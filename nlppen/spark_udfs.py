@@ -6,6 +6,9 @@ import pandas as pd
 from pyspark.sql import Row
 from pyspark.sql.types import IntegerType
 
+from .extraccion.ProcessException import ProcessException
+from .extraccion.Natural import Natural
+
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
             'X', 'SPACE']
@@ -119,8 +122,9 @@ def spark_skipgrams(batch, n=3, k=1, filtro=[], cruce='index', incluir=['PROPN',
             txt = solo_considerando(row.txt.lower())
             txt, _ = spark_cambios(txt, cambios)
             doc = nlp(txt)
-            sents = [skipgrams(sent, n, k)
-                     for sent in doc.sents if filtro_oraciones(sent, filtro)]
+            # sents = [skipgrams(sent, n, k)
+            #          for sent in doc.sents if filtro_oraciones(sent, filtro)]
+            sents = [skipgrams(doc, n, k)]
             for sk in sents:
                 res += [{**{'cruce': row[cruce]}, **{f't{tn}': '__'.join([limpiar(t.lower_), t.pos_])
                          for tn, t in enumerate(skipgram) if t.pos_ in incluir and limpiar(t.lemma_) != ''}}
@@ -132,5 +136,31 @@ def spark_skipgrams(batch, n=3, k=1, filtro=[], cruce='index', incluir=['PROPN',
         yield df.reset_index().rename(columns={'index': 'freq'})
 
 
+def spark_aplicar_extraccion(res, doc, nombreProc, procesarDoc):
+    try: 
+        res.update(procesarDoc(doc))
+    except ProcessException as err:
+        proc, msg = err.args
+        res['error'].update({nombreProc:  msg})
+    return res
 
-        
+def spark_extraccion_info(txt):
+    natural = Natural()
+    doc = {'txt': txt}
+    res = {'error':{}}
+
+    doc.update(spark_aplicar_extraccion(res, doc, 'secciones', natural.secciones))
+
+    spark_aplicar_extraccion(res, doc, 'extraccion_expediente', natural.expedientes)
+    spark_aplicar_extraccion(res, doc, 'extraccion_fechahora', natural.fechahora)
+    spark_aplicar_extraccion(res, doc, 'extraccion_tipo_proceso', natural.tipo_proceso)
+    spark_aplicar_extraccion(res, doc, 'extraccion_sentencia', natural.sentencia)
+    spark_aplicar_extraccion(res, doc, 'extraccion_voto_salvado', natural.voto_salvado)
+    spark_aplicar_extraccion(res, doc, 'extraccion_redactor', natural.redactor)
+    spark_aplicar_extraccion(res, doc, 'extraccion_fechahora', natural.fechahora)
+    spark_aplicar_extraccion(res, doc, 'extraccion_magistrados', natural.extraer_magistrados)
+    spark_aplicar_extraccion(res, doc, 'extraccion_lemma', natural.lematizacion)
+
+    return res
+
+

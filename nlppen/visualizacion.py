@@ -58,7 +58,7 @@ class Visualizacion:
 
         font_sizes = (features.index.value_counts() / features.index.value_counts().max() * 15 + 12).astype(str) + 'px'
 
-        G = nx.from_pandas_edgelist(relaciones, 't0', 't1', 'weight')
+        G = nx.from_pandas_edgelist(relaciones, 't0', 't1', ['weight', 'cruce'])
 
         # Atributos de los nodos
         features['token'] = features.index.values

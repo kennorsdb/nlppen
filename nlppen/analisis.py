@@ -133,7 +133,7 @@ class Analisis:
 
         return self.wdf
 
-    def skipgrams(self, parquet_prefix='skgrams', filtro=[], cruce='index', n=3, k=1, incluir=['NOUN', 'VERB', 'ADJ'], cambios={}):
+    def skipgrams(self, parquet_prefix='skgrams', filtro=[], cruce='index', n=3, k=1, incluir=['NOUN', 'VERB', 'ADJ'], cambios=None):
         rel_parquet_path = f'{self.datasets_path}/{parquet_prefix}_{cruce}_n{n}_k{k}_{"_".join(incluir)}_rel.parquet'
         att_parquet_path = f'{self.datasets_path}/{parquet_prefix}_{cruce}_n{n}_k{k}_{"_".join(incluir)}_att.parquet'
         if os.path.exists(rel_parquet_path):
@@ -151,8 +151,8 @@ class Analisis:
 
         return relaciones, attributes
 
-    def procesar_skipgrams(self, filtro=[], cruce='index', n=3, k=1, incluir=['NOUN', 'VERB', 'ADJ'], cambios={}):
-        if cambios == {}:
+    def procesar_skipgrams(self, filtro=[], cruce='index', n=3, k=1, incluir=['NOUN', 'VERB', 'ADJ'], cambios=None):
+        if cambios == None:
             cambios = {**deepcopy(self.terminos), **
                        deepcopy(self.cambios_config)}
 
