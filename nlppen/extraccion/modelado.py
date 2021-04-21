@@ -1,5 +1,6 @@
 from joblib import Memory
 import numpy as np
+import pickle
 
 # Herramientas de cálculo
 from sklearn.model_selection import train_test_split
@@ -119,11 +120,18 @@ class NNModel:
         self.model.fit(self.x_test, self.y_test, epochs=5, batch_size=32, verbose=0)
 
         
-    def load_model(self, file):
-        self.model = keras.models.load_model(file)
+    def load_model(self, model_file, encoder_file):
+        self.model = keras.models.load_model(model_file)
+        infile = open(encoder_file,'rb')
+        self.encoder = pickle.load(infile)
+        infile.close()
+         
     
-    def save_model(self, file):
-        self.model.save(file)
+    def save_model(self, model_file, encoder_file):
+        self.model.save(model_file)
+        output = open(encoder_file,'wb')
+        pickle.dump(self.encoder, output)
+        output.close()
 
 
     def get_model(self):

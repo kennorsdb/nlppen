@@ -144,6 +144,18 @@ def spark_aplicar_extraccion(res, doc, nombreProc, procesarDoc):
         res['error'].update({nombreProc:  msg})
     return res
 
+def spark_aplicar_entidades(res, doc, nombreProc, procesarDoc):
+    try: 
+        proc = procesarDoc(doc)
+        entys = { f'entidades.{k}':v for k,v in proc['entidades'].items()}
+        entys['texts.entidades'] = proc['texts.entidades_html']
+        res.update(entys)
+
+    except ProcessException as err:
+        proc, msg = err.args
+        res['error'].update({nombreProc:  msg})
+    return res
+
 def spark_extraccion_info(txt):
     natural = Natural()
     doc = {'txt': txt}
@@ -158,8 +170,10 @@ def spark_extraccion_info(txt):
     spark_aplicar_extraccion(res, doc, 'extraccion_voto_salvado', natural.voto_salvado)
     spark_aplicar_extraccion(res, doc, 'extraccion_redactor', natural.redactor)
     spark_aplicar_extraccion(res, doc, 'extraccion_fechahora', natural.fechahora)
-    spark_aplicar_extraccion(res, doc, 'extraccion_magistrados', natural.extraer_magistrados)
+    # spark_aplicar_extraccion(res, doc, 'extraccion_magistrados', natural.extraer_magistrados)
     spark_aplicar_extraccion(res, doc, 'extraccion_lemma', natural.lematizacion)
+
+    spark_aplicar_entidades(res, doc, 'extraccion.entidades', natural.entidades)
 
     return res
 

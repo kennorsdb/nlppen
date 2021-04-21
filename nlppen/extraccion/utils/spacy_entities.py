@@ -1,5 +1,6 @@
 from spacy.matcher import PhraseMatcher
 from spacy.pipeline import EntityRuler
+from spacy.language import Language
 from nltk.parse import CoreNLPParser
 import spacy
 import re
@@ -9,7 +10,7 @@ import re
 # -preload tokenize,ssplit,pos,ner,parse \
 # -status_port 9003  -port 9003 -timeout 15000
 
-
+@Language.component('Sentencias')
 def sentencias_entities(doc):
     res = []
     #FEcha y Hora
@@ -485,12 +486,11 @@ def nlp_corte(text, personas=True):
     try: 
         nlp
     except:
-        nlp = spacy.load('es_core_news_md')
-        ruler = EntityRuler(nlp, validate=True)
+        nlp = spacy.load('es_core_news_lg')
 
+        ruler = nlp.add_pipe("entity_ruler", first=True)
         ruler.add_patterns(patterns)
-        nlp.add_pipe(ruler, first=True)
-        nlp.add_pipe(sentencias_entities, name="fechahora", first=True)
+        nlp.add_pipe('Sentencias', first=True)
     
     doc = nlp(text, disable=["ner"])
         
