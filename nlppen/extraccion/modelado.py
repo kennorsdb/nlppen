@@ -120,18 +120,30 @@ class NNModel:
         self.model.fit(self.x_test, self.y_test, epochs=5, batch_size=32, verbose=0)
 
         
-    def load_model(self, model_file, encoder_file):
+    def load_model(self, model_file, encoder_file, vectorizer_file, tfidf_file):
         self.model = keras.models.load_model(model_file)
-        infile = open(encoder_file,'rb')
-        self.encoder = pickle.load(infile)
-        infile.close()
+        with open(encoder_file,'rb') as infile:
+            self.encoder = pickle.load(infile)
+        
+        with open(vectorizer_file,'rb') as infile:
+            self.vectorizer = pickle.load(infile)
+        
+        with open(tfidf_file,'rb') as infile:
+            self.tfidf_transformer = pickle.load(infile)
+        
          
     
-    def save_model(self, model_file, encoder_file):
+    def save_model(self, model_file, encoder_file, vectorizer_file, tfidf_file):
         self.model.save(model_file)
-        output = open(encoder_file,'wb')
-        pickle.dump(self.encoder, output)
-        output.close()
+        
+        with open(encoder_file,'wb') as output:
+            pickle.dump(self.encoder, output)
+        
+        with open(vectorizer_file,'wb') as output:
+            pickle.dump(self.vectorizer, output)
+        
+        with open(tfidf_file,'wb') as output:
+            pickle.dump(self.tfidf_transformer, output)
 
 
     def get_model(self):

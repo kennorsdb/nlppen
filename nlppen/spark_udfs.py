@@ -1,13 +1,17 @@
 import spacy
 import re
 
+import numpy as np
 import pandas as pd
+import tensorflow as tf
+
 
 from pyspark.sql import Row
 from pyspark.sql.types import IntegerType
 
 from .extraccion.ProcessException import ProcessException
 from .extraccion.Natural import Natural
+from .extraccion.modelado import NNModel
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
@@ -45,7 +49,8 @@ def spark_cambios(txt, terminos=None):
         for key in terminos:
             for term in terminos[key]:
                 terms += [key.replace(" ", "")]
-                txt = re.sub(term, key.replace(" ", ""), txt, re.I | re.M | re.X)
+                txt = re.sub(term, key.replace(" ", ""),
+                             txt, re.I | re.M | re.X)
 
     return txt, terms
 
@@ -137,17 +142,18 @@ def spark_skipgrams(batch, n=3, k=1, filtro=[], cruce='index', incluir=['PROPN',
 
 
 def spark_aplicar_extraccion(res, doc, nombreProc, procesarDoc):
-    try: 
+    try:
         res.update(procesarDoc(doc))
     except ProcessException as err:
         proc, msg = err.args
         res['error'].update({nombreProc:  msg})
     return res
 
+
 def spark_aplicar_entidades(res, doc, nombreProc, procesarDoc):
-    try: 
+    try:
         proc = procesarDoc(doc)
-        entys = { f'entidades.{k}':v for k,v in proc['entidades'].items()}
+        entys = {f'entidades.{k}': v for k, v in proc['entidades'].items()}
         entys['texts.entidades'] = proc['texts.entidades_html']
         res.update(entys)
 
@@ -156,25 +162,59 @@ def spark_aplicar_entidades(res, doc, nombreProc, procesarDoc):
         res['error'].update({nombreProc:  msg})
     return res
 
-def spark_extraccion_info(txt):
+
+def spark_extraccion_info(txt, model=None):
     natural = Natural()
     doc = {'txt': txt}
-    res = {'error':{}}
+    res = {'error': {}}
 
-    doc.update(spark_aplicar_extraccion(res, doc, 'secciones', natural.secciones))
+    doc.update(spark_aplicar_extraccion(
+        res, doc, 'secciones', natural.secciones))
 
-    spark_aplicar_extraccion(res, doc, 'extraccion_expediente', natural.expedientes)
-    spark_aplicar_extraccion(res, doc, 'extraccion_fechahora', natural.fechahora)
-    spark_aplicar_extraccion(res, doc, 'extraccion_tipo_proceso', natural.tipo_proceso)
-    spark_aplicar_extraccion(res, doc, 'extraccion_sentencia', natural.sentencia)
-    spark_aplicar_extraccion(res, doc, 'extraccion_voto_salvado', natural.voto_salvado)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_expediente', natural.expedientes)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_fechahora', natural.fechahora)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_tipo_proceso', natural.tipo_proceso)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_sentencia', natural.sentencia)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_voto_salvado', natural.voto_salvado)
     spark_aplicar_extraccion(res, doc, 'extraccion_redactor', natural.redactor)
-    spark_aplicar_extraccion(res, doc, 'extraccion_fechahora', natural.fechahora)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_fechahora', natural.fechahora)
     # spark_aplicar_extraccion(res, doc, 'extraccion_magistrados', natural.extraer_magistrados)
-    spark_aplicar_extraccion(res, doc, 'extraccion_lemma', natural.lematizacion)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_lemma', natural.lematizacion)
 
-    spark_aplicar_entidades(res, doc, 'extraccion.entidades', natural.entidades)
+    spark_aplicar_entidades(
+        res, doc, 'extraccion.entidades', natural.entidades)
+
+    if model is not None and 'texts.lemma' in res:
+        spark_estimar_tema(res, model, res['texts.lemma'])
+        
 
     return res
 
+
+def cargar_modelo( model_file, encoder_file, vectorizer_file, tfidf_file):
+    try:
+        model
+    except:
+        model = NNModel(None, None)
+        model.load_model(model_file, encoder_file, vectorizer_file, tfidf_file)
+    
+    return model
+
+
+def spark_estimar_tema(res, model, lemma):
+    with tf.device('/cpu:0'):
+        model.predict(np.array([lemma]))
+    
+    est = model.estimated[0]
+    probs = {k:v for k,v in zip(model.encoder.classes_.tolist(), model.predicted.tolist()[0])}
+
+    res.update({'estimado.tema': est, 'estimado.tema.probs': probs})
+    return res
 

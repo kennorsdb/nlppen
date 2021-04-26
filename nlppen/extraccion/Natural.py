@@ -272,9 +272,9 @@ class Natural:
                 res = {'extraccion.proceso': "Recurso de Amparo"}
             elif self.consultaFacultativa.search(doc["secciones"]["encabezado"] ) is not None:
                 res = {'extraccion.proceso': "Consulta Facultativa"}
-            elif self.self.consultaPreceptiva.search(doc["secciones"]["encabezado"] ) is not None:
+            elif self.consultaPreceptiva.search(doc["secciones"]["encabezado"] ) is not None:
                 res = {'extraccion.proceso': "Consulta Preceptiva"}
-            elif self.self.consultaLegislativa.search(doc["secciones"]["encabezado"] ) is not None:
+            elif self.consultaLegislativa.search(doc["secciones"]["encabezado"] ) is not None:
                 res = {'extraccion.proceso': "Consulta Legislativa"}
             elif self.consultaPrescriptiva.search(doc["secciones"]["encabezado"] ) is not None:
                 res = {'extraccion.proceso': "Consulta Prescriptiva"}
