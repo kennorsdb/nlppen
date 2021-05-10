@@ -63,6 +63,12 @@ def sentencias_entities(doc):
         res.append(doc.char_span(start, end, label="Constitución"))
         
         
+    # Cita Sentencia
+    citaSentenciaExp = re.compile(
+            r"""Sentencia\s+?(?:(?:n[uú]mero)|(?:N[ºo°]\.?))\s*(?P<sentencia_citada>[\d\-\.]+)""",  re.X | re.M | re.I)
+    for match in re.finditer(citaSentenciaExp, doc.text):
+        start, end = match.span(1)
+        res.append(doc.char_span(start, end, label="CitaSentencia"))
         
     # Magistrados
     magistrado = re.compile(
@@ -74,7 +80,12 @@ def sentencias_entities(doc):
             res.append(doc.char_span(start, end, label="Magistrado"))   
 
     if doc.ents is not None:
-        doc.ents = list(doc.ents) + [r for r in res if r is not None]
+        for r in res:
+            if r is not None:
+                try:
+                    doc.ents = (*doc.ents, r)
+                except ValueError as V:
+                    pass
     else:
         doc.ents = [r for r in res if r is not None]
         

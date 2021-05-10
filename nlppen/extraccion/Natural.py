@@ -34,8 +34,8 @@ os.environ['JAVAHOME'] = 'C:/Program Files/Java/jre1.8.0_192/bin'
 class Natural:
     def __init__(self, debug=False):
         self.nlp = None
-        self.debug = debug
         self.vocabulary = None
+        self.debug = debug
         #stagger = StanfordPOSTagger("spanish.tagger", '../lib/stanford-postagger/stanford-postagger.jar')
         self.stemmerEsp = SnowballStemmer('spanish')
         self.hunspell = None
@@ -50,7 +50,7 @@ class Natural:
         # RegExp para separar la resolución en sus partes
         self.partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
                                 (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
-                                (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando)|(?i:(?:-|\n)\s*por\ tanto)))?
+                                (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
                                 (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*)))?""", re.X | re.M)
         self.excepcionPartes = re.compile(
             r'^[ \tA-Z]+[A-Z]+[ \tA-Z]+$', re.M | re.U)
@@ -141,6 +141,12 @@ class Natural:
         self.votoSalvadoReg1 = re.compile(r'salvan?\s+el\s+voto', re.I | re.M | re.X)
         self.votoSalvadoReg2 = re.compile(r'salv[oó]\s+el\s+voto', re.I | re.M | re.X)
         self.votoSalvadoReg3 = re.compile(r'voto\s+salvado', re.I | re.M | re.X)
+
+        # RegExp Cita Sentencias
+        self.sentenciaRegex = re.compile(
+            r"""Sentencia\s+?(?:(?:n[uú]mero)|(?:N[ºo°]\.?))\s*(?P<sentencia_citada>[\d\-\.]+)"""
+            , re.I | re.M | re.X)
+
         
     def preprocesar(self, doc):
         try:
@@ -235,10 +241,11 @@ class Natural:
 
         return { "extraccion.redactor" : result.groupdict()['redactor'] }
 
+
     def sentencia(self, doc):
         res = None
         try:
-            if "secciones" in doc and 'portanto' in doc["secciones"]and doc["secciones"]["portanto"] is not None:
+            if "secciones" in doc and 'portanto' in doc["secciones"] and doc["secciones"]["portanto"] is not None:
 
                 match = [r.groupdict() for r in self.sentenciaReg.finditer(doc["secciones"]['portanto'])]
                 if len(match) != 0:
@@ -381,7 +388,8 @@ class Natural:
                 'MAGISTRADO' : 'linear-gradient( to bottom, #FCCF31 10%, #F55555 100%)',
                 'REGLAMENTO' : 'linear-gradient( to bottom, #FFF720 10%, #3CD500 100%)',
                 'LEY' : 'linear-gradient( to top, #FD6E6A 10%, #FFC600 100%)',
-                'DECRETO' : 'linear-gradient( to bottom, #3C8CE7 10%, #00EAFF 100%)'
+                'DECRETO' : 'linear-gradient( to bottom, #3C8CE7 10%, #00EAFF 100%)',
+                'CITASENTENCIA' : 'linear-gradient( to bottom, #3C8CE7 10%, #00EAFF 100%)'
                 } 
         }
 

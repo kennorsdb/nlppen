@@ -8,13 +8,13 @@ import re
 
 # Visualización
 
-from bokeh.palettes import Colorblind
+from bokeh.palettes import Colorblind, Category20c
 from bokeh.plotting import figure, from_networkx, show
 from bokeh.themes import Theme
 from bokeh.io import output_notebook, show, curdoc
 from bokeh.models import (Text, GraphRenderer, MultiLine, BoxZoomTool, HoverTool, ResetTool,
                           BasicTicker, ColorBar, LinearColorMapper, PrintfTickFormatter,
-                          ColumnDataSource)
+                          ColumnDataSource, CategoricalColorMapper)
 
 from pyspark.sql.functions import desc
 
@@ -67,7 +67,7 @@ class Visualizacion:
         nx.set_node_attributes(G, features.apply(lambda row: row['POS'], axis=1).to_dict(), 'POS')
         nx.set_node_attributes(G, font_sizes.to_dict(), 'font_size')
         nx.set_node_attributes(G, features[['token', 'token']].to_dict()['token'], 'token')
-        nx.set_node_attributes(G, features.index.value_counts().to_dict(), 'cantidad')
+        nx.set_node_attributes(G, features.freq.groupby(['token']).sum().to_dict(), 'cantidad')
 
         return G
 
@@ -253,30 +253,20 @@ class Visualizacion:
 
     @staticmethod
     def terminos_cruce_circulos_v2(df, term, cruce, bins=[0,1,2,3,4,5,10,20,50, 100,100000], index_col='index', title=None, circle_factor=0.7, circle_min=3):
-        ldf = df
-        ldf['d_bins'] = pd.cut(df[term], bins)
-        ldf = ldf[['d_bins',cruce, index_col]].groupby(['d_bins',cruce]).count().reset_index()
-        ldf.loc[ldf[index_col] == 0,index_col] = pd.NA
-        ldf.index = ldf.index.astype(str)
-        ldf['d_bins'] = ldf.astype(str)
-        
-        ldf['size'] = ldf[index_col] * circle_factor + circle_min
-        
+        ldf = df[[cruce, term, index_col]].groupby([cruce, term]).count().query(f'{term} != 0').reset_index()
+        ldf['size'] = ldf[term] * circle_factor + circle_min
+
         source = ColumnDataSource(ldf)
-        mapper = LinearColorMapper('Spectral11', low=0, high=ldf[index_col].max())
-        
-        p = figure(title=title, x_range=ldf.d_bins.unique(), y_range=ldf[cruce].unique(), width=800, height=800,)
-        p.circle(x='d_bins', y=cruce, size='size', source=source, alpha=0.7, line_color=None, 
-                fill_color={'field': 'size', 'transform': mapper},)
-        
-        p.xaxis.axis_label = 'Frecuencia de términos'
-        p.yaxis.axis_label = cruce.title()
+        mapper = CategoricalColorMapper(palette=Category20c[20]+Category20c[20], factors=ldf[cruce].unique())
+
+        p = figure(title=title, x_axis_type="log", width=800, height=800)
+        p.circle(x=index_col, y=term, size='size', source=source, alpha=0.7, line_color=None,
+                fill_color={'field': cruce, 'transform': mapper}, legend_field=cruce)
+
+        p.xaxis.axis_label = 'Cantidad de Sentencias'
+        p.yaxis.axis_label = 'Cantidad de Términos'
         p.xaxis.major_label_orientation = np.pi/2
-        
-        color_bar = ColorBar(color_mapper=mapper, major_label_text_font_size="9px",
-                        ticker=BasicTicker(desired_num_ticks=5),
-                        formatter=PrintfTickFormatter(format="%d docs"),
-                        label_standoff=10, border_line_color=None, height=150, margin=0 , width=16, padding=30)
-        p.add_layout(color_bar, 'right')
+
+        show(p)
         
         return p

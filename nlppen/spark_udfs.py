@@ -181,7 +181,8 @@ def spark_extraccion_info(txt, model=None):
         res, doc, 'extraccion_sentencia', natural.sentencia)
     spark_aplicar_extraccion(
         res, doc, 'extraccion_voto_salvado', natural.voto_salvado)
-    spark_aplicar_extraccion(res, doc, 'extraccion_redactor', natural.redactor)
+    spark_aplicar_extraccion(
+        res, doc, 'extraccion_redactor', natural.redactor)
     spark_aplicar_extraccion(
         res, doc, 'extraccion_fechahora', natural.fechahora)
     # spark_aplicar_extraccion(res, doc, 'extraccion_magistrados', natural.extraer_magistrados)
