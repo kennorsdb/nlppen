@@ -28,81 +28,6 @@ class Analisis:
         if not os.path.exists(datasets_path):
             os.makedirs(datasets_path)
 
-    def filtrar_sentencias(self, parquet_file='terminos.parquet'):
-        parquet_path = self.datasets_path + '/' + parquet_file
-        if os.path.exists(parquet_path):
-            self.sdf = self.spark.read.parquet(parquet_path)
-        else:
-            self.__busqueda_terminos()
-
-            if self.sdf is not None:
-                self.sdf.write.parquet(parquet_path)
-
-        return self.sdf
-
-    def tabla_resumen(self):
-        terminos_cols = [col.replace(' ', '_') for col in self.terminos.keys()]
-        ldf = self.sdf.select(*terminos_cols).toPandas()
-
-        total_terminos = ldf.sum(axis=0)
-        docs_encontrados = ldf.apply(lambda x: x != 0).sum(axis=0)
-        df = pd.DataFrame([total_terminos, docs_encontrados]).T
-        df.columns = ['Total de términos encontrados',
-                      'Documentos encontrados']
-        df.index = [term.replace('_', ' ') for term in df.index]
-        return df
-
-    def tabla_coocurrencia(self):
-        terminos_cols = [col.replace(' ', '_') for col in self.terminos.keys()]
-        ldf = self.sdf.select(*terminos_cols).toPandas()
-
-        ldf[ldf != 0] = 1
-        df = ldf.T.dot(ldf)
-        df.columns = [term.replace('_', ' ') for term in df.columns]
-        df.index = [term.replace('_', ' ') for term in df.index]
-        return df
-
-    def __busqueda_terminos(self):
-        sdf = self.spark.read.parquet(self.parquet_path)
-        schema = deepcopy(sdf.schema)
-
-        term_regex = {}
-        for cat, lst in self.terminos.items():
-            col_name = cat.replace(' ', '_')
-            term_regex[col_name] = [re.compile(r'\s+' + t.replace(' ', r'[\s\.\,\-\)\;\:\]]+'),  re.X | re.M | re.I)
-                                    for t in lst]
-            schema.add(col_name, 'integer', True)
-
-        self.sdf = (sdf.rdd
-                    .map(lambda row: spark_buscar_terminos_doc(row, term_regex))
-                    .filter(lambda d: d is not None)
-                    .toDF(schema=schema)
-                    .persist()
-                    )
-        return self.sdf
-
-    def sub_busqueda(self, terminos_sub, actualizar_sdf=False):
-        schema = deepcopy(self.sdf.schema)
-        term_regex = {}
-
-        for cat, lst in terminos_sub.items():
-            col_name = cat.replace(' ', '_')
-            term_regex[col_name] = [re.compile(r'\s+' + t.replace(' ', r'[\s\.\,\-\)\;\:\]]+'))
-                                    for t in lst]
-            schema.add(col_name, 'integer', True)
-
-        self.subbusqueda = (self.sdf.rdd
-                            .map(lambda row: spark_buscar_terminos_doc(row, term_regex))
-                            .filter(lambda d: d is not None)
-                            .toDF(schema=schema)
-                            .persist()
-                            )
-
-        if actualizar_sdf:
-            self.terminos = {**self.terminos, **terminos_sub}
-            self.sdf = self.subbusqueda
-
-        return self.subbusqueda
 
     def frecuencias(self, parquet_file='frecuencias.parquet', **kargs):
         parquet_path = self.datasets_path + '/' + parquet_file
@@ -116,15 +41,17 @@ class Analisis:
 
         return self.wdf
 
-    def __frecuencias(self, index_col='index', txt_col='txt', incluir=['PROPN', 'NOUN', 'VERB', 'ADJ'], cambios={}):
+    def __frecuencias(self, index_col='index', txt_col='txt', incluir=['PROPN', 'NOUN', 'VERB', 'ADJ'], cambios={}, preprocess=None):
         if cambios == {}:
             cambios = {**deepcopy(self.terminos), **
                        deepcopy(self.cambios_config)}
 
         self.wdf = (self.sdf.mapInPandas(lambda df: spark_extraer_tokens(df,
                                                                          index_col=index_col,
+                                                                         txt_col=txt_col,
                                                                          incluir=incluir,
-                                                                         cambios=cambios),
+                                                                         cambios=cambios,
+                                                                         preprocess=preprocess),
                                          schema='index string, palabra string, POS string, Dep string')
                     .groupby(['palabra', 'index'])
                     .count()
@@ -133,25 +60,22 @@ class Analisis:
 
         return self.wdf
 
-    def skipgrams(self, parquet_prefix='skgrams', filtro=[], cruce='index', n=3, k=1, incluir=['NOUN', 'VERB', 'ADJ'], cambios=None):
+    def skipgrams(self, parquet_prefix='skgrams', cruce='index', n=3, k=1, incluir=['PROPN', 'NOUN', 'VERB', 'ADJ'], cambios=None,  **kargs):
+        print('procesando skipgrams')
         rel_parquet_path = f'{self.datasets_path}/{parquet_prefix}_{cruce}_n{n}_k{k}_{"_".join(incluir)}_rel.parquet'
         att_parquet_path = f'{self.datasets_path}/{parquet_prefix}_{cruce}_n{n}_k{k}_{"_".join(incluir)}_att.parquet'
         if os.path.exists(rel_parquet_path):
             relaciones = pd.read_parquet(rel_parquet_path)
             attributes = pd.read_parquet(att_parquet_path)
         else:
-            relaciones, attributes = self.procesar_skipgrams(filtro=filtro,
-                                                             cruce=cruce,
-                                                             n=n, k=k,
-                                                             incluir=incluir,
-                                                             cambios=cambios)
+            relaciones, attributes = self.procesar_skipgrams(n=n, k=k, cruce=cruce, incluir=incluir, cambios=cambios, **kargs)
             print('Escribiendo Parquets')
             relaciones.to_parquet(rel_parquet_path)
             attributes.to_parquet(att_parquet_path)
 
         return relaciones, attributes
 
-    def procesar_skipgrams(self, filtro=[], cruce='index', n=3, k=1, incluir=['NOUN', 'VERB', 'ADJ'], cambios=None):
+    def procesar_skipgrams(self,n=3, k=1, cruce='index', incluir=['PROPN', 'NOUN', 'VERB', 'ADJ'], cambios=None, **kargs):
         if cambios == None:
             cambios = {**deepcopy(self.terminos), **
                        deepcopy(self.cambios_config)}
@@ -160,10 +84,8 @@ class Analisis:
 
         print('Procesando skipgrams')
         schema = ' string, '.join(columnas)+' string, cruce string, freq int'
-        print(self.sdf.mapInPandas(lambda d: spark_skipgrams(d, incluir=incluir,
-              cruce=cruce, filtro=filtro, k=k, n=n, cambios=cambios), schema=schema).count())
 
-        res = (self.sdf.mapInPandas(lambda d: spark_skipgrams(d, incluir=incluir, cruce=cruce, filtro=filtro, k=k, n=n, cambios=cambios), schema=schema)
+        res = (self.sdf.mapInPandas(lambda d: spark_skipgrams(d, n=n, k=k, cruce=cruce, incluir=incluir, cambios=cambios,**kargs), schema=schema)
                .groupby(*(columnas+['cruce'])).sum()
                .withColumnRenamed("sum(freq)", "freq")
                .persist())
@@ -187,3 +109,12 @@ class Analisis:
         res.unpersist()
 
         return relaciones, attributes
+
+    def procesar_dependencias(self, cruce='index', excluir=None, cambios=None):
+        if cambios == None:
+            cambios = {**deepcopy(self.terminos), **
+                       deepcopy(self.cambios_config)}
+
+        schema = ''
+
+        

@@ -23,24 +23,25 @@ def procesar_archivos(PATH='.', collection='Digesto', db="SalaC"):
 
         archivos = []
         result = [file for file in list(dir_path.rglob("*.*")) if file.suffix.lower() not in excludeExt ]
+        
         for file in tqdm(result):
             dict = {'error': {}}
-            dict['anno'] = file.parts[3]
+            dict['anno'] = file.parts[4]
             dict['archivo'] = file.parts[-1]
             dict['path'] = str(file)
             dict['extension'] = file.suffix.lower()
             if len(file.parts) > 4:
-                dict['categoria'] =  file.parts[4]
+                dict['categoria'] =  file.parts[3]
             try:
-                with open(work_path + "/" + str(file),encoding="latin-1") as f:
+                with open(work_path + "/" + str(file), 'rb') as f:
                     no_extracted = f.read()
                     f.seek(0)
-                    s = bs4.BeautifulSoup(f)
+                    s = bs4.BeautifulSoup(f, "html.parser" )
                     bs_text = ''
                     for item in s.find_all(lambda tag: (tag.name == 'p' and tag.find_parent(['p','span']) == None) 
                                            or (tag.name == 'span' and tag.find_parent(['p','span']) == None)):
                         bs_text = bs_text + item.text.replace('\n',' ') + '\n'
-                        
+
                     dict['texts'] = {
                         'bs4': bs_text.replace(u'\xa0',''),
                         'html': no_extracted

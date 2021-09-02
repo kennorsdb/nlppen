@@ -12,11 +12,11 @@ from sklearn.metrics import roc_curve
 from sklearn.metrics import auc
 
 # Redes Neuronales
-import keras as keras
-from keras.models import Sequential
-from keras.utils import to_categorical
-from keras.layers import Dense
-from keras.models import load_model
+import tensorflow.keras as keras
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.layers import Dense
+from tensorflow.keras.models import load_model
 import tensorflow as tf
 
 # Rutinas de Data Scaling

@@ -1,22 +1,20 @@
 import os
 import re
 
-
 from .export import Export
 
 class Descripcion():
-  def __init__(self, seleccion, extraccion_path='./extraccion/'):
-    self.seleccion = seleccion
-    self.sdf = seleccion.sdf
+  def __init__(self, df, extraccion_path='./extraccion/'):
+    self.df = df
     self.extraccion_path = extraccion_path
     self.export = Export(extraccion_path)
+
 
   def guardar_lista(self, columnas, sheet='Lista'):
     self.export(sheet, self.df[columnas])
 
   def guardar_df(self, df, sheet='Lista'):
     self.export(sheet, df)
-
 
   def cruce_variables(self, var1, var2, sheet=None):
     ldf = (self.df[['archivo', var1, var2]]

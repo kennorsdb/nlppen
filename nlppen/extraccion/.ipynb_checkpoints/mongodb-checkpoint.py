@@ -14,7 +14,7 @@ class QueryStrategy:
 
 class AllDataQuery(QueryStrategy):
     def query(self, collection, skip=0, limit=0):
-        return collection.find({'num': {'$gte': skip}},{'archivo':1, 'txt':1, 'anno':1, 'num':1, 'error':1, 'secciones':1, 'texts.html':1}).limit(limit)
+        return collection.find({'num': {'$gte': skip}},{'archivo':1, 'txt':1, 'anno':1, 'num':1, 'error':1, 'secciones':1, 'texts.html':1}, no_cursor_timeout=True).limit(limit)
 
 class PreExpedientesQuery(QueryStrategy):
     def query(self, collection, skip=0, limit=0):
@@ -23,7 +23,7 @@ class PreExpedientesQuery(QueryStrategy):
 
 class PreEntitiesQuery(QueryStrategy):
     def query(self, collection, skip=0, limit=0):
-        return collection.find({'entidades': {'$exists': 0}},{'txt':1, 'archivo':1, 'error':1, 'anno':1}).sort("_id", -1).skip(skip).limit(limit)
+        return collection.find({'entidades': {'$exists': 0}},{'txt':1, 'archivo':1, 'error':1, 'anno':1}, no_cursor_timeout=True).sort("_id", -1).skip(skip).limit(limit)
 #         return collection.find({'entidades': {'$exists': 0}},{'txt':1, 'archivo':1, 'error':1, 'anno':1}).sort("_id", -1).skip(skip).limit(limit)
 #         return collection.find({'entidades': {'$exists': 0}},{'textos':1, 'archivo':1, 'error':1, 'anno':1}).sort("_id", -1).skip(skip).limit(limit)
 

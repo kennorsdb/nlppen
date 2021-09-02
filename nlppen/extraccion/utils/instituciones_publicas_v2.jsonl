@@ -1,0 +1,955 @@
+ {"label": "Entidad Pública", "id": "Academia Nacional de Ciencias", "pattern": [ {"LOWER": "academia"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciencias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Academia Nacional de Ciencias", "pattern": [ {"ORTH": "ANC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Auditoria General de Servicios de Salud", "pattern": [ {"LOWER": "auditoria"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicios"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Auditoria General de Servicios de Salud", "pattern": [ {"ORTH": "AGSS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Autoridad Presupuestaria", "pattern": [ {"LOWER": "autoridad"}, {"LOWER": "presupuestaria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Autoridad Presupuestaria", "pattern": [ {"ORTH": "AP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Autoridad Reguladora de Servicios Publicos", "pattern": [ {"LOWER": "autoridad"}, {"LOWER": "reguladora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicios"}, {"LOWER": "publicos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Autoridad Reguladora de Servicios Publicos", "pattern": [ {"ORTH": "ARESEP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Central de Costa Rica", "pattern": [ {"LOWER": "banco"}, {"LOWER": "central"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Central de Costa Rica", "pattern": [ {"ORTH": "BCCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Credito Agricola de Cartago", "pattern": [ {"LOWER": "banco"}, {"LOWER": "credito"}, {"LOWER": "agricola"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cartago"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Credito Agricola de Cartago", "pattern": [ {"ORTH": "BCAC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco de Costa Rica", "pattern": [ {"LOWER": "banco"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco de Costa Rica", "pattern": [ {"ORTH": "BCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco de Costa Rica Planes de Pension", "pattern": [ {"LOWER": "banco"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}, {"LOWER": "planes"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pension"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco de Costa Rica Planes de Pension", "pattern": [ {"ORTH": "BCRPP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco de Costa Rica Sociedad Administradora de Fondos de Inversion", "pattern": [ {"LOWER": "banco"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}, {"LOWER": "sociedad"}, {"LOWER": "administradora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fondos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "inversion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco de Costa Rica Sociedad Administradora de Fondos de Inversion", "pattern": [ {"ORTH": "BCRFI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco de Costa Rica Valores, Puesto de Bolsa", "pattern": [ {"LOWER": "banco"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}, {"LOWER": "valores"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco de Costa Rica Valores, Puesto de Bolsa", "pattern": [ {"ORTH": "BCRV"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Hipotecario de La Vivienda", "pattern": [ {"LOWER": "banco"}, {"LOWER": "hipotecario"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vivienda"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Hipotecario de La Vivienda", "pattern": [ {"ORTH": "BANHVI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Internacional de Costa Rica", "pattern": [ {"LOWER": "banco"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Internacional de Costa Rica", "pattern": [ {"ORTH": "BICSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Nacional de Costa Rica", "pattern": [ {"LOWER": "banco"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Nacional de Costa Rica", "pattern": [ {"ORTH": "BNCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Nacional Sociedad Administradora de Fondos de Inversion", "pattern": [ {"LOWER": "banco"}, {"LOWER": "nacional"}, {"LOWER": "sociedad"}, {"LOWER": "administradora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fondos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "inversion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Nacional Sociedad Administradora de Fondos de Inversion", "pattern": [ {"ORTH": "BNFI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Nacional Valores", "pattern": [ {"LOWER": "banco"}, {"LOWER": "nacional"}, {"LOWER": "valores"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Nacional Valores", "pattern": [ {"ORTH": "BNV"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Popular Operadora de Pensiones Complementarias", "pattern": [ {"LOWER": "banco"}, {"LOWER": "popular"}, {"LOWER": "operadora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"}, {"LOWER": "complementarias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Popular Operadora de Pensiones Complementarias", "pattern": [ {"ORTH": "BPOPOP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Banco Popular y de Desarrollo Comunal", "pattern": [ {"LOWER": "banco"}, {"LOWER": "popular"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "comunal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Banco Popular y de Desarrollo Comunal", "pattern": [ {"ORTH": "BPYDDC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Bn Vital Operadora de Pensiones Complementarias", "pattern": [ {"LOWER": "bn"}, {"LOWER": "vital"}, {"LOWER": "operadora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"}, {"LOWER": "complementarias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Bn Vital Operadora de Pensiones Complementarias", "pattern": [ {"ORTH": "BNVITAL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Caja Costarricense de Seguro Social", "pattern": [ {"LOWER": "caja"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguro"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Caja Costarricense de Seguro Social", "pattern": [ {"ORTH": "CCSS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Casa Hogar de La Tia Tere", "pattern": [ {"LOWER": "casa"}, {"LOWER": "hogar"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tia"}, {"LOWER": "tere"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Casa Hogar de La Tia Tere", "pattern": [ {"ORTH": "CHTT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Centro Costarricense de Ciencia y Cultura Museo de Los Niños", "pattern": [ {"LOWER": "centro"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciencia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cultura"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Centro Costarricense de Ciencia y Cultura Museo de Los Niños", "pattern": [ {"ORTH": "MDN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Centro Costarricense de Ciencia y Cultura Museo de Los Niños", "pattern": [ {"LOWER": "museo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niños"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Centro Costarricense de Ciencia y Cultura Museo de Los Niños", "pattern": [ {"ORTH": "MDN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Centro Costarricense de Produccion Cinematografica", "pattern": [ {"LOWER": "centro"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "produccion"}, {"LOWER": "cinematografica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Centro Costarricense de Produccion Cinematografica", "pattern": [ {"ORTH": "CCPC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Centro Cultural E Historico Jose Figueres Ferrer", "pattern": [ {"LOWER": "centro"}, {"LOWER": "cultural"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "historico"}, {"LOWER": "jose"}, {"LOWER": "figueres"}, {"LOWER": "ferrer"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Centro Cultural E Historico Jose Figueres Ferrer", "pattern": [ {"ORTH": "CCHJFF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Centro Cultural Herediano Omar Dengo", "pattern": [ {"LOWER": "centro"}, {"LOWER": "cultural"}, {"LOWER": "herediano"}, {"LOWER": "omar"}, {"LOWER": "dengo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Centro Cultural Herediano Omar Dengo", "pattern": [ {"ORTH": "CCHOD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Centro Nacional de La Musica", "pattern": [ {"LOWER": "centro"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "musica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Centro Nacional de La Musica", "pattern": [ {"ORTH": "CNM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio Agropecuario de San Carlos", "pattern": [ {"LOWER": "colegio"}, {"LOWER": "agropecuario"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "san"}, {"LOWER": "carlos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio Agropecuario de San Carlos", "pattern": [ {"ORTH": "CASC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Abogados", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "abogados"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Abogados", "pattern": [ {"ORTH": "CABOG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Bibliotecarios de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "bibliotecarios"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Bibliotecarios de Costa Rica", "pattern": [ {"ORTH": "CBCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Biologos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "biologos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Biologos", "pattern": [ {"ORTH": "CB"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Cirujanos Dentistas de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cirujanos"}, {"LOWER": "dentistas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Cirujanos Dentistas de Costa Rica", "pattern": [ {"ORTH": "CCD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Contadores Privados", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "contadores"}, {"LOWER": "privados"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Contadores Privados", "pattern": [ {"ORTH": "CCPRIV"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Contadores Publicos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "contadores"}, {"LOWER": "publicos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Contadores Publicos", "pattern": [ {"ORTH": "CCP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Enfermeras de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "enfermeras"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Enfermeras de Costa Rica", "pattern": [ {"ORTH": "CECR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Farmaceuticos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "farmaceuticos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Farmaceuticos", "pattern": [ {"ORTH": "CFARM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Fisicos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fisicos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Fisicos", "pattern": [ {"ORTH": "CF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Geologos de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "geologos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Geologos de Costa Rica", "pattern": [ {"ORTH": "CGCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Ingenieros Agronomos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ingenieros"}, {"LOWER": "agronomos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Ingenieros Agronomos", "pattern": [ {"ORTH": "CIA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Ingenieros Quimicos y Profesionales Afines", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ingenieros"}, {"LOWER": "quimicos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"LOWER": "afines"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Ingenieros Quimicos y Profesionales Afines", "pattern": [ {"ORTH": "CIQPA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Licenciados y Profesores En Letras y Filosofia, Ciencias y Artes", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "licenciados"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesores"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "letras"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "filosofia"}, {"IS_STOP": true, "OP":"?"}, {"LOWER": "ciencias"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "artes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Licenciados y Profesores En Letras y Filosofia, Ciencias y Artes", "pattern": [ {"ORTH": "CLYP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Medicos Veterinarios", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "medicos"}, {"LOWER": "veterinarios"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Medicos Veterinarios", "pattern": [ {"ORTH": "CMV"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Medicos y Cirujanos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "medicos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cirujanos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Medicos y Cirujanos", "pattern": [ {"ORTH": "CMYC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Microbiologos", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "microbiologos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Microbiologos", "pattern": [ {"ORTH": "CM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Periodistas de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "periodistas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Periodistas de Costa Rica", "pattern": [ {"ORTH": "CPCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Profesionales de Psicologia de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "psicologia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Profesionales de Psicologia de Costa Rica", "pattern": [ {"ORTH": "CPPCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Profesionales En Ciencias Economicas", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciencias"}, {"LOWER": "economicas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Profesionales En Ciencias Economicas", "pattern": [ {"ORTH": "CPCE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Profesionales En Ciencias Politicas y Relaciones Internacionales", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciencias"}, {"LOWER": "politicas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "relaciones"}, {"LOWER": "internacionales"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Profesionales En Ciencias Politicas y Relaciones Internacionales", "pattern": [ {"ORTH": "CPCP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Profesionales En Informatica y Computacion", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "informatica"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "computacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Profesionales En Informatica y Computacion", "pattern": [ {"ORTH": "CPIYC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Profesionales En Nutricion", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nutricion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Profesionales En Nutricion", "pattern": [ {"ORTH": "CPN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Profesionales En Quiropractica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "profesionales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "quiropractica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Profesionales En Quiropractica", "pattern": [ {"ORTH": "CPQ"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Quimicos de Costa Rica", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "quimicos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Quimicos de Costa Rica", "pattern": [ {"ORTH": "CQCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio de Trabajadores Sociales", "pattern": [ {"LOWER": "colegio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}, {"LOWER": "sociales"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio de Trabajadores Sociales", "pattern": [ {"ORTH": "CTS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio Federado de Ingenieros y Arquitectos", "pattern": [ {"LOWER": "colegio"}, {"LOWER": "federado"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ingenieros"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "arquitectos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio Federado de Ingenieros y Arquitectos", "pattern": [ {"ORTH": "CFIYA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio San Luis Gonzaga", "pattern": [ {"LOWER": "colegio"}, {"LOWER": "san"}, {"LOWER": "luis"}, {"LOWER": "gonzaga"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio San Luis Gonzaga", "pattern": [ {"ORTH": "CSG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Colegio Universitario de Limon", "pattern": [ {"LOWER": "colegio"}, {"LOWER": "universitario"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "limon"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Colegio Universitario de Limon", "pattern": [ {"ORTH": "CUL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision de Mejora Regulatoria", "pattern": [ {"LOWER": "comision"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mejora"}, {"LOWER": "regulatoria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision de Mejora Regulatoria", "pattern": [ {"ORTH": "CMR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision de Ordenamiento y Manejo de La Cuenca Alta Del Rio Reventazon", "pattern": [ {"LOWER": "comision"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ordenamiento"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "manejo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cuenca"}, {"LOWER": "alta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "rio"}, {"LOWER": "reventazon"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision de Ordenamiento y Manejo de La Cuenca Alta Del Rio Reventazon", "pattern": [ {"ORTH": "COMCURE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision de Promocion de La Competencia", "pattern": [ {"LOWER": "comision"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "promocion"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "competencia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision de Promocion de La Competencia", "pattern": [ {"ORTH": "CPC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Interinstitucional de Marinas y Atracaderos Turisticos", "pattern": [ {"LOWER": "comision"}, {"LOWER": "interinstitucional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "marinas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "atracaderos"}, {"LOWER": "turisticos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Interinstitucional de Marinas y Atracaderos Turisticos", "pattern": [ {"ORTH": "CIMAT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Asuntos Indigenas", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asuntos"}, {"LOWER": "indigenas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Asuntos Indigenas", "pattern": [ {"ORTH": "CONAI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Conmemoraciones Historicas", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "conmemoraciones"}, {"LOWER": "historicas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Conmemoraciones Historicas", "pattern": [ {"ORTH": "CCCH"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Energia Atomica", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "energia"}, {"LOWER": "atomica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Energia Atomica", "pattern": [ {"ORTH": "CNEA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Nomenclatura", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nomenclatura"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Nomenclatura", "pattern": [ {"ORTH": "CNN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Prestamos Para La Educacion", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "prestamos"}, {"LOWER": "para"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Prestamos Para La Educacion", "pattern": [ {"ORTH": "CONAPE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Prevencion de Riesgos y Atencion de Emergencias", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "prevencion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "riesgos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "atencion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "emergencias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Prevencion de Riesgos y Atencion de Emergencias", "pattern": [ {"ORTH": "CNPRAE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional de Vacunacion y Epidemiologia", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vacunacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "epidemiologia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional de Vacunacion y Epidemiologia", "pattern": [ {"ORTH": "CNVYE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional Del Consumidor", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "consumidor"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional Del Consumidor", "pattern": [ {"ORTH": "CNCONSUM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional Para La Defensa Del Idioma", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"LOWER": "para"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "defensa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "idioma"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional Para La Defensa Del Idioma", "pattern": [ {"ORTH": "CNPDI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Nacional Para La Gestion de La Biodiversidad", "pattern": [ {"LOWER": "comision"}, {"LOWER": "nacional"}, {"LOWER": "para"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "gestion"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "biodiversidad"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Nacional Para La Gestion de La Biodiversidad", "pattern": [ {"ORTH": "CONAGEBIO"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Reguladora de Turismo", "pattern": [ {"LOWER": "comision"}, {"LOWER": "reguladora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "turismo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Reguladora de Turismo", "pattern": [ {"ORTH": "CRT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comision Tecnica Filatelica", "pattern": [ {"LOWER": "comision"}, {"LOWER": "tecnica"}, {"LOWER": "filatelica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comision Tecnica Filatelica", "pattern": [ {"ORTH": "CTF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comite Coordinador Del Programa de Desarrollo Rural Integrado Osa-Golfito", "pattern": [ {"LOWER": "comite"}, {"LOWER": "coordinador"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "programa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "rural"}, {"LOWER": "integrado"}, {"LOWER": "osa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "golfito"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comite Coordinador Del Programa de Desarrollo Rural Integrado Osa-Golfito", "pattern": [ {"ORTH": "CCPOGOL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comites Cantonales de Deportes", "pattern": [ {"LOWER": "comites"}, {"LOWER": "cantonales"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "deportes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comites Cantonales de Deportes", "pattern": [ {"ORTH": "CCD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Comites Cantonales de La Persona Joven", "pattern": [ {"LOWER": "comites"}, {"LOWER": "cantonales"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "persona"}, {"LOWER": "joven"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Comites Cantonales de La Persona Joven", "pattern": [ {"ORTH": "CCPJ"}] }
+ 
+ {"label": "Entidad Pública", "id": "Compañia Nacional de Danza (Programa Del Teatro Melico Salazar)", "pattern": [ {"LOWER": "compañia"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "danza"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Compañia Nacional de Danza (Programa Del Teatro Melico Salazar)", "pattern": [ {"ORTH": "CND"}] }
+ 
+ {"label": "Entidad Pública", "id": "Compañia Nacional de Fuerza y Luz", "pattern": [ {"LOWER": "compañia"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fuerza"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "luz"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Compañia Nacional de Fuerza y Luz", "pattern": [ {"ORTH": "CNFL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo de Atencion Integral", "pattern": [ {"LOWER": "consejo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "atencion"}, {"LOWER": "integral"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo de Atencion Integral", "pattern": [ {"ORTH": "CAI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo de Salud Ocupacional", "pattern": [ {"LOWER": "consejo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"}, {"LOWER": "ocupacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo de Salud Ocupacional", "pattern": [ {"ORTH": "CSO"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo de Seguridad Vial", "pattern": [ {"LOWER": "consejo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguridad"}, {"LOWER": "vial"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo de Seguridad Vial", "pattern": [ {"ORTH": "CSV"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Fondo Editorial", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "fondo"}, {"LOWER": "editorial"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Fondo Editorial", "pattern": [ {"ORTH": "CPFE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Interinstitucional de Atencion A La Madre Adolescente", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "interinstitucional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "atencion"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "madre"}, {"LOWER": "adolescente"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Interinstitucional de Atencion A La Madre Adolescente", "pattern": [ {"ORTH": "CIAMA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Concesiones", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "concesiones"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Concesiones", "pattern": [ {"ORTH": "CNC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Cooperativas", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cooperativas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Cooperativas", "pattern": [ {"ORTH": "CNCOOP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Desarrollo de La Comunidad", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comunidad"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Desarrollo de La Comunidad", "pattern": [ {"ORTH": "CNDC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Enseñanza Superior Universitaria Privada", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "enseñanza"}, {"LOWER": "superior"}, {"LOWER": "universitaria"}, {"LOWER": "privada"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Enseñanza Superior Universitaria Privada", "pattern": [ {"ORTH": "CONESUP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Espectaculos Publicos", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "espectaculos"}, {"LOWER": "publicos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Espectaculos Publicos", "pattern": [ {"ORTH": "CNEP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Investigaciones Cientificas y Tecnologicas", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "investigaciones"}, {"LOWER": "cientificas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tecnologicas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Investigaciones Cientificas y Tecnologicas", "pattern": [ {"ORTH": "CONICIT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de La Niñez y La Adolescencia", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niñez"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "adolescencia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de La Niñez y La Adolescencia", "pattern": [ {"ORTH": "CNNYA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de La Persona Adulta Mayor", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "persona"}, {"LOWER": "adulta"}, {"LOWER": "mayor"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de La Persona Adulta Mayor", "pattern": [ {"ORTH": "CONAPAM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de La Produccion", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "produccion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de La Produccion", "pattern": [ {"ORTH": "CNP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Politica Publica de La Persona Joven", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "politica"}, {"LOWER": "publica"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "persona"}, {"LOWER": "joven"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Politica Publica de La Persona Joven", "pattern": [ {"ORTH": "CNPPPJ"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Rectores", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "rectores"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Rectores", "pattern": [ {"ORTH": "CONARE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Rehabilitacion y Educacion Especial", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "rehabilitacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"}, {"LOWER": "especial"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Rehabilitacion y Educacion Especial", "pattern": [ {"ORTH": "CNREE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Salarios", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salarios"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Salarios", "pattern": [ {"ORTH": "CNSAL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Supervision Del Sistema Financiero", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "supervision"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "sistema"}, {"LOWER": "financiero"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Supervision Del Sistema Financiero", "pattern": [ {"ORTH": "CONASSIF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Transporte Publico", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "transporte"}, {"LOWER": "publico"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Transporte Publico", "pattern": [ {"ORTH": "CNTP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional de Vialidad", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vialidad"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional de Vialidad", "pattern": [ {"ORTH": "CONAVI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Nacional Para La Calidad", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"LOWER": "para"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "calidad"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Nacional Para La Calidad", "pattern": [ {"ORTH": "CONAC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Portuario Nacional", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "portuario"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Portuario Nacional", "pattern": [ {"ORTH": "CPN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Rector Del Sistema Banca Para El Desarrollo", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "rector"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "sistema"}, {"LOWER": "banca"}, {"LOWER": "para"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Rector Del Sistema Banca Para El Desarrollo", "pattern": [ {"ORTH": "CRSBD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Superior de Educacion", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "superior"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Superior de Educacion", "pattern": [ {"ORTH": "CSE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Tecnico de Asistencia Medico Social", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "tecnico"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asistencia"}, {"LOWER": "medico"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Tecnico de Asistencia Medico Social", "pattern": [ {"ORTH": "CTAMS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejo Tecnico de Aviacion Civil", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "tecnico"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "aviacion"}, {"LOWER": "civil"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejo Tecnico de Aviacion Civil", "pattern": [ {"ORTH": "CTAC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejos Regionales Ambientales", "pattern": [ {"LOWER": "consejos"}, {"LOWER": "regionales"}, {"LOWER": "ambientales"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejos Regionales Ambientales", "pattern": [ {"ORTH": "CNA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Consejos Tecnicos Asesores de Estaciones Experimentales", "pattern": [ {"LOWER": "consejos"}, {"LOWER": "tecnicos"}, {"LOWER": "asesores"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estaciones"}, {"LOWER": "experimentales"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Consejos Tecnicos Asesores de Estaciones Experimentales", "pattern": [ {"ORTH": "CTAEEMAG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Contraloria General de La Republica", "pattern": [ {"LOWER": "contraloria"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "republica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Contraloria General de La Republica", "pattern": [ {"ORTH": "CGR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Corporacion Arrocera Nacional", "pattern": [ {"LOWER": "corporacion"}, {"LOWER": "arrocera"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Corporacion Arrocera Nacional", "pattern": [ {"ORTH": "CAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Corporacion Bananera Nacional", "pattern": [ {"LOWER": "corporacion"}, {"LOWER": "bananera"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Corporacion Bananera Nacional", "pattern": [ {"ORTH": "CORBANA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Corporacion Ganadera Nacional", "pattern": [ {"LOWER": "corporacion"}, {"LOWER": "ganadera"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Corporacion Ganadera Nacional", "pattern": [ {"ORTH": "CGN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Corporacion Horticola Nacional", "pattern": [ {"LOWER": "corporacion"}, {"LOWER": "horticola"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Corporacion Horticola Nacional", "pattern": [ {"ORTH": "CHN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Correos de Costa Rica", "pattern": [ {"LOWER": "correos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Correos de Costa Rica", "pattern": [ {"ORTH": "CCRSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Cuerpo de Bomberos", "pattern": [ {"LOWER": "cuerpo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "bomberos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Cuerpo de Bomberos", "pattern": [ {"ORTH": "CB"}] }
+ 
+ {"label": "Entidad Pública", "id": "Defensoria de Los Habitantes", "pattern": [ {"LOWER": "defensoria"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "habitantes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Defensoria de Los Habitantes", "pattern": [ {"ORTH": "DHR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion de Geologia , Minas E Hidrocarburos", "pattern": [ {"LOWER": "direccion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "geologia"}, {"IS_STOP": true, "OP":"?"}, {"LOWER": "minas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "hidrocarburos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion de Geologia , Minas E Hidrocarburos", "pattern": [ {"ORTH": "DGM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion Ejecutora de Proyectos", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "ejecutora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "proyectos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion Ejecutora de Proyectos", "pattern": [ {"ORTH": "DEP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion General de Adaptacion Social", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "adaptacion"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion General de Adaptacion Social", "pattern": [ {"ORTH": "DGAS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion General de Desarrollo Social y Asignaciones Familiares", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "social"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asignaciones"}, {"LOWER": "familiares"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion General de Desarrollo Social y Asignaciones Familiares", "pattern": [ {"ORTH": "DESAF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion General de Hidrocarburos", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "hidrocarburos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion General de Hidrocarburos", "pattern": [ {"ORTH": "DGH"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion General de Migracion y Extranjeria", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "migracion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "extranjeria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion General de Migracion y Extranjeria", "pattern": [ {"ORTH": "DGMYE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion General Del Archivo Nacional", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "archivo"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion General Del Archivo Nacional", "pattern": [ {"ORTH": "DGAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion General Del Servicio Civil", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicio"}, {"LOWER": "civil"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion General Del Servicio Civil", "pattern": [ {"ORTH": "DGSC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Direccion Nacional de Desarrollo de La Comunidad", "pattern": [ {"LOWER": "direccion"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comunidad"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Direccion Nacional de Desarrollo de La Comunidad", "pattern": [ {"ORTH": "DINADECO"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ecomuseo de Las Minas de Abangares", "pattern": [ {"LOWER": "ecomuseo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "minas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "abangares"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ecomuseo de Las Minas de Abangares", "pattern": [ {"ORTH": "EMMA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Editorial Costa Rica", "pattern": [ {"LOWER": "editorial"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Editorial Costa Rica", "pattern": [ {"ORTH": "ECR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Empresa de Servicios Publicos de Heredia", "pattern": [ {"LOWER": "empresa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicios"}, {"LOWER": "publicos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "heredia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Empresa de Servicios Publicos de Heredia", "pattern": [ {"ORTH": "ESPH"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ente Costarricense de Acreditacion", "pattern": [ {"LOWER": "ente"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "acreditacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ente Costarricense de Acreditacion", "pattern": [ {"ORTH": "ECA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Escuela Tecnica Agricola Industrial", "pattern": [ {"LOWER": "escuela"}, {"LOWER": "tecnica"}, {"LOWER": "agricola"}, {"LOWER": "industrial"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Escuela Tecnica Agricola Industrial", "pattern": [ {"ORTH": "ETAI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fabrica Nacional de Licores", "pattern": [ {"LOWER": "fabrica"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "licores"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fabrica Nacional de Licores", "pattern": [ {"ORTH": "FANAL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo de Desarrollo Social de Limon", "pattern": [ {"LOWER": "fondo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "social"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "limon"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo de Desarrollo Social de Limon", "pattern": [ {"ORTH": "FODELI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo de Desarrollo Social y Asignaciones Familiares", "pattern": [ {"LOWER": "fondo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "social"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asignaciones"}, {"LOWER": "familiares"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo de Desarrollo Social y Asignaciones Familiares", "pattern": [ {"ORTH": "FODESAF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo de Parques Nacionales", "pattern": [ {"LOWER": "fondo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "parques"}, {"LOWER": "nacionales"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo de Parques Nacionales", "pattern": [ {"ORTH": "FPN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo de Preinversion", "pattern": [ {"LOWER": "fondo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "preinversion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo de Preinversion", "pattern": [ {"ORTH": "FPMIDEPLAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo de Vida Silvestre", "pattern": [ {"LOWER": "fondo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vida"}, {"LOWER": "silvestre"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo de Vida Silvestre", "pattern": [ {"ORTH": "FVS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Especial Del Servicio Nacional de Guardacostas", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "especial"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicio"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "guardacostas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Especial Del Servicio Nacional de Guardacostas", "pattern": [ {"ORTH": "FESNG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Especifico de Migracion y Extranjeria.", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "especifico"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "migracion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "extranjeria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Especifico de Migracion y Extranjeria.", "pattern": [ {"ORTH": "FEMYE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Forestal", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "forestal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Forestal", "pattern": [ {"ORTH": "FF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Jurisdiccion de Transito", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "jurisdiccion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "transito"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Jurisdiccion de Transito", "pattern": [ {"ORTH": "FJT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Nacional Ambiental", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "nacional"}, {"LOWER": "ambiental"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Nacional Ambiental", "pattern": [ {"ORTH": "FNA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Nacional de Becas", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "becas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Nacional de Becas", "pattern": [ {"ORTH": "FNB"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Nacional de Emergencias", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "emergencias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Nacional de Emergencias", "pattern": [ {"ORTH": "FNE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Nacional de Estabilizacion Cafetalera", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estabilizacion"}, {"LOWER": "cafetalera"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Nacional de Estabilizacion Cafetalera", "pattern": [ {"ORTH": "FONECAFE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Fondo Nacional de Financiamiento Forestal", "pattern": [ {"LOWER": "fondo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "financiamiento"}, {"LOWER": "forestal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Fondo Nacional de Financiamiento Forestal", "pattern": [ {"ORTH": "FONAFIFO"}] }
+ 
+ {"label": "Entidad Pública", "id": "Imprenta Nacional, Junta Administrativa", "pattern": [ {"LOWER": "imprenta"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Imprenta Nacional, Junta Administrativa", "pattern": [ {"ORTH": "JAIN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Acueductos y Alcantarillados", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "acueductos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "alcantarillados"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Acueductos y Alcantarillados", "pattern": [ {"ORTH": "ICAA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Electricidad", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "electricidad"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Electricidad", "pattern": [ {"ORTH": "ICE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Ferrocarriles", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ferrocarriles"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Ferrocarriles", "pattern": [ {"ORTH": "INCOFER"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Investigacion y Enseñanza En Nutricion y Salud", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "investigacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "enseñanza"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nutricion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Investigacion y Enseñanza En Nutricion y Salud", "pattern": [ {"ORTH": "INCIENSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Pesca y Acuacultura", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pesca"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "acuacultura"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Pesca y Acuacultura", "pattern": [ {"ORTH": "INCOPESCA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Puertos Del Pacifico", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "puertos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pacifico"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Puertos Del Pacifico", "pattern": [ {"ORTH": "INCOP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense de Turismo", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "turismo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense de Turismo", "pattern": [ {"ORTH": "ICT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense Del Deporte y La Recreacion", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "deporte"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "recreacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense Del Deporte y La Recreacion", "pattern": [ {"ORTH": "ICODER"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Costarricense Sobre Drogas", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "costarricense"}, {"LOWER": "sobre"}, {"LOWER": "drogas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Costarricense Sobre Drogas", "pattern": [ {"ORTH": "ICSD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto de Desarrollo Agrario", "pattern": [ {"LOWER": "instituto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "agrario"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto de Desarrollo Agrario", "pattern": [ {"ORTH": "IDA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto de Desarrollo Profesional", "pattern": [ {"LOWER": "instituto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "profesional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto de Desarrollo Profesional", "pattern": [ {"ORTH": "IDPUGS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto de Fomento y Asesoria Municipal", "pattern": [ {"LOWER": "instituto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fomento"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asesoria"}, {"LOWER": "municipal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto de Fomento y Asesoria Municipal", "pattern": [ {"ORTH": "IFAM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Del Cafe de Costa Rica", "pattern": [ {"LOWER": "instituto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cafe"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Del Cafe de Costa Rica", "pattern": [ {"ORTH": "ICAFE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Geografico Nacional", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "geografico"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Geografico Nacional", "pattern": [ {"ORTH": "IGN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Latinoamericano Prevencion Del Delito y Tratamiento Delincuente", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "latinoamericano"}, {"LOWER": "prevencion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "delito"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tratamiento"}, {"LOWER": "delincuente"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Latinoamericano Prevencion Del Delito y Tratamiento Delincuente", "pattern": [ {"ORTH": "ILANUD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Meteorologico Nacional", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "meteorologico"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Meteorologico Nacional", "pattern": [ {"ORTH": "IMN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Mixto de Ayuda Social", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "mixto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ayuda"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Mixto de Ayuda Social", "pattern": [ {"ORTH": "IMAS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Aprendizaje", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "aprendizaje"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Aprendizaje", "pattern": [ {"ORTH": "INA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Estadisticas y Censos", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estadisticas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "censos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Estadisticas y Censos", "pattern": [ {"ORTH": "INEC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Fomento Cooperativo", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fomento"}, {"LOWER": "cooperativo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Fomento Cooperativo", "pattern": [ {"ORTH": "INFOCOOP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Innovacion y Transferencia Tecnologica Agropecuaria", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "innovacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "transferencia"}, {"LOWER": "tecnologica"}, {"LOWER": "agropecuaria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Innovacion y Transferencia Tecnologica Agropecuaria", "pattern": [ {"ORTH": "INTA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Las Mujeres", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujeres"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Las Mujeres", "pattern": [ {"ORTH": "INAMU"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Seguros", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguros"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Seguros", "pattern": [ {"ORTH": "INS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Seguros-Bancredito Operadora de Pensiones Complementarias", "pattern": [ {"LOWER": "bancredito"}, {"LOWER": "operadora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"}, {"LOWER": "complementarias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Seguros-Bancredito Operadora de Pensiones Complementarias", "pattern": [ {"ORTH": "IBOPC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Seguros-Bancredito Sociedad Administradora de Fondos de Inversion", "pattern": [ {"LOWER": "bancredito"}, {"LOWER": "sociedad"}, {"LOWER": "administradora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fondos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "inversion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Seguros-Bancredito Sociedad Administradora de Fondos de Inversion", "pattern": [ {"ORTH": "IBFI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Seguros-Bancredito Valores", "pattern": [ {"LOWER": "bancredito"}, {"LOWER": "valores"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Seguros-Bancredito Valores", "pattern": [ {"ORTH": "IBV"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Nacional de Vivienda y Urbanismo", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vivienda"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "urbanismo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Nacional de Vivienda y Urbanismo", "pattern": [ {"ORTH": "INVU"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Sobre Alcoholismo y Farmacodependencia", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "sobre"}, {"LOWER": "alcoholismo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "farmacodependencia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Sobre Alcoholismo y Farmacodependencia", "pattern": [ {"ORTH": "IAFA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Instituto Tecnologico de Costa Rica", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "tecnologico"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Instituto Tecnologico de Costa Rica", "pattern": [ {"ORTH": "ITCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Administradora de Servicios Electricos de Cartago", "pattern": [ {"LOWER": "junta"}, {"LOWER": "administradora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicios"}, {"LOWER": "electricos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cartago"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Administradora de Servicios Electricos de Cartago", "pattern": [ {"ORTH": "JASEC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Administrativa de Los Centros Civicos", "pattern": [ {"LOWER": "junta"}, {"LOWER": "administrativa"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "centros"}, {"LOWER": "civicos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Administrativa de Los Centros Civicos", "pattern": [ {"ORTH": "JACC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Administrativa Del Archivo Nacional", "pattern": [ {"LOWER": "junta"}, {"LOWER": "administrativa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "archivo"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Administrativa Del Archivo Nacional", "pattern": [ {"ORTH": "JAAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Administrativa Del Parque Recreativo Playas de Manuel Antonio", "pattern": [ {"LOWER": "junta"}, {"LOWER": "administrativa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "parque"}, {"LOWER": "recreativo"}, {"LOWER": "playas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "manuel"}, {"LOWER": "antonio"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Administrativa Del Parque Recreativo Playas de Manuel Antonio", "pattern": [ {"ORTH": "JAPRPMN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Administrativa Del Registro Nacional", "pattern": [ {"LOWER": "junta"}, {"LOWER": "administrativa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "registro"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Administrativa Del Registro Nacional", "pattern": [ {"ORTH": "RN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Administrativa Portuaria y Desarrollo Economico de La Vertiente Atlantica", "pattern": [ {"LOWER": "junta"}, {"LOWER": "administrativa"}, {"LOWER": "portuaria"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "economico"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vertiente"}, {"LOWER": "atlantica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Administrativa Portuaria y Desarrollo Economico de La Vertiente Atlantica", "pattern": [ {"ORTH": "JAPDEVA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Desarrollo de La Zona Sur", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "zona"}, {"LOWER": "sur"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Desarrollo de La Zona Sur", "pattern": [ {"ORTH": "JUDESUR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Fomento Avicola", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fomento"}, {"LOWER": "avicola"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Fomento Avicola", "pattern": [ {"ORTH": "JFA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Fomento Porcino", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fomento"}, {"LOWER": "porcino"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Fomento Porcino", "pattern": [ {"ORTH": "JFP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Fomento Salinero", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fomento"}, {"LOWER": "salinero"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Fomento Salinero", "pattern": [ {"ORTH": "JFS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Pensiones y Jubilaciones Del Magisterio Nacional", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "jubilaciones"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "magisterio"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Pensiones y Jubilaciones Del Magisterio Nacional", "pattern": [ {"ORTH": "JPJMN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Proteccion Social", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "proteccion"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Proteccion Social", "pattern": [ {"ORTH": "JPSS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta de Vigilancia de Drogas y Estupefacientes", "pattern": [ {"LOWER": "junta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vigilancia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "drogas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estupefacientes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta de Vigilancia de Drogas y Estupefacientes", "pattern": [ {"ORTH": "JVDE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Nacional de La Cabuya", "pattern": [ {"LOWER": "junta"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cabuya"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Nacional de La Cabuya", "pattern": [ {"ORTH": "JNC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Junta Promotora de Turismo de La Ciudad de Puntarenas", "pattern": [ {"LOWER": "junta"}, {"LOWER": "promotora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "turismo"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciudad"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "puntarenas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Junta Promotora de Turismo de La Ciudad de Puntarenas", "pattern": [ {"ORTH": "JPTCP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Juntas Administrativas de Colegios", "pattern": [ {"LOWER": "juntas"}, {"LOWER": "administrativas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "colegios"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Juntas Administrativas de Colegios", "pattern": [ {"ORTH": "JACA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Juntas de Educacion de Escuelas", "pattern": [ {"LOWER": "juntas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "escuelas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Juntas de Educacion de Escuelas", "pattern": [ {"ORTH": "JEESC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Juntas Viales Cantonales", "pattern": [ {"LOWER": "juntas"}, {"LOWER": "viales"}, {"LOWER": "cantonales"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Juntas Viales Cantonales", "pattern": [ {"ORTH": "JVC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Laboratorio Costarricense de Metrologia", "pattern": [ {"LOWER": "laboratorio"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "metrologia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Laboratorio Costarricense de Metrologia", "pattern": [ {"ORTH": "LACOMET"}] }
+ 
+ {"label": "Entidad Pública", "id": "Liga Agricola Industrial de La Caña", "pattern": [ {"LOWER": "liga"}, {"LOWER": "agricola"}, {"LOWER": "industrial"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "caña"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Liga Agricola Industrial de La Caña", "pattern": [ {"ORTH": "LAICA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Agricultura y Ganaderia", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "agricultura"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ganaderia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Agricultura y Ganaderia", "pattern": [ {"ORTH": "MAG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Ciencia, Tecnologia y Telecomunicaciones", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciencia"}, {"IS_PUNCT": true, "OP":"?"}, {"LOWER": "tecnologia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "telecomunicaciones"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Ciencia, Tecnologia y Telecomunicaciones", "pattern": [ {"ORTH": "MICITT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Comercio Exterior", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"}, {"LOWER": "exterior"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Comercio Exterior", "pattern": [ {"ORTH": "COMEX"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Cultura y Juventud", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cultura"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "juventud"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Cultura y Juventud", "pattern": [ {"ORTH": "MCJ"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Economia, Industria y Comercio", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "economia"}, {"IS_PUNCT": true, "OP":"?"}, {"LOWER": "industria"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Economia, Industria y Comercio", "pattern": [ {"ORTH": "MEIC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Educacion Publica", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"}, {"LOWER": "publica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Educacion Publica", "pattern": [ {"ORTH": "MEP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Gobernacion y Policia", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "gobernacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "policia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Gobernacion y Policia", "pattern": [ {"ORTH": "MGP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Hacienda", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "hacienda"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Hacienda", "pattern": [ {"ORTH": "MH"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Justicia y Paz", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "justicia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "paz"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Justicia y Paz", "pattern": [ {"ORTH": "MJP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de La Presidencia", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "presidencia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de La Presidencia", "pattern": [ {"ORTH": "MP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Obras Publicas y Transportes", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "obras"}, {"LOWER": "publicas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "transportes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Obras Publicas y Transportes", "pattern": [ {"ORTH": "MOPT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Planificacion Nacional y Politica Economica", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "planificacion"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "politica"}, {"LOWER": "economica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Planificacion Nacional y Politica Economica", "pattern": [ {"ORTH": "MIDEPLAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Relaciones Exteriores y Culto", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "relaciones"}, {"LOWER": "exteriores"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "culto"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Relaciones Exteriores y Culto", "pattern": [ {"ORTH": "MREYC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Salud", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Salud", "pattern": [ {"ORTH": "MINSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Seguridad Publica", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguridad"}, {"LOWER": "publica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Seguridad Publica", "pattern": [ {"ORTH": "MSP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Trabajo y Seguridad Social", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguridad"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Trabajo y Seguridad Social", "pattern": [ {"ORTH": "MTSS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio de Vivienda y Asentamientos Humanos", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "vivienda"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asentamientos"}, {"LOWER": "humanos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio de Vivienda y Asentamientos Humanos", "pattern": [ {"ORTH": "MIVAH"}] }
+ 
+ {"label": "Entidad Pública", "id": "Ministerio Del Ambiente y Energia", "pattern": [ {"LOWER": "ministerio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ambiente"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "energia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Ministerio Del Ambiente y Energia", "pattern": [ {"ORTH": "MINAE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Museo de Arte Costarricense", "pattern": [ {"LOWER": "museo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "arte"}, {"LOWER": "costarricense"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Museo de Arte Costarricense", "pattern": [ {"ORTH": "MAC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Museo de Arte y Diseño Contemporaneo", "pattern": [ {"LOWER": "museo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "arte"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "diseño"}, {"LOWER": "contemporaneo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Museo de Arte y Diseño Contemporaneo", "pattern": [ {"ORTH": "MAYDC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Museo de Guanacaste", "pattern": [ {"LOWER": "museo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "guanacaste"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Museo de Guanacaste", "pattern": [ {"ORTH": "MDG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Museo Dr. Rafael Angel Calderon Guardia", "pattern": [ {"LOWER": "museo"}, {"LOWER": {"IN": ["dr","doctor"]}, "OP":"?"}, {"IS_PUNCT": true, "OP":"?"}, {"LOWER": "rafael"}, {"LOWER": "angel"}, {"LOWER": "calderon"}, {"LOWER": "guardia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Museo Dr. Rafael Angel Calderon Guardia", "pattern": [ {"ORTH": "MRCG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Museo Historico Cultural Juan Santamaria", "pattern": [ {"LOWER": "museo"}, {"LOWER": "historico"}, {"LOWER": "cultural"}, {"LOWER": "juan"}, {"LOWER": "santamaria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Museo Historico Cultural Juan Santamaria", "pattern": [ {"ORTH": "MHJS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Museo Nacional de Costa Rica", "pattern": [ {"LOWER": "museo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Museo Nacional de Costa Rica", "pattern": [ {"ORTH": "MN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Oficina de Cooperacion Internacional de La Salud", "pattern": [ {"LOWER": "oficina"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cooperacion"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Oficina de Cooperacion Internacional de La Salud", "pattern": [ {"ORTH": "OCIS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Oficina Ejecutora Del Proyecto Turistico Golfo de Papagayo", "pattern": [ {"LOWER": "oficina"}, {"LOWER": "ejecutora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "proyecto"}, {"LOWER": "turistico"}, {"LOWER": "golfo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "papagayo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Oficina Ejecutora Del Proyecto Turistico Golfo de Papagayo", "pattern": [ {"ORTH": "OEPTGP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Oficina Nacional de Semillas", "pattern": [ {"LOWER": "oficina"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "semillas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Oficina Nacional de Semillas", "pattern": [ {"ORTH": "ONSEM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Oficina Nacional Forestal", "pattern": [ {"LOWER": "oficina"}, {"LOWER": "nacional"}, {"LOWER": "forestal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Oficina Nacional Forestal", "pattern": [ {"ORTH": "ONF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Operadora de Pensiones Complementarias y de Capitalizacion Laboral de La Caja Costarricense de Seguro Social", "pattern": [ {"LOWER": "operadora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"}, {"LOWER": "complementarias"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "capitalizacion"}, {"LOWER": "laboral"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "caja"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguro"}, {"LOWER": "social"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Operadora de Pensiones Complementarias y de Capitalizacion Laboral de La Caja Costarricense de Seguro Social", "pattern": [ {"ORTH": "CCSSOP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Organo de Reglamentacion Tecnica", "pattern": [ {"LOWER": "organo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "reglamentacion"}, {"LOWER": "tecnica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Organo de Reglamentacion Tecnica", "pattern": [ {"ORTH": "ORT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Parque Marino Del Pacifico", "pattern": [ {"LOWER": "parque"}, {"LOWER": "marino"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pacifico"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Parque Marino Del Pacifico", "pattern": [ {"ORTH": "PMP"}] }
+ 
+ {"label": "Entidad Pública", "id": "Patronato de Construcciones, Instalaciones y Adquisicion de Bienes", "pattern": [ {"LOWER": "patronato"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "construcciones"}, {"IS_STOP": true, "OP":"?"}, {"LOWER": "instalaciones"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "adquisicion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "bienes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Patronato de Construcciones, Instalaciones y Adquisicion de Bienes", "pattern": [ {"ORTH": "PNCIYAB"}] }
+ 
+ {"label": "Entidad Pública", "id": "Patronato Nacional de Ciegos", "pattern": [ {"LOWER": "patronato"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ciegos"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Patronato Nacional de Ciegos", "pattern": [ {"ORTH": "PANACI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Patronato Nacional de La Infancia", "pattern": [ {"LOWER": "patronato"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "infancia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Patronato Nacional de La Infancia", "pattern": [ {"ORTH": "PANI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Patronato Nacional de Rehabilitacion", "pattern": [ {"LOWER": "patronato"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "rehabilitacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Patronato Nacional de Rehabilitacion", "pattern": [ {"ORTH": "PANARE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Poder Ejecutivo", "pattern": [ {"LOWER": "poder"}, {"LOWER": "ejecutivo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Poder Ejecutivo", "pattern": [ {"ORTH": "PE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Presidencia de La Republica", "pattern": [ {"LOWER": "presidencia"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "republica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Presidencia de La Republica", "pattern": [ {"ORTH": "PE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Poder Judicial", "pattern": [ {"LOWER": "poder"}, {"LOWER": "judicial"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Poder Judicial", "pattern": [ {"ORTH": "PJ"}] }
+ 
+ {"label": "Entidad Pública", "id": "Poder Legislativo", "pattern": [ {"LOWER": "poder"}, {"LOWER": "legislativo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Poder Legislativo", "pattern": [ {"ORTH": "PL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Asamblea Legislativa", "pattern": [ {"LOWER": "asamblea"}, {"LOWER": "legislativa"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Asamblea Legislativa", "pattern": [ {"ORTH": "PL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Popular Valores, Puesto de Bolsa", "pattern": [ {"LOWER": "popular"}, {"LOWER": "valores"}, {"IS_STOP": true, "OP":"?"}, {"LOWER": "puesto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "bolsa"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Popular Valores, Puesto de Bolsa", "pattern": [ {"ORTH": "PVAL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Procuraduria General de La Republica", "pattern": [ {"LOWER": "procuraduria"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "republica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Procuraduria General de La Republica", "pattern": [ {"ORTH": "PGR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Programa Integral de Mercadeo Agropecuario", "pattern": [ {"LOWER": "programa"}, {"LOWER": "integral"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mercadeo"}, {"LOWER": "agropecuario"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Programa Integral de Mercadeo Agropecuario", "pattern": [ {"ORTH": "PIMA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Promotora de Comercio Exterior", "pattern": [ {"LOWER": "promotora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"}, {"LOWER": "exterior"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Promotora de Comercio Exterior", "pattern": [ {"ORTH": "PROCOMER"}] }
+ 
+ {"label": "Entidad Pública", "id": "Proyecto de Desarrollo Agricola de La Zona Atlantica", "pattern": [ {"LOWER": "proyecto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "agricola"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "zona"}, {"LOWER": "atlantica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Proyecto de Desarrollo Agricola de La Zona Atlantica", "pattern": [ {"ORTH": "PDAZA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Proyecto de Desarrollo Agricola Peninsula de Nicoya", "pattern": [ {"LOWER": "proyecto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "agricola"}, {"LOWER": "peninsula"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nicoya"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Proyecto de Desarrollo Agricola Peninsula de Nicoya", "pattern": [ {"ORTH": "PRODAPEN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Radiografica Costarricense S. A.", "pattern": [ {"LOWER": "radiografica"}, {"LOWER": "costarricense"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Radiografica Costarricense S. A.", "pattern": [ {"ORTH": "RACSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Refinadora Costarricense de Petroleo", "pattern": [ {"LOWER": "refinadora"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "petroleo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Refinadora Costarricense de Petroleo", "pattern": [ {"ORTH": "RECOPE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Secretaria de Politica Nacional de Alimentacion y Nutricion", "pattern": [ {"LOWER": "secretaria"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "politica"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "alimentacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nutricion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Secretaria de Politica Nacional de Alimentacion y Nutricion", "pattern": [ {"ORTH": "SEPAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Secretaria Ejecutiva Planificacion Sectorial Agropecuaria", "pattern": [ {"LOWER": "secretaria"}, {"LOWER": "ejecutiva"}, {"LOWER": "planificacion"}, {"LOWER": "sectorial"}, {"LOWER": "agropecuaria"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Secretaria Ejecutiva Planificacion Sectorial Agropecuaria", "pattern": [ {"ORTH": "SEPSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Secretaria Tecnica de Gobierno Digital", "pattern": [ {"LOWER": "secretaria"}, {"LOWER": "tecnica"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "gobierno"}, {"LOWER": "digital"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Secretaria Tecnica de Gobierno Digital", "pattern": [ {"ORTH": "STGD"}] }
+ 
+ {"label": "Entidad Pública", "id": "Secretaria Tecnica Nacional Ambiental", "pattern": [ {"LOWER": "secretaria"}, {"LOWER": "tecnica"}, {"LOWER": "nacional"}, {"LOWER": "ambiental"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Secretaria Tecnica Nacional Ambiental", "pattern": [ {"ORTH": "SETENA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Servicio Fitosanitario Del Estado", "pattern": [ {"LOWER": "servicio"}, {"LOWER": "fitosanitario"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estado"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Servicio Fitosanitario Del Estado", "pattern": [ {"ORTH": "DSF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Servicio Nacional de Aguas Subterraneas, Riego y Avenamiento", "pattern": [ {"LOWER": "servicio"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "aguas"}, {"LOWER": "subterraneas"}, {"IS_STOP": true, "OP":"?"}, {"LOWER": "riego"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "avenamiento"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Servicio Nacional de Aguas Subterraneas, Riego y Avenamiento", "pattern": [ {"ORTH": "SENARA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Servicio Nacional de Guardacostas", "pattern": [ {"LOWER": "servicio"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "guardacostas"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Servicio Nacional de Guardacostas", "pattern": [ {"ORTH": "SNG"}] }
+ 
+ {"label": "Entidad Pública", "id": "Servicio Nacional de Salud Animal", "pattern": [ {"LOWER": "servicio"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"}, {"LOWER": "animal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Servicio Nacional de Salud Animal", "pattern": [ {"ORTH": "SENASA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Sistema de Emergencias 911", "pattern": [ {"LOWER": "sistema"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "emergencias"}, {"LOWER": "911"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Sistema de Emergencias 911", "pattern": [ {"ORTH": "SE911"}] }
+ 
+ {"label": "Entidad Pública", "id": "Sistema Nacional de Acreditacion de La Educacion Superior", "pattern": [ {"LOWER": "sistema"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "acreditacion"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"}, {"LOWER": "superior"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Sistema Nacional de Acreditacion de La Educacion Superior", "pattern": [ {"ORTH": "SINAES"}] }
+ 
+ {"label": "Entidad Pública", "id": "Sistema Nacional de Areas de Conservacion", "pattern": [ {"LOWER": "sistema"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "areas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "conservacion"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Sistema Nacional de Areas de Conservacion", "pattern": [ {"ORTH": "SINAC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Sistema Nacional de Radio y Television Cultural de Costa Rica", "pattern": [ {"LOWER": "sistema"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "radio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "television"}, {"LOWER": "cultural"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Sistema Nacional de Radio y Television Cultural de Costa Rica", "pattern": [ {"ORTH": "SINART"}] }
+ 
+ {"label": "Entidad Pública", "id": "Sociedad Administradora de Fondos de Inversion Del Banco Popular y de Desarrollo Popular", "pattern": [ {"LOWER": "sociedad"}, {"LOWER": "administradora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fondos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "inversion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "banco"}, {"LOWER": "popular"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "popular"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Sociedad Administradora de Fondos de Inversion Del Banco Popular y de Desarrollo Popular", "pattern": [ {"ORTH": "BPOPFI"}] }
+ 
+ {"label": "Entidad Pública", "id": "Superintendencia de Telecomunicaciones", "pattern": [ {"LOWER": "superintendencia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "telecomunicaciones"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Superintendencia de Telecomunicaciones", "pattern": [ {"ORTH": "SUTEL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Superintendencia General de Entidades Financieras", "pattern": [ {"LOWER": "superintendencia"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "entidades"}, {"LOWER": "financieras"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Superintendencia General de Entidades Financieras", "pattern": [ {"ORTH": "SUGEF"}] }
+ 
+ {"label": "Entidad Pública", "id": "Superintendencia General de Pensiones", "pattern": [ {"LOWER": "superintendencia"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Superintendencia General de Pensiones", "pattern": [ {"ORTH": "SUPEN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Superintendencia General de Seguros", "pattern": [ {"LOWER": "superintendencia"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguros"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Superintendencia General de Seguros", "pattern": [ {"ORTH": "SUGES"}] }
+ 
+ {"label": "Entidad Pública", "id": "Superintendencia General de Valores", "pattern": [ {"LOWER": "superintendencia"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "valores"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Superintendencia General de Valores", "pattern": [ {"ORTH": "SUGEVAL"}] }
+ 
+ {"label": "Entidad Pública", "id": "Teatro Nacional", "pattern": [ {"LOWER": "teatro"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Teatro Nacional", "pattern": [ {"ORTH": "TN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Teatro Popular Melico Salazar", "pattern": [ {"LOWER": "teatro"}, {"LOWER": "popular"}, {"LOWER": "melico"}, {"LOWER": "salazar"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Teatro Popular Melico Salazar", "pattern": [ {"ORTH": "TPMS"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Administrativo de Transportes", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "administrativo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "transportes"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Administrativo de Transportes", "pattern": [ {"ORTH": "TAT"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Administrativo Migratorio", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "administrativo"}, {"LOWER": "migratorio"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Administrativo Migratorio", "pattern": [ {"ORTH": "TAM"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Aduanero Nacional", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "aduanero"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Aduanero Nacional", "pattern": [ {"ORTH": "TAN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Ambiental Administrativo", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "ambiental"}, {"LOWER": "administrativo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Ambiental Administrativo", "pattern": [ {"ORTH": "TAA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal de Carrera Docente", "pattern": [ {"LOWER": "tribunal"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "carrera"}, {"LOWER": "docente"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal de Carrera Docente", "pattern": [ {"ORTH": "TCE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Del Servicio Civil", "pattern": [ {"LOWER": "tribunal"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "servicio"}, {"LOWER": "civil"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Del Servicio Civil", "pattern": [ {"ORTH": "TSC"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Fiscal Administrativo", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "fiscal"}, {"LOWER": "administrativo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Fiscal Administrativo", "pattern": [ {"ORTH": "TFA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Registral Administrativo", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "registral"}, {"LOWER": "administrativo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Registral Administrativo", "pattern": [ {"ORTH": "TRA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Tribunal Supremo de Elecciones", "pattern": [ {"LOWER": "tribunal"}, {"LOWER": "supremo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "elecciones"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Tribunal Supremo de Elecciones", "pattern": [ {"ORTH": "TSE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Unidad Coordinadora Del Proyecto de Mejoramiento de La Calidad de La Educacion General Basica", "pattern": [ {"LOWER": "unidad"}, {"LOWER": "coordinadora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "proyecto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mejoramiento"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "calidad"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"}, {"LOWER": "general"}, {"LOWER": "basica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Unidad Coordinadora Del Proyecto de Mejoramiento de La Calidad de La Educacion General Basica", "pattern": [ {"ORTH": "UEPROMECE"}] }
+ 
+ {"label": "Entidad Pública", "id": "Unidad Ejecutora 1030 Banco Interamericano de Desarrollo-Ministerio de Hacienda UEBID-", "pattern": [ {"LOWER": "unidad"}, {"LOWER": "ejecutora"}, {"LOWER": "1030", "OP": "?"}, {"LOWER": "banco"}, {"LOWER": "interamericano"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Unidad Ejecutora 1030 Banco Interamericano de Desarrollo-Ministerio de Hacienda UEBID-", "pattern": [ {"ORTH": "MH"}] }
+ 
+ {"label": "Entidad Pública", "id": "Unidad Ejecutora de Credito y Desarrollo Agricola de Pequeños Productores de La Zona Norte", "pattern": [ {"LOWER": "unidad"}, {"LOWER": "ejecutora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "credito"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "agricola"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pequeños"}, {"LOWER": "productores"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "zona"}, {"LOWER": "norte"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Unidad Ejecutora de Credito y Desarrollo Agricola de Pequeños Productores de La Zona Norte", "pattern": [ {"ORTH": "UECZN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Unidad Ejecutora de Programa Ganadero de Salud Animal", "pattern": [ {"LOWER": "unidad"}, {"LOWER": "ejecutora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "programa"}, {"LOWER": "ganadero"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "salud"}, {"LOWER": "animal"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Unidad Ejecutora de Programa Ganadero de Salud Animal", "pattern": [ {"ORTH": "UEPGSA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Unidad Ejecutora Del Programa de Regularizacion Del Catastro y Registro", "pattern": [ {"LOWER": "unidad"}, {"LOWER": "ejecutora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "programa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "regularizacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "catastro"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "registro"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Unidad Ejecutora Del Programa de Regularizacion Del Catastro y Registro", "pattern": [ {"ORTH": "UEPRCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Universidad de Costa Rica", "pattern": [ {"LOWER": "universidad"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Universidad de Costa Rica", "pattern": [ {"ORTH": "UCR"}] }
+ 
+ {"label": "Entidad Pública", "id": "Universidad Estatal A Distancia", "pattern": [ {"LOWER": "universidad"}, {"LOWER": "estatal"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "distancia"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Universidad Estatal A Distancia", "pattern": [ {"ORTH": "UNED"}] }
+ 
+ {"label": "Entidad Pública", "id": "Universidad Nacional", "pattern": [ {"LOWER": "universidad"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Universidad Nacional", "pattern": [ {"ORTH": "UNA"}] }
+ 
+ {"label": "Entidad Pública", "id": "Universidad Tecnica Nacional", "pattern": [ {"LOWER": "universidad"}, {"LOWER": "tecnica"}, {"LOWER": "nacional"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Universidad Tecnica Nacional", "pattern": [ {"ORTH": "UTN"}] }
+ 
+ {"label": "Entidad Pública", "id": "Vida Plena Operadora de Pensiones Complementarias", "pattern": [ {"LOWER": "vida"}, {"LOWER": "plena"}, {"LOWER": "operadora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pensiones"}, {"LOWER": "complementarias"} ]}
+ {"label": "Entidad Pública Acrónimo","id": "Vida Plena Operadora de Pensiones Complementarias", "pattern": [ {"ORTH": "VPOPC"}] }
+ 
+ {"label": "Entidad Pública Nueva", "id": "Programa Estado de la Nación", "pattern": [ {"LOWER": "programa"},  {"LOWER": "estado"}, {"IS_STOP": true, "OP":"+"},  {"LOWER": {"IN": ["nacion", "nación"]}}]}
+{"label": "Entidad Pública Acrónimo", "id": "Programa Estado de la Nación", "pattern": [ {"ORTH": "PEN"}]}
+
+{"label": "Entidad Pública Nueva", "id": "Instituto de Investigaciones Sociales", "pattern": [ {"LOWER": "instituto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "investigaciones"}, {"IS_STOP": true, "OP":"+"},  {"LOWER": "sociales"}]}
+{"label": "Entidad Pública Acrónimo", "id": "Instituto de Investigaciones Sociales", "pattern": [ {"ORTH": "IIS"}]}
+
+
+
+
+
+{"label": "Sociedad Civil", "pattern": [ {"LOWER": {"IN": ["ecoanálisis", "ecoanalisis"]}}]}
+{"label": "Sociedad Civil", "pattern": [ {"LOWER": "academia"},  {"IS_STOP": true, "OP":"+"},  {"LOWER":{"IN": ["centroamérica", "centroamerica"]}}]}
+{"label": "Sociedad Civil", "pattern": [ {"LOWER": "observatorio"},  {"IS_STOP": true, "OP":"+"},  {"LOWER": "desarrollo"}]}
+
+{"label": "Sociedad Civil La Nacion", "pattern": [ {"LOWER": "estado", "OP":"!"}, {"IS_STOP": true, "OP":"!"}, { "LOWER": "la"}, {"LOWER": {"IN": ["nacion", "nación"]}}]}
+
+
+{"label": "Sociedad Civil", "id": "Centro de Investigacion y Estudios Politicos", "pattern": [ {"LOWER": "centro"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["investigación", "investigacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estudios"}, {"LOWER": {"IN": ["políticos", "politicos"]}}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Centro de Investigacion y Estudios Politicos", "pattern": [ {"ORTH": "CIEP"}] }
+
+{"label": "Sociedad Civil", "id": "Deutsche Gesellschaft fur Internationale Zusamme", "pattern": [{"LOWER": "deutsche"}, {"LOWER": "gesellschaft"}, {"LOWER": "für"}, {"LOWER": "internationale"}, {"LOWER": "zusamme"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Deutsche Gesellschaft fur Internationale Zusamme", "pattern": [ {"ORTH": "GIZ"}] }
+
+{"label": "Sociedad Civil", "id": "Coalicion Costarricense de Iniciativas de Desarrollo", "pattern": [ {"LOWER": {"IN": ["coalición", "coalicion"]}}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "iniciativas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Coalicion Costarricense de Iniciativas de Desarrollo", "pattern": [ {"ORTH": "CINDE"}] }
+
+{"label": "Sociedad Civil", "id": "Promotora de Comercio Exterior de Costa Rica", "pattern": [{"LOWER": "promotora"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"}, {"LOWER": "exterior"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Promotora de Comercio Exterior de Costa Rica", "pattern": [ {"ORTH": "PROCOMER"}] }
+
+{"label": "Sociedad Civil", "id": "Observatorio de Politica Nacional", "pattern": [{"LOWER": "observatorio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["política", "politica"]}}, {"LOWER": "nacional"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Observatorio de Politica Nacional", "pattern": [ {"ORTH": "OPNA"}] }
+
+{"label": "Sociedad Civil", "id": "Union Costarricense de Camaras y Asociaciones del Sector Empresarial Privado", "pattern": [ {"LOWER": {"IN": ["union", "unión"]}}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["camaras", "cámaras"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asociaciones"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "sector"}, {"LOWER": "empresarial"}, {"LOWER": "privado"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Union Costarricense de Camaras y Asociaciones del Sector Empresarial Privado", "pattern": [ {"ORTH": "UCCAEP"}] }
+
+{"label": "Sociedad Civil", "id": "Asociacion Nacional de Empleados Publicos y Privados", "pattern": [ {"LOWER": {"IN": ["asociación", "asociacion"]}}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "empleados"}, {"LOWER": {"IN": ["públicos", "publicos"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "privados"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Asociacion Nacional de Empleados Publicos y Privados", "pattern": [ {"ORTH": "ANEP"}] }
+
+{"label": "Sociedad Civil", "id": "Union Nacional de Empleados de la Caja y la Seguridad Social", "pattern": [ {"LOWER": {"IN": ["unión", "union"]}}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "empleados"},  {"IS_STOP": true, "OP":"+"}, {"LOWER": "caja"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "seguridad"}, {"LOWER": "social"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Union Nacional de Empleados de la Caja y la Seguridad Social", "pattern": [ {"ORTH": "UNDECA"}] }
+
+{"label": "Sociedad Civil", "id": "Asociacion Nacional de Educadores y Educadoras", "pattern": [ {"LOWER": {"IN": ["asociación", "asociacion"]}}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educadores"}, {"IS_STOP": true, "OP":"*"}, {"LOWER": "educadoras"}]}
+{"label": "Sociedad Civil Acrónimo", "id": "Asociacion Nacional de Educadores y Educadoras", "pattern": [ {"ORTH": "ANDE"}] }
+
+
+{"label": "Sociedad Civil", "id": "Camara de Comercio de Costa Rica", "pattern": [ {"LOWER": "camara"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Camara de Comercio de Costa Rica", "pattern": [ {"ORTH": "CCCR"} ]}
+
+{"label": "Sociedad Civil", "id": "Camara de Exportadores de Costa Rica", "pattern": [ {"LOWER": "camara"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "exportadores"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Camara de Exportadores de Costa Rica", "pattern": [ {"ORTH": "CADEXCO"} ]}
+
+{"label": "Sociedad Civil", "id": "Consejo Promocion Competitividad ", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "promocion"}, {"LOWER": "competitividad"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Consejo Promocion Competitividad ", "pattern": [ {"ORTH": "CPC"} ]}
+
+{"label": "Sociedad Civil", "id": "Federacion Nacional de Camaras de Comercio", "pattern": [ {"LOWER": "federacion"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "camaras"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Federacion Nacional de Camaras de Comercio", "pattern": [ {"ORTH": "FEDECAMARAS"} ]}
+
+{"label": "Sociedad Civil", "id": "Asamblea de Trabajadores y Trabajadoras del Banco Popular", "pattern": [ {"LOWER": "asamblea"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadoras"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "banco"}, {"LOWER": "popular"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Asamblea de Trabajadores y Trabajadoras del Banco Popular", "pattern": [ {"ORTH": "ATTBPDC"} ]}
+
+{"label": "Sociedad Civil", "id": "Sindicato de Trabajadoras y Trabajadores de la Educacion Costarricense", "pattern": [ {"LOWER": "sindicato"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadoras"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}, {"IS_STOP": true, "OP":"+"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educacion"}, {"LOWER": "costarricense"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Sindicato de Trabajadoras y Trabajadores de la Educacion Costarricense", "pattern": [ {"ORTH": "SEC"} ]}
+
+{"label": "Sociedad Civil", "id": "Central del Movimiento de Trabajadores", "pattern": [ {"LOWER": "central"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "movimiento"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Central del Movimiento de Trabajadores", "pattern": [ {"ORTH": "CMTC"} ]}
+
+{"label": "Sociedad Civil", "id": "Central Social Juanito Mora Porras", "pattern": [ {"LOWER": "central"}, {"LOWER": "social"}, {"LOWER": "juanito"}, {"LOWER": "mora"}, {"LOWER": "porras"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Central Social Juanito Mora Porras", "pattern": [ {"ORTH": "CSJMP"} ]}
+
+{"label": "Sociedad Civil", "id": "Confederacion Unitaria de Trabajadores ", "pattern": [ {"LOWER": "confederacion"}, {"LOWER": "unitaria"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Confederacion Unitaria de Trabajadores ", "pattern": [ {"ORTH": "CUT"} ]}
+
+{"label": "Sociedad Civil", "id": "Central General de Trabajadores", "pattern": [ {"LOWER": "central"}, {"LOWER": "general"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Central General de Trabajadores", "pattern": [ {"ORTH": "CGT"} ]}
+
+{"label": "Sociedad Civil", "id": "Bloque Unitario Sindical y Social Costarricense", "pattern": [ {"LOWER": "bloque"}, {"LOWER": "unitario"}, {"LOWER": "sindical"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "social"}, {"LOWER": "costarricense"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Bloque Unitario Sindical y Social Costarricense", "pattern": [ {"ORTH": "BUSSCO"} ]}
+
+{"label": "Sociedad Civil", "id": "Consejo Nacional de Cooperativas", "pattern": [ {"LOWER": "consejo"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cooperativas"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Consejo Nacional de Cooperativas", "pattern": [ {"ORTH": "CONACOOP"} ]}
+
+{"label": "Sociedad Civil", "id": "Centro de Estudios y Capacitacion Cooperativa", "pattern": [ {"LOWER": "centro"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estudios"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "capacitacion"}, {"LOWER": "cooperativa"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Centro de Estudios y Capacitacion Cooperativa", "pattern": [ {"ORTH": "CENECOOP"} ]}
+
+{"label": "Sociedad Civil", "id": "Union Nacional de Gobiernos Locales", "pattern": [ {"LOWER": "union"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "gobiernos"}, {"LOWER": "locales"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Union Nacional de Gobiernos Locales", "pattern": [ {"ORTH": "UNGL"} ]}
+
+{"label": "Sociedad Civil", "id": "Confederacion Costarricense de Asociaciones Solidaristas", "pattern": [ {"LOWER": "confederacion"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asociaciones"}, {"LOWER": "solidaristas"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Confederacion Costarricense de Asociaciones Solidaristas", "pattern": [ {"ORTH": "CONCASOL"} ]}
+
+{"label": "Sociedad Civil", "id": "Escuela Social Juan XXIII", "pattern": [ {"LOWER": "escuela"}, {"LOWER": "social"}, {"LOWER": "juan"}, {"LOWER": "xxiii"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Escuela Social Juan XXIII", "pattern": [ {"ORTH": "JUAN XXIII"} ]}
+
+{"label": "Sociedad Civil", "id": "Alianza Nacional Agropecuaria", "pattern": [ {"LOWER": "alianza"}, {"LOWER": "nacional"}, {"LOWER": "agropecuaria"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Alianza Nacional Agropecuaria", "pattern": [ {"ORTH": "ANA"} ]}
+
+{"label": "Sociedad Civil", "id": "Conferencia Episcopal", "pattern": [ {"LOWER": "conferencia"}, {"LOWER": "episcopal"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Conferencia Episcopal", "pattern": [ {"ORTH": "CECOR"} ]}
+
+{"label": "Sociedad Civil", "id": "Red Nacional De Agencias De Desarrollo Economico Local", "pattern": [ {"LOWER": "red"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "agencias"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desarrollo"}, {"LOWER": "economico"}, {"LOWER": "local"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Red Nacional De Agencias De Desarrollo Economico Local", "pattern": [ {"ORTH": "Renadel"} ]}
+
+{"label": "Sociedad Civil", "id": "Asociacion Nacional de Alcaldias e Intendencias", "pattern": [ {"LOWER": "asociacion"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "alcaldias"}, {"LOWER": "e"}, {"LOWER": "intendencias"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Asociacion Nacional de Alcaldias e Intendencias", "pattern": [ {"ORTH": "ANAI"} ]}
+
+{"label": "Sociedad Civil", "id": "Union Nacional de Gobiernos Locales", "pattern": [ {"LOWER": "union"}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "gobiernos"}, {"LOWER": "locales"}]}
+{"label": "Sociedad Civil Acrónimo","id": "Union Nacional de Gobiernos Locales", "pattern": [ {"ORTH": "UNGL"} ]}
+
+{"label": "Sociedad Civil", "id": "Confederación Costarricense de Trabajadores Democráticos Rerum Novarum", "pattern": [ {"LOWER": "confederacion"}, {"LOWER": "costarricense"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trabajadores"}, {"LOWER": "democraticos"}, {"LOWER": "rerum"}, {"LOWER": "novarum"} ]}
+{"label": "Sociedad Civil", "id": "Confederación Costarricense de Trabajadores Democráticos Rerum Novarum", "pattern": [ {"LOWER": "Rerum"}, {"LOWER": "Novarum"} ]}
+{"label": "Sociedad Civil Acrónimo","id": "Confederación Costarricense de Trabajadores Democráticos Rerum Novarum", "pattern": [ {"ORTH": "CTRN"} ]}
+
+{"label": "Sociedad Civil", "id": "Foro De Mujeres Del Inamu", "pattern": [ {"LOWER": "foro"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujeres"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "inamu"} ]}
+
+{"label": "Sociedad Civil", "id": "Confederacion de Estudiantes Universitarios", "pattern": [ {"LOWER": "confederacion"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estudiantes"}, {"LOWER": "universitarios"} ]}
+
+{"label": "Sociedad Civil", "id": "Federación Alianza Evangelica Costarricense", "pattern": [ {"LOWER": "Federación"}, {"LOWER": "alianza"}, {"LOWER": "evangelica"}, {"LOWER": "costarricense"} ]}
+{"label": "Sociedad Civil", "id": "Federación Alianza Evangelica Costarricense", "pattern": [ {"LOWER": "alianza"}, {"LOWER": "evangelica"} ]}
