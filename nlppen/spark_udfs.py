@@ -65,20 +65,35 @@ def spark_get_spacy(lang):
 
 
 def spark_buscar_terminos_doc(row, terminos, col='txt'):
+    """
+        Ejecuta la busqueda de terminos revisando la cantidad de ocurrencias de las expresiones regulares para un row en especifico
+
+        Parametros:
+        
+        row: Row - Spark
+            El row al que va a ser aplicada la busqueda de terminos
+        
+        terminos: Diccionario (e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]})
+            El conjunto de terminos a buscar cada valor corresponde a una expresion regular compilada
+        
+        col: String
+            Columna del row donde será aplicada la busqueda, de forma predeterminada está la columna txt correspondiente al texto de la sentencia.
+
+    """
     if terminos == None or terminos == []:
         assert "No se han especificado términos"
 
     res = row.asDict()
     tiene_terminos = False
-    for key in terminos:
-        for reg in terminos[key]:
-            resultado = reg.findall(row[col])
+    for key in terminos: # Recorrer cada termino.
+        for reg in terminos[key]: # Recorrer cada expresión regular.
+            resultado = reg.findall(row[col]) #Busca todas las ocurrencias.
             if key not in res:
-                res[key] = 0
+                res[key] = 0 # Crea la columna en el row
             tiene_terminos = len(resultado) != 0 or tiene_terminos
             res[key] += len(resultado)
 
-    if tiene_terminos:
+    if tiene_terminos: # Retorna un objeto Row
         return Row(**res)
     else:
         return None
