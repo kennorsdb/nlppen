@@ -99,7 +99,9 @@ class Seleccion:
                     )
         return self.sdf
 
-    def sub_busqueda(self, terminos_sub, actualizar_sdf=False):
+
+
+    def sub_busqueda(self, terminos_sub, actualizar_sdf=False, preprocess=None):
         schema = deepcopy(self.sdf.schema)
         term_regex = {}
 
@@ -110,7 +112,7 @@ class Seleccion:
             schema.add(col_name, 'integer', True)
 
         self.subbusqueda = (self.sdf.rdd
-                            .map(lambda row: spark_buscar_terminos_doc(row, term_regex))
+                            .map(lambda row: spark_buscar_terminos_doc(row, term_regex, preprocess=preprocess))
                             .filter(lambda d: d is not None)
                             .toDF(schema=schema)
                             .persist()

@@ -31,6 +31,19 @@ def solo_considerando(txt):
         return ''
 
 
+def solo_portanto(txt):
+    partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
+                            (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
+                            (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
+                            (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*)))?""", re.X | re.M)
+
+    res = partesExp.search(txt)
+    if res is not None and res.group('portanto') is not None:
+        return res.group('portanto')
+    else:
+        return ''
+
+
 def filtro_oraciones(sent, filtro):
     if filtro == []:
         return True
@@ -64,15 +77,26 @@ def spark_get_spacy(lang):
         return nlp
 
 
-def spark_buscar_terminos_doc(row, terminos, col='txt'):
+def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
+    import sys
+    sys.path.insert(0, "/home/jovyan/Work/ej/paquetes/nlppen/")
+
+    import nlppen
+
     if terminos == None or terminos == []:
         assert "No se han especificado términos"
 
     res = row.asDict()
     tiene_terminos = False
+
+    if preprocess is not None:
+        txt = preprocess(row[col])
+    else:
+        txt = row[col]
+
     for key in terminos:
         for reg in terminos[key]:
-            resultado = reg.findall(row[col])
+            resultado = reg.findall(txt)
             if key not in res:
                 res[key] = 0
             tiene_terminos = len(resultado) != 0 or tiene_terminos
