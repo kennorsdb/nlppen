@@ -31,6 +31,19 @@ def solo_considerando(txt):
         return ''
 
 
+def solo_portanto(txt):
+    partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
+                            (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
+                            (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
+                            (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*)))?""", re.X | re.M)
+
+    res = partesExp.search(txt)
+    if res is not None and res.group('portanto') is not None:
+        return res.group('portanto')
+    else:
+        return ''
+
+
 def filtro_oraciones(sent, filtro):
     if filtro == []:
         return True
