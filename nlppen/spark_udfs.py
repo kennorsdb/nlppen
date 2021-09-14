@@ -1,4 +1,6 @@
+import stanza
 import spacy
+from spacy.matcher import Matcher
 import re
 
 import numpy as np
@@ -67,6 +69,24 @@ def spark_cambios(txt, terminos=None):
 
     return txt, terms
 
+def spark_get_stanza(lang):
+    """
+        Revisa si ya existe una instancia de Stanza generada previamente. Evita generar una instancia del modelo cada vez que utilizado 
+
+        Retorna:
+             Modelo de Stanza
+
+        Parametros:
+
+            lang: String
+                Representa el lenguaje a utilizar para crear el modelo de Stanza.
+    """
+    global nlpStanza
+    if "nlpStanza" in globals():
+        return nlpStanza
+    else:
+        nlpStanza = stanza.Pipeline(lang)
+        return nlpStanza
 
 def spark_get_spacy(lang):
     global nlp
@@ -77,7 +97,98 @@ def spark_get_spacy(lang):
         return nlp
 
 
-def spark_buscar_terminos_doc(row, terminos, col='txt'):
+def spark_extraer_se_ordena(row, newColumns, patterns, col='txt', useSpacy=True):
+    """
+        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+        entidades.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con el valor de la nueva columna.
+
+        Parametros:
+
+            doc: Document
+                El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
+            start: int
+                Inicio del span donde se obtendran las entidades.
+            end: int
+                Fin del span donde se obtendran las entidades.
+    """
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+    txt = res[col]
+
+    doc = nlp(txt)
+    matcher = Matcher(nlp.vocab)
+    matcher.add("Patron 1 :", patterns, greedy="FIRST")
+
+    matches = matcher(doc)
+    allEntities = []
+    for match_id, start, end in matches:
+        if useSpacy:
+            allEntities += getEntitiesBySpacy(doc, start, end)
+        else:
+            textSpan =  doc[start:end]
+            allEntities += getEntitiesByStanza(textSpan.text)
+    #TODO: Check this for multiple columns
+    if(allEntities != []):
+        res[newColumns[0]] = allEntities
+    else:
+         res[newColumns[0]] = None
+    return Row(**res)
+
+def getEntitiesBySpacy(doc, start, end):
+    """
+        Obtiene las entidades presentes en un texto utilizando Spacy
+
+        Retorna:
+             Un arreglo de strings, la forma del string es tipo : entidad.
+
+        Parametros:
+
+            doc: Document
+                El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
+            start: int
+                Inicio del span donde se obtendran las entidades.
+            end: int
+                Fin del span donde se obtendran las entidades.
+    """
+    ents = []
+    for ent in doc[start:end].ents:
+        if ent.label_ == "PER":
+            #TODO: Usar append.
+            ents += [ent.label_ + " : " + ent.text]
+    return ents
+    
+    #print("-----------USING SPACY TO GET IDENTITIES-------\n")
+    #for ent in doc[start:end].ents:
+    #    print(ent.label_ + " : " + ent.text)
+
+def getEntitiesByStanza(text):
+    """
+        Obtiene las entidades presentes en un texto utilizando Stanza
+
+        Retorna:
+             Un arreglo de strings, la forma del string es tipo : entidad.
+
+        Parametros:
+
+            text: String
+                String para ser procesado por Stanza. De acá se obtienen las entidades.
+    """
+    nlp = spark_get_stanza("es")
+    doc = nlp(text)
+    ents = []
+    for ent in doc.ents:
+        if ent.type == "PER":
+            ents += [ent.type + " : " + ent.text]
+    return ents
+    #print(text)
+    #print("-----------USING STANZA TO GET IDENTITIES-------\n")
+    #for ent in doc.ents:
+    #    print(ent.type + " : " + ent.text)
+
+def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
     """
         Ejecuta la busqueda de terminos revisando la cantidad de ocurrencias de las expresiones regulares para un row en especifico
 
@@ -93,14 +204,25 @@ def spark_buscar_terminos_doc(row, terminos, col='txt'):
             Columna del row donde será aplicada la busqueda, de forma predeterminada está la columna txt correspondiente al texto de la sentencia.
 
     """
+    import sys
+    sys.path.insert(0, "/home/jovyan/Work/ej/paquetes/nlppen/")
+
+    import nlppen
+
     if terminos == None or terminos == []:
         assert "No se han especificado términos"
 
     res = row.asDict()
     tiene_terminos = False
+
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+
     for key in terminos: # Recorrer cada termino.
         for reg in terminos[key]: # Recorrer cada expresión regular.
-            resultado = reg.findall(row[col]) #Busca todas las ocurrencias.
+            resultado = reg.findall(txt) #Busca todas las ocurrencias.
             if key not in res:
                 res[key] = 0 # Crea la columna en el row
             tiene_terminos = len(resultado) != 0 or tiene_terminos

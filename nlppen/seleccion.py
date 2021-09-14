@@ -57,7 +57,7 @@ class Seleccion:
             self.sdf = self.spark.read.parquet(self.parquet_path)
 
     
-    def filtrar_sentencias(self, parquet_file='terminos.parquet'):
+    def filtrar_sentencias(self, parquet_file='terminos.parquet', preprocess=None):
         """ Sobreescribe el Dataframe aplicando el filtro de las sentencias de acuerdo a los terminos de la clase.
 
         Parametros:
@@ -69,7 +69,7 @@ class Seleccion:
         if os.path.exists(parquet_path):
             self.sdf = self.spark.read.parquet(parquet_path)
         else:
-            self.__busqueda_terminos()
+            self.__busqueda_terminos(preprocess)
 
             if self.sdf is not None:
                 self.sdf.write.parquet(parquet_path)
@@ -97,6 +97,7 @@ class Seleccion:
         df.columns = [term.replace('_', ' ') for term in df.columns]
         df.index = [term.replace('_', ' ') for term in df.index]
         return df
+    
 
     def tabla_terminos_anno(self):
         terminos_cols = [col.replace(' ', '_') for col in self.terminos.keys()]
@@ -111,7 +112,7 @@ class Seleccion:
         ldf.columns = self.terminos.keys()
         return ldf
 
-    def __busqueda_terminos(self):
+    def __busqueda_terminos(self, preprocess=None):
         """
             Aplica la busqueda de terminos distribuido con Spark, y sobreescribe el dataframe. 
 
@@ -130,15 +131,69 @@ class Seleccion:
             schema.add(col_name, 'integer', True) # Agregar las nuevas columnas
 
         self.sdf = (self.sdf.rdd
-                    .map(lambda row: spark_buscar_terminos_doc(row, term_regex)) # Ejecuta la busqueda de terminos con spark
+                    .map(lambda row: spark_buscar_terminos_doc(row, term_regex, preprocess=preprocess)) # Ejecuta la busqueda de terminos con spark
                     .filter(lambda d: d is not None)
                     .toDF(schema=schema) 
                     .persist()
                     ) # Guarda el nuevo esquema
         return self.sdf
+    
+    def __agregarColumnasSchema(self, columnas):
+        """
+        Agrega nuevas columnas al schema del sdf.
 
+        Retorna:
+             Un nuevo esquema con las nuevas columnas, y las columnas agregadas
 
+        Parametros:
 
+        columnas: Dictionary e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]}
+            Es un diccionario de columnas a agregar al schema del sdf. Las llaves corresponde
+            a los nombres de las columnas, el valor corresponde al tipo de dato DataType object de Spark.
+        """
+
+        schema = deepcopy(self.sdf.schema)
+        newColumns = []
+        for colum, type in columnas.items():
+            #Convertir y agregar todas las columnas
+            col_name = colum.replace(' ', '_')
+            newColumns.append(col_name)
+            schema.add(col_name, type, True)
+        return (schema,newColumns)
+
+    def separarSeOrdena(self, addColumns, spacy):
+        """
+            Extrae todos los patrones del por tanto, que inician con la palabra se ordena hasta el signo
+            de puntuación punto(.).
+            Luego de extraer estos patrones obtiene las entidades asociadas y las agrega a la columna.
+
+            Retorna:
+                Un nuevo SDF, no reemplaza el anterior. 
+
+            Parametros:
+
+                addColumns: Dictionary e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]}
+                    Es un diccionario de columnas a agregar al schema del sdf. Las llaves corresponde
+                    a los nombres de las columnas, el valor corresponde al tipo de dato DataType object de Spark.
+
+                spacy: Booleano.
+                    True para usar spacy para obtener las entidades.
+                    False para usar stanza para obtener las entidades.
+
+        """
+        se_ordena_pattern = [{"LOWER": "se"}, {'LEMMA': 'ordenar'},
+                      {"TEXT": {"REGEX": "^(?!\.)"}, "OP": "+"},
+                      {"TEXT": '.'}]
+        patterns  = [se_ordena_pattern]
+        (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
+        result = (self.sdf.rdd
+                    .map( lambda row : spark_extraer_se_ordena(row, newColumns , patterns, useSpacy=spacy))
+                    .toDF(schema=schema)
+                    .persist()
+                    )
+        return result
+
+    #TODO Comentarios
     def sub_busqueda(self, terminos_sub, actualizar_sdf=False, preprocess=None):
         schema = deepcopy(self.sdf.schema)
         term_regex = {}
