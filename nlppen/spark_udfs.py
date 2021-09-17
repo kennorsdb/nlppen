@@ -21,6 +21,20 @@ POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
 
 
 def solo_considerando(txt):
+    """
+        Aplica un filtro utilizando una expresión regular de una sentencia y obtiene solamente el texto que corresponde
+        a la sección del considerando.
+
+        Retorna:
+             Texto correspondiente a la parte del considerando.
+
+        Parametros:
+
+            txt: String
+                Representa el texto de la sentencia completa.
+    """
+
+    
     # RegExp para separar la resolución en sus partes
     partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))
                             (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
@@ -34,6 +48,19 @@ def solo_considerando(txt):
 
 
 def solo_portanto(txt):
+    """
+        Aplica un filtro utilizando una expresión regular de una sentencia y obtiene solamente el texto que corresponde
+        a la sección del por lo tanto.
+
+        Retorna:
+             Texto correspondiente a la parte del por lo tanto.
+
+        Parametros:
+
+            txt: String
+                Representa el texto de la sentencia completa.
+    """
+
     partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
                             (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
                             (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
@@ -96,17 +123,46 @@ def spark_get_spacy(lang):
         nlp = spacy.load(lang)
         return nlp
 
-
-def spark_extraer_se_ordena(row, newColumns, patterns, col='txt', useSpacy=True):
+def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
     """
-        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
-        entidades.
+        Extrae la extensión de la sentencia y de la parte de corresponde al por lo tanto, y los agrega
+        al Row.
 
         Retorna:
-             El mismo objeto Row de entrada, pero con el valor de la nueva columna.
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
 
         Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
 
+            porLoTantoFunction: Function
+                Funcion para filtrar el texto y calcular la extensión del por lo tanto.
+    """
+
+    res = row.asDict()
+    porLoTantoExtension = 0
+    sentenciaExtension = 0
+    if porLoTantoFunction is not None:
+        porLoTantoExtension = len(porLoTantoFunction(res[col]))
+    sentenciaExtension = len(res[col])
+    
+    
+    res[newColumns[0]] = sentenciaExtension
+    res[newColumns[1]] = porLoTantoExtension
+    return Row(**res)
+
+def spark_extraer_entidades_se_ordena(row, newColumns, patterns, col='txt', useSpacy=True):
+    """
+        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+        entidades, y los agrega al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+             row: Row - Spark
+                El row al que va a ser aplicada la busqueda de entidades
+        
             doc: Document
                 El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
             start: int
@@ -122,22 +178,26 @@ def spark_extraer_se_ordena(row, newColumns, patterns, col='txt', useSpacy=True)
     matcher = Matcher(nlp.vocab)
     matcher.add("Patron 1 :", patterns, greedy="FIRST")
 
+    entities = {}
+
+    for column in newColumns:
+        entities[column] = []
+
     matches = matcher(doc)
-    allEntities = []
-    for match_id, start, end in matches:
+    for _, start, end in matches:
         if useSpacy:
-            allEntities += getEntitiesBySpacy(doc, start, end)
+            getEntitiesBySpacy(doc, start, end, entities, newColumns)
         else:
             textSpan =  doc[start:end]
-            allEntities += getEntitiesByStanza(textSpan.text)
-    #TODO: Check this for multiple columns
-    if(allEntities != []):
-        res[newColumns[0]] = allEntities
-    else:
-         res[newColumns[0]] = None
+            getEntitiesByStanza(textSpan.text, entities, newColumns)
+    for column in newColumns:
+        if (entities[column] != []):
+            res[column] = entities[column]
+        else:
+            res[column] = None
     return Row(**res)
 
-def getEntitiesBySpacy(doc, start, end):
+def getEntitiesBySpacy(doc, start, end, entities,newColumns):
     """
         Obtiene las entidades presentes en un texto utilizando Spacy
 
@@ -153,18 +213,24 @@ def getEntitiesBySpacy(doc, start, end):
             end: int
                 Fin del span donde se obtendran las entidades.
     """
-    ents = []
     for ent in doc[start:end].ents:
         if ent.label_ == "PER":
-            #TODO: Usar append.
-            ents += [ent.label_ + " : " + ent.text]
-    return ents
-    
-    #print("-----------USING SPACY TO GET IDENTITIES-------\n")
-    #for ent in doc[start:end].ents:
-    #    print(ent.label_ + " : " + ent.text)
+            entities[newColumns[0]].append(ent.text)
+            continue
+        if ent.label_ == "LOC":
+            entities[newColumns[1]].append(ent.text)
+            continue
+        if ent.label_ == "ORG":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "MISC":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "GPE":
+            entities[newColumns[3]].append(ent.text)
+            continue
 
-def getEntitiesByStanza(text):
+def getEntitiesByStanza(text, entities, newColumns):
     """
         Obtiene las entidades presentes en un texto utilizando Stanza
 
@@ -178,15 +244,22 @@ def getEntitiesByStanza(text):
     """
     nlp = spark_get_stanza("es")
     doc = nlp(text)
-    ents = []
     for ent in doc.ents:
-        if ent.type == "PER":
-            ents += [ent.type + " : " + ent.text]
-    return ents
-    #print(text)
-    #print("-----------USING STANZA TO GET IDENTITIES-------\n")
-    #for ent in doc.ents:
-    #    print(ent.type + " : " + ent.text)
+        if ent.label_ == "PER":
+            entities[newColumns[0]].append(ent.text)
+            continue
+        if ent.label_ == "LOC":
+            entities[newColumns[1]].append(ent.text)
+            continue
+        if ent.label_ == "ORG":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "MISC":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "GPE":
+            entities[newColumns[3]].append(ent.text)
+            continue
 
 def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
     """
@@ -219,7 +292,6 @@ def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
         txt = preprocess(res[col])
     else:
         txt = res[col]
-
     for key in terminos: # Recorrer cada termino.
         for reg in terminos[key]: # Recorrer cada expresión regular.
             resultado = reg.findall(txt) #Busca todas las ocurrencias.
