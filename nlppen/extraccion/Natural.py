@@ -401,6 +401,12 @@ class Natural:
             else:
                 entidades[ent.label_].append(ent.text)
 
+        if 'Constitución' in entidades:
+            articulos = []
+            for constitucion in entidades['Constitución']:
+                articulos.append(int(re.search(r"\d+", constitucion).group()))
+            entidades['Constitución'] = articulos
+
         html = spacy.displacy.render(spcy, style="ent", options=options, page=True, jupyter=False)    
 
         return {'entidades':  entidades, 'texts.entidades_html': html}

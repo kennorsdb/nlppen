@@ -72,7 +72,9 @@ def sentencias_entities(doc):
         
     # Magistrados
     magistrado = re.compile(
-        r"""(?<=por\stanto).+\n(?P<presidente>[^\n]+)\s+presidente\.?\s+([^\n]+?)\s{2,}(\w+(?:\ |\n)[^\n]+)\n([^\n]+?)\s{2,}(\w+(?:\ |\n)[^\n]+)\n([^\n]+?)\s{2,}(\w+(?:\ |\n)[^\n]+)\n""", re.I | re.M | re.X | re.S)
+        r"""(?<=por\stanto).+\n(?P<presidente>[^\n]+)\s+presidente\.?\s+([^\n]+?)\s{2,}
+        (\w+(?:\ |\n)[^\n]+)\n([^\n]+?)\s{2,}(\w+(?:\ |\n)[^\n]+)\n([^\n]+?)\s{2,}
+        (\w+(?:\ |\n)[^\n]+)\n""", re.I | re.M | re.X | re.S)
     match = magistrado.search(doc.text)
     if match is not None:
         for i, g in enumerate(match.groups()):
