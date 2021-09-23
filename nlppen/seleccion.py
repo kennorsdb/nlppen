@@ -3,6 +3,8 @@ from copy import deepcopy
 import json
 import os
 
+import shutil
+
 from pyspark.sql.functions import desc
 
 from .spark_udfs import *
@@ -55,9 +57,21 @@ class Seleccion:
     def cargar_datos(self):
         if os.path.exists(self.parquet_path):
             self.sdf = self.spark.read.parquet(self.parquet_path)
+    
+    def guardarDatos(self, parquet_file='terminos.parquet'):
+        if self.sdf is not None:
+            parquet_path = self.datasets_path + '/' + parquet_file
+            if os.path.exists(parquet_path):
+                 shutil.rmtree(parquet_path)
+            self.sdf.write.parquet(parquet_path)
+            
+    def cargarPreprocesados(self, parquet_file='terminos.parquet'):
+        parquet_path = self.datasets_path + '/' + parquet_file
+        if os.path.exists(parquet_path):
+            self.sdf = self.spark.read.parquet(parquet_path)
 
     
-    def filtrar_sentencias(self, parquet_file='terminos.parquet', preprocess=None):
+    def filtrar_sentencias(self, parquet_file='terminos.parquet', preprocess=None, save=True):
         """ Sobreescribe el Dataframe aplicando el filtro de las sentencias de acuerdo a los terminos de la clase.
 
         Parametros:
@@ -73,9 +87,8 @@ class Seleccion:
             self.sdf = self.spark.read.parquet(parquet_path)
         else:
             self.__busqueda_terminos(preprocess)
-
-            if self.sdf is not None:
-                self.sdf.write.parquet(parquet_path)
+            if save:
+                self.guardarDatos(parquet_file)
 
         return self.sdf
 

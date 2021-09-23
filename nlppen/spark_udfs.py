@@ -1,19 +1,19 @@
+
 import stanza
 import spacy
 from spacy.matcher import Matcher
 import re
-
+import sys
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-
-
 from pyspark.sql import Row
 from pyspark.sql.types import IntegerType
 
 from .extraccion.ProcessException import ProcessException
 from .extraccion.Natural import Natural
 from .extraccion.modelado import NNModel
+from .extraccion.utils.Txt2Numbers import Txt2Numbers
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
@@ -151,7 +151,57 @@ def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
     res[newColumns[1]] = porLoTantoExtension
     return Row(**res)
 
-def spark_extraer_entidades_se_ordena(row, newColumns, patterns, col='txt', useSpacy=True):
+def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+
+    plazos = []
+    if res['termino_ext'] != "Sin lugar":
+        doc = nlp(txt)
+        matcher = Matcher(nlp.vocab)
+        matcher.add("Patron 1 :", patterns, greedy="FIRST")
+
+        matches = matcher(doc)
+        print("PROCESANDO DOCUMENTO : " + res["expediente"])
+        for _, start, end in matches:
+
+            includeText = False
+            plazo = ""
+            for token in doc[start:end]:
+                if includeText:
+                    if token.pos_ == "PUNCT":
+                        break
+                    plazo += " " + token.text
+                else:
+                    if token.pos_ == "NUM":
+                        textToken = token.text 
+                        if textToken.isdigit() == False and textToken.isalpha():
+                            #TODO: Convertir numero si es texto
+                            convertToText = Txt2Numbers()
+                            number = convertToText.number(textToken)
+                            textToken = str(number)
+                        plazo += textToken
+                        includeText = True
+            if plazo != "":
+                span =  doc[start:end]
+                print(span.text)
+                plazos.append(plazo)
+    else:
+        print("DECLARADA SIN LUGAR")
+    for column in newColumns:
+        if (plazos != []):
+            print(plazos)
+            res[column] = plazos
+        else:
+            res[column] = None
+    return Row(**res)
+
+def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col='txt', useSpacy=True):
     """
         Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
         entidades, y los agrega al Row.
@@ -172,7 +222,10 @@ def spark_extraer_entidades_se_ordena(row, newColumns, patterns, col='txt', useS
     """
     nlp = spark_get_spacy('es_core_news_lg')
     res = row.asDict()
-    txt = res[col]
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
 
     doc = nlp(txt)
     matcher = Matcher(nlp.vocab)

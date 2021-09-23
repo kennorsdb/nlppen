@@ -5,7 +5,6 @@ from copy import deepcopy
 class SentenciasEstructurales():
     def __init__(self, seleccion):
         self.seleccion = seleccion
-        self.sdf = seleccion.sdf
     
     def __agregarColumnasSchema(self, columnas):
         """
@@ -21,7 +20,7 @@ class SentenciasEstructurales():
             a los nombres de las columnas, el valor corresponde al tipo de dato DataType object de Spark.
         """
 
-        schema = deepcopy(self.sdf.schema)
+        schema = deepcopy(self.seleccion.sdf.schema)
         newColumns = []
         for colum, type in columnas.items():
             #Convertir y agregar todas las columnas
@@ -46,14 +45,14 @@ class SentenciasEstructurales():
         """
         
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
-        resultado = (self.sdf.rdd
+        resultado = (self.seleccion.sdf.rdd
                     .map( lambda row : spark_extraer_extension(row, newColumns, solo_portanto))
                     .toDF(schema=schema)
                     .persist()
                     )
 
         if actualizar_sdf:
-            self.sdf = resultado
+            self.seleccion.sdf = resultado
 
         return resultado
 
@@ -86,13 +85,31 @@ class SentenciasEstructurales():
                       {"TEXT": '.'}]
         patterns  = [se_ordena_pattern]
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
-        resultado = (self.sdf.rdd
-                    .map( lambda row : spark_extraer_entidades_se_ordena(row, newColumns , patterns, useSpacy=spacy))
+        resultado = (self.seleccion.sdf.rdd
+                    .map( lambda row : spark_extraer_entidades_se_ordena(row, newColumns , patterns, solo_portanto , useSpacy=spacy))
                     .toDF(schema=schema)
                     .persist()
                     )
 
         if actualizar_sdf:
-            self.sdf = resultado
+            self.seleccion.sdf = resultado
+
+        return resultado
+
+    def plazosDefinidos(self, addColumns, actualizar_sdf=False):
+        plazos_pattern =  [{"LOWER": "plazo"},
+          {"TEXT": {"REGEX": "^(?!\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?)"}, "OP": "+"},
+          {"TEXT": {"REGEX": "\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?"}},
+          ]
+        patterns  = [plazos_pattern]
+        (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
+        resultado = (self.seleccion.sdf.rdd
+                    .map( lambda row : spark_extraer_plazos(row, newColumns , patterns, solo_portanto))
+                    .toDF(schema=schema)
+                    .persist()
+                    )
+
+        if actualizar_sdf:
+            self.seleccion.sdf = resultado
 
         return resultado
