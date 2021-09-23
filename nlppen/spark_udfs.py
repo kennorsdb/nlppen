@@ -1,17 +1,19 @@
-import spacy
-import re
 
+import stanza
+import spacy
+from spacy.matcher import Matcher
+import re
+import sys
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-
-
 from pyspark.sql import Row
 from pyspark.sql.types import IntegerType
 
 from .extraccion.ProcessException import ProcessException
 from .extraccion.Natural import Natural
 from .extraccion.modelado import NNModel
+from .extraccion.utils.Txt2Numbers import Txt2Numbers
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
@@ -19,6 +21,20 @@ POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
 
 
 def solo_considerando(txt):
+    """
+        Aplica un filtro utilizando una expresión regular de una sentencia y obtiene solamente el texto que corresponde
+        a la sección del considerando.
+
+        Retorna:
+             Texto correspondiente a la parte del considerando.
+
+        Parametros:
+
+            txt: String
+                Representa el texto de la sentencia completa.
+    """
+
+    
     # RegExp para separar la resolución en sus partes
     partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))
                             (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
@@ -32,6 +48,19 @@ def solo_considerando(txt):
 
 
 def solo_portanto(txt):
+    """
+        Aplica un filtro utilizando una expresión regular de una sentencia y obtiene solamente el texto que corresponde
+        a la sección del por lo tanto.
+
+        Retorna:
+             Texto correspondiente a la parte del por lo tanto.
+
+        Parametros:
+
+            txt: String
+                Representa el texto de la sentencia completa.
+    """
+
     partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
                             (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
                             (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
@@ -67,6 +96,24 @@ def spark_cambios(txt, terminos=None):
 
     return txt, terms
 
+def spark_get_stanza(lang):
+    """
+        Revisa si ya existe una instancia de Stanza generada previamente. Evita generar una instancia del modelo cada vez que utilizado 
+
+        Retorna:
+             Modelo de Stanza
+
+        Parametros:
+
+            lang: String
+                Representa el lenguaje a utilizar para crear el modelo de Stanza.
+    """
+    global nlpStanza
+    if "nlpStanza" in globals():
+        return nlpStanza
+    else:
+        nlpStanza = stanza.Pipeline(lang)
+        return nlpStanza
 
 def spark_get_spacy(lang):
     global nlp
@@ -76,8 +123,213 @@ def spark_get_spacy(lang):
         nlp = spacy.load(lang)
         return nlp
 
+def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
+    """
+        Extrae la extensión de la sentencia y de la parte de corresponde al por lo tanto, y los agrega
+        al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
+
+            porLoTantoFunction: Function
+                Funcion para filtrar el texto y calcular la extensión del por lo tanto.
+    """
+
+    res = row.asDict()
+    porLoTantoExtension = 0
+    sentenciaExtension = 0
+    if porLoTantoFunction is not None:
+        porLoTantoExtension = len(porLoTantoFunction(res[col]))
+    sentenciaExtension = len(res[col])
+    
+    
+    res[newColumns[0]] = sentenciaExtension
+    res[newColumns[1]] = porLoTantoExtension
+    return Row(**res)
+
+def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+
+    plazos = []
+    if res['termino_ext'] != "Sin lugar":
+        doc = nlp(txt)
+        matcher = Matcher(nlp.vocab)
+        matcher.add("Patron 1 :", patterns, greedy="FIRST")
+
+        matches = matcher(doc)
+        print("PROCESANDO DOCUMENTO : " + res["expediente"])
+        for _, start, end in matches:
+
+            includeText = False
+            plazo = ""
+            for token in doc[start:end]:
+                if includeText:
+                    if token.pos_ == "PUNCT":
+                        break
+                    plazo += " " + token.text
+                else:
+                    if token.pos_ == "NUM":
+                        textToken = token.text 
+                        if textToken.isdigit() == False and textToken.isalpha():
+                            #TODO: Convertir numero si es texto
+                            convertToText = Txt2Numbers()
+                            number = convertToText.number(textToken)
+                            textToken = str(number)
+                        plazo += textToken
+                        includeText = True
+            if plazo != "":
+                span =  doc[start:end]
+                print(span.text)
+                plazos.append(plazo)
+    else:
+        print("DECLARADA SIN LUGAR")
+    for column in newColumns:
+        if (plazos != []):
+            print(plazos)
+            res[column] = plazos
+        else:
+            res[column] = None
+    return Row(**res)
+
+def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col='txt', useSpacy=True):
+    """
+        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+        entidades, y los agrega al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+             row: Row - Spark
+                El row al que va a ser aplicada la busqueda de entidades
+        
+            doc: Document
+                El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
+            start: int
+                Inicio del span donde se obtendran las entidades.
+            end: int
+                Fin del span donde se obtendran las entidades.
+    """
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+
+    doc = nlp(txt)
+    matcher = Matcher(nlp.vocab)
+    matcher.add("Patron 1 :", patterns, greedy="FIRST")
+
+    entities = {}
+
+    for column in newColumns:
+        entities[column] = []
+
+    matches = matcher(doc)
+    for _, start, end in matches:
+        if useSpacy:
+            getEntitiesBySpacy(doc, start, end, entities, newColumns)
+        else:
+            textSpan =  doc[start:end]
+            getEntitiesByStanza(textSpan.text, entities, newColumns)
+    for column in newColumns:
+        if (entities[column] != []):
+            res[column] = entities[column]
+        else:
+            res[column] = None
+    return Row(**res)
+
+def getEntitiesBySpacy(doc, start, end, entities,newColumns):
+    """
+        Obtiene las entidades presentes en un texto utilizando Spacy
+
+        Retorna:
+             Un arreglo de strings, la forma del string es tipo : entidad.
+
+        Parametros:
+
+            doc: Document
+                El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
+            start: int
+                Inicio del span donde se obtendran las entidades.
+            end: int
+                Fin del span donde se obtendran las entidades.
+    """
+    for ent in doc[start:end].ents:
+        if ent.label_ == "PER":
+            entities[newColumns[0]].append(ent.text)
+            continue
+        if ent.label_ == "LOC":
+            entities[newColumns[1]].append(ent.text)
+            continue
+        if ent.label_ == "ORG":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "MISC":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "GPE":
+            entities[newColumns[3]].append(ent.text)
+            continue
+
+def getEntitiesByStanza(text, entities, newColumns):
+    """
+        Obtiene las entidades presentes en un texto utilizando Stanza
+
+        Retorna:
+             Un arreglo de strings, la forma del string es tipo : entidad.
+
+        Parametros:
+
+            text: String
+                String para ser procesado por Stanza. De acá se obtienen las entidades.
+    """
+    nlp = spark_get_stanza("es")
+    doc = nlp(text)
+    for ent in doc.ents:
+        if ent.label_ == "PER":
+            entities[newColumns[0]].append(ent.text)
+            continue
+        if ent.label_ == "LOC":
+            entities[newColumns[1]].append(ent.text)
+            continue
+        if ent.label_ == "ORG":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "MISC":
+            entities[newColumns[2]].append(ent.text)
+            continue
+        if ent.label_ == "GPE":
+            entities[newColumns[3]].append(ent.text)
+            continue
 
 def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
+    """
+        Ejecuta la busqueda de terminos revisando la cantidad de ocurrencias de las expresiones regulares para un row en especifico
+
+        Parametros:
+        
+        row: Row - Spark
+            El row al que va a ser aplicada la busqueda de terminos
+        
+        terminos: Diccionario (e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]})
+            El conjunto de terminos a buscar cada valor corresponde a una expresion regular compilada
+        
+        col: String
+            Columna del row donde será aplicada la busqueda, de forma predeterminada está la columna txt correspondiente al texto de la sentencia.
+
+    """
     import sys
     sys.path.insert(0, "/home/jovyan/Work/ej/paquetes/nlppen/")
 
@@ -90,19 +342,18 @@ def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
     tiene_terminos = False
 
     if preprocess is not None:
-        txt = preprocess(row[col])
+        txt = preprocess(res[col])
     else:
-        txt = row[col]
-
-    for key in terminos:
-        for reg in terminos[key]:
-            resultado = reg.findall(txt)
+        txt = res[col]
+    for key in terminos: # Recorrer cada termino.
+        for reg in terminos[key]: # Recorrer cada expresión regular.
+            resultado = reg.findall(txt) #Busca todas las ocurrencias.
             if key not in res:
-                res[key] = 0
+                res[key] = 0 # Crea la columna en el row
             tiene_terminos = len(resultado) != 0 or tiene_terminos
             res[key] += len(resultado)
 
-    if tiene_terminos:
+    if tiene_terminos: # Retorna un objeto Row
         return Row(**res)
     else:
         return None
