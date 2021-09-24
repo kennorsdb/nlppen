@@ -326,19 +326,19 @@ def getEntitiesByStanza(text, entities, newColumns):
     nlp = spark_get_stanza("es")
     doc = nlp(text)
     for ent in doc.ents:
-        if ent.label_ == "PER":
+        if ent.type == "PER":
             entities[newColumns[0]].append(ent.text)
             continue
-        if ent.label_ == "LOC":
+        if ent.type == "LOC":
             entities[newColumns[1]].append(ent.text)
             continue
-        if ent.label_ == "ORG":
+        if ent.type == "ORG":
             entities[newColumns[2]].append(ent.text)
             continue
-        if ent.label_ == "MISC":
+        if ent.type == "MISC":
             entities[newColumns[2]].append(ent.text)
             continue
-        if ent.label_ == "GPE":
+        if ent.type == "GPE":
             entities[newColumns[3]].append(ent.text)
             continue
 
