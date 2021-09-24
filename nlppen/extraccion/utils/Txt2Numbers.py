@@ -117,4 +117,8 @@ class Txt2Numbers:
         
 
     def number(self, text):
-        return self.numberList[self.limpiar.sub(" ", text).lower()]
+        try:
+            resultado = self.numberList[self.limpiar.sub(" ", text).lower()]
+            return resultado
+        except:
+            return None

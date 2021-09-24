@@ -151,9 +151,29 @@ def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
     res[newColumns[1]] = porLoTantoExtension
     return Row(**res)
 
+def txt2Date(text, number):
+    regularExpresion = re.compile(r"[Hh][OoÓó][Rr][Aa]([Ss])?")
+    if regularExpresion.search(text) != None:
+        return pd.Timedelta(hours=number)
+    regularExpresion = re.compile(r"[dD][iíIÍ][ÁAaa]([Ss])?")
+    if regularExpresion.search(text) != None:
+        return pd.Timedelta(days=number)
+    regularExpresion = re.compile(r"[Mm][EeÉé][Ss]([EeÉé][Ss])?")
+    if regularExpresion.search(text) != None:
+        days = number*30
+        return pd.Timedelta(days=days)
+    regularExpresion = re.compile(r"[ÁáAa][Ññ][OoÓó]([Ss])?")
+    if regularExpresion.search(text) != None:
+        days = number*365
+        return pd.Timedelta(days=days)
+
+         
+
 def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
     nlp = spark_get_spacy('es_core_news_lg')
     res = row.asDict()
+
+    regularExpresion = re.compile(r"\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?")
 
     if preprocess is not None:
         txt = preprocess(res[col])
@@ -167,35 +187,35 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
         matcher.add("Patron 1 :", patterns, greedy="FIRST")
 
         matches = matcher(doc)
-        print("PROCESANDO DOCUMENTO : " + res["expediente"])
         for _, start, end in matches:
 
             includeText = False
             plazo = ""
+            stringNumber = ""
             for token in doc[start:end]:
                 if includeText:
                     if token.pos_ == "PUNCT":
                         break
-                    plazo += " " + token.text
+                    if regularExpresion.search(token.text) != None:
+                        convertToText = Txt2Numbers()
+                        number = convertToText.number(textToken)
+                        if number != None: 
+                            deltaTime = txt2Date(token.text, number)
+                            plazo = pd.Timestamp(pd.to_datetime('1970-01-01') + deltaTime).to_pydatetime()
+                        
+                        break
+                    stringNumber += " " + token.text
                 else:
                     if token.pos_ == "NUM":
                         textToken = token.text 
-                        if textToken.isdigit() == False and textToken.isalpha():
-                            #TODO: Convertir numero si es texto
-                            convertToText = Txt2Numbers()
-                            number = convertToText.number(textToken)
-                            textToken = str(number)
-                        plazo += textToken
-                        includeText = True
+                        if textToken.isdigit() == False:
+                            stringNumber += textToken
+                            includeText = True
             if plazo != "":
                 span =  doc[start:end]
-                print(span.text)
                 plazos.append(plazo)
-    else:
-        print("DECLARADA SIN LUGAR")
     for column in newColumns:
         if (plazos != []):
-            print(plazos)
             res[column] = plazos
         else:
             res[column] = None
