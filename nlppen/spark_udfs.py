@@ -14,6 +14,7 @@ from .extraccion.ProcessException import ProcessException
 from .extraccion.Natural import Natural
 from .extraccion.modelado import NNModel
 from .extraccion.utils.Txt2Numbers import Txt2Numbers
+from .extraccion.utils.Txt2Date import Txt2Date
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
@@ -145,31 +146,30 @@ def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
     if porLoTantoFunction is not None:
         porLoTantoExtension = len(porLoTantoFunction(res[col]))
     sentenciaExtension = len(res[col])
-    
-    
+
     res[newColumns[0]] = sentenciaExtension
     res[newColumns[1]] = porLoTantoExtension
     return Row(**res)
 
-def txt2Date(text, number):
-    regularExpresion = re.compile(r"[Hh][OoÓó][Rr][Aa]([Ss])?")
-    if regularExpresion.search(text) != None:
-        return pd.Timedelta(hours=number)
-    regularExpresion = re.compile(r"[dD][iíIÍ][ÁAaa]([Ss])?")
-    if regularExpresion.search(text) != None:
-        return pd.Timedelta(days=number)
-    regularExpresion = re.compile(r"[Mm][EeÉé][Ss]([EeÉé][Ss])?")
-    if regularExpresion.search(text) != None:
-        days = number*30
-        return pd.Timedelta(days=days)
-    regularExpresion = re.compile(r"[ÁáAa][Ññ][OoÓó]([Ss])?")
-    if regularExpresion.search(text) != None:
-        days = number*365
-        return pd.Timedelta(days=days)
+
 
          
 
 def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
+    """
+        Extrae los plazos desde el texto, realiza la conversión a DeltaTime. Finalmente
+        convierte el DeltaTime a timestamp y lo almacena en el row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
+
+            porLoTantoFunction: Function
+                Funcion para filtrar el texto y calcular la extensión del por lo tanto.
+    """
     nlp = spark_get_spacy('es_core_news_lg')
     res = row.asDict()
 
@@ -181,26 +181,35 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
         txt = res[col]
 
     plazos = []
+    #No procesar las que son sin lugar.
     if res['termino_ext'] != "Sin lugar":
         doc = nlp(txt)
         matcher = Matcher(nlp.vocab)
         matcher.add("Patron 1 :", patterns, greedy="FIRST")
 
         matches = matcher(doc)
+
+        #Crear los objetos para convertir de texto a número y de para convertir de texto a fechas.
+        convertToDate = Txt2Date()
+        convertToNumber = Txt2Numbers()
         for _, start, end in matches:
 
             includeText = False
             plazo = ""
             stringNumber = ""
             for token in doc[start:end]:
+                # Recolectar todos los token a partir del primer NUM hasta considir con
+                # algunas de las palabras de: [horas, dias, meses, año]
+                # eg( tres dias, cuatro meses)
                 if includeText:
                     if token.pos_ == "PUNCT":
                         break
                     if regularExpresion.search(token.text) != None:
-                        convertToText = Txt2Numbers()
-                        number = convertToText.number(textToken)
+                        
+                        number = convertToNumber.number(textToken)
                         if number != None: 
-                            deltaTime = txt2Date(token.text, number)
+                            deltaTime = convertToDate.txt2Date(token.text, number)
+                            # Convierte los delta time a un datatime y se obtiene el timestamp
                             plazo = pd.Timestamp(pd.to_datetime('1970-01-01') + deltaTime).to_pydatetime()
                         
                         break
@@ -212,7 +221,6 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                             stringNumber += textToken
                             includeText = True
             if plazo != "":
-                span =  doc[start:end]
                 plazos.append(plazo)
     for column in newColumns:
         if (plazos != []):

@@ -63,7 +63,7 @@ class SentenciasEstructurales():
             Luego de extraer estos patrones obtiene las entidades asociadas y las agrega a la columna.
 
             Retorna:
-                Un nuevo SDF, no reemplaza el anterior. 
+                Un nuevo SDF. 
 
             Parametros:
 
@@ -97,6 +97,25 @@ class SentenciasEstructurales():
         return resultado
 
     def plazosDefinidos(self, addColumns, actualizar_sdf=False):
+        """
+            Extrae todos lo patrones que inician con la palabra plazo y terminan con la palabra horas, días, meses o año y sus variantes. 
+            Si no encuentra ninguna se detiene en el primer punto (.).
+            
+            Retorna:
+                Un nuevo SDF, no reemplaza el anterior. 
+
+            Parametros:
+
+                addColumns: Dictionary e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]}
+                    Es un diccionario de columnas a agregar al schema del sdf. Las llaves corresponde
+                    a los nombres de las columnas, el valor corresponde al tipo de dato DataType object de Spark.
+                
+                actualizar_sdf: Booleano.
+                    True para reescribir el sdf.
+                    False para no sobreescribir el sdf.
+
+        """
+
         plazos_pattern =  [{"LOWER": "plazo"},
           {"TEXT": {"REGEX": "^(?!\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?)"}, "OP": "+"},
           {"TEXT": {"REGEX": "\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?"}},
