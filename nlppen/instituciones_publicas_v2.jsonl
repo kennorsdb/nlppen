@@ -843,14 +843,11 @@
 
 
 
-
-
 {"label": "Sociedad Civil", "pattern": [ {"LOWER": {"IN": ["ecoanálisis", "ecoanalisis"]}}]}
 {"label": "Sociedad Civil", "pattern": [ {"LOWER": "academia"},  {"IS_STOP": true, "OP":"+"},  {"LOWER":{"IN": ["centroamérica", "centroamerica"]}}]}
 {"label": "Sociedad Civil", "pattern": [ {"LOWER": "observatorio"},  {"IS_STOP": true, "OP":"+"},  {"LOWER": "desarrollo"}]}
 
 {"label": "Sociedad Civil La Nacion", "pattern": [ {"LOWER": "estado", "OP":"!"}, {"IS_STOP": true, "OP":"!"}, { "LOWER": "la"}, {"LOWER": {"IN": ["nacion", "nación"]}}]}
-
 
 {"label": "Sociedad Civil", "id": "Centro de Investigacion y Estudios Politicos", "pattern": [ {"LOWER": "centro"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["investigación", "investigacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estudios"}, {"LOWER": {"IN": ["políticos", "politicos"]}}]}
 {"label": "Sociedad Civil Acrónimo", "id": "Centro de Investigacion y Estudios Politicos", "pattern": [ {"ORTH": "CIEP"}] }
@@ -878,7 +875,6 @@
 
 {"label": "Sociedad Civil", "id": "Asociacion Nacional de Educadores y Educadoras", "pattern": [ {"LOWER": {"IN": ["asociación", "asociacion"]}}, {"LOWER": "nacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "educadores"}, {"IS_STOP": true, "OP":"*"}, {"LOWER": "educadoras"}]}
 {"label": "Sociedad Civil Acrónimo", "id": "Asociacion Nacional de Educadores y Educadoras", "pattern": [ {"ORTH": "ANDE"}] }
-
 
 {"label": "Sociedad Civil", "id": "Camara de Comercio de Costa Rica", "pattern": [ {"LOWER": "camara"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "comercio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "costa"}, {"LOWER": "rica"}]}
 {"label": "Sociedad Civil Acrónimo","id": "Camara de Comercio de Costa Rica", "pattern": [ {"ORTH": "CCCR"} ]}
