@@ -134,7 +134,7 @@ def nlp_test(text, personas=False):
         ruler1 = nlp.add_pipe("entity_ruler", first=True)
         ruler1.add_patterns(patterns)
         (nlp.add_pipe("entity_ruler", name='inst_publicas', first=True, validate=True)
-            .from_disk("/home/jovyan/Work/ej/paquetes/nlppen/nlppen/instituciones_publicas_v2.jsonl"))
+            .from_disk("/home/jovyan/work/nlppen/nlppen/instituciones_publicas_v2.jsonl"))
 
     doc = nlp(text, disable=["ner"])
 

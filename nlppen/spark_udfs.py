@@ -15,6 +15,7 @@ from .extraccion.Natural import Natural
 from .extraccion.modelado import NNModel
 from .extraccion.utils.Txt2Numbers import Txt2Numbers
 from .extraccion.utils.Txt2Date import Txt2Date
+from .spacy_entities import nlp_test
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
@@ -266,18 +267,29 @@ def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col
 
     matches = matcher(doc)
     for _, start, end in matches:
+        
+        textSpan =  doc[start:end]
         if useSpacy:
             getEntitiesBySpacy(doc, start, end, entities, newColumns)
+            filtrarEntidadesPublicas(textSpan.text, entities, newColumns)
         else:
-            textSpan =  doc[start:end]
             getEntitiesByStanza(textSpan.text, entities, newColumns)
+            filtrarEntidadesPublicas(textSpan.text, entities, newColumns)
     for column in newColumns:
         if (entities[column] != []):
             res[column] = entities[column]
         else:
             res[column] = None
+    
     return Row(**res)
 
+def filtrarEntidadesPublicas(span, entities, newColumns):
+    #Aplicar para cada tipo de entidad
+    doc = nlp_test(span,personas=False)
+    entidadesFiltradas = [ent.ent_id_ for ent in doc.ents if ent.label_ == "Entidad Pública" or ent.label_ == "Entidad Pública Acrónimo"]
+    entities[newColumns[-1]] = entidadesFiltradas
+            
+    
 def getEntitiesBySpacy(doc, start, end, entities,newColumns):
     """
         Obtiene las entidades presentes en un texto utilizando Spacy
@@ -305,10 +317,10 @@ def getEntitiesBySpacy(doc, start, end, entities,newColumns):
             entities[newColumns[2]].append(ent.text)
             continue
         if ent.label_ == "MISC":
-            entities[newColumns[2]].append(ent.text)
+            entities[newColumns[3]].append(ent.text)
             continue
         if ent.label_ == "GPE":
-            entities[newColumns[3]].append(ent.text)
+            entities[newColumns[4]].append(ent.text)
             continue
 
 def getEntitiesByStanza(text, entities, newColumns):
@@ -336,10 +348,10 @@ def getEntitiesByStanza(text, entities, newColumns):
             entities[newColumns[2]].append(ent.text)
             continue
         if ent.type == "MISC":
-            entities[newColumns[2]].append(ent.text)
+            entities[newColumns[3]].append(ent.text)
             continue
         if ent.type == "GPE":
-            entities[newColumns[3]].append(ent.text)
+            entities[newColumns[4]].append(ent.text)
             continue
 
 def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
