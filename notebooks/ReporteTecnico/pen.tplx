@@ -1,0 +1,115 @@
+((*- extends 'report' -*))
+
+%% jupyter nbconvert --LatexExporter.template_file=pen.tplx --to=latex --debug -TagRemovePreprocessor.remove_input_tags hide_input --TemplateExporter.exclude_output_prompt=True Reporte1b.ipynb 
+
+%===============================================================================
+% Document class
+%===============================================================================
+
+((* block docclass *))
+\documentclass[EJ]{estadonacion}
+((* endblock docclass *))
+
+
+%===============================================================================
+% Packages
+%===============================================================================
+
+%    "latex_metadata": {
+%        "tipo_autoria": "Investigadores",
+%        "autoria": "Kenneth Obando",
+%        "title": "Sentencias Estructurales",
+%        "antetitulo": "Mesa de Ciencia de Datos. Documento de trabajo",
+%        "tipodocumento": "Insumos de Investigación",
+%        "annoinforme" : "2019",
+%        "date": "2020",
+%        "address": "San José",
+%        "bib": "referencias.bib"
+%    }
+
+((* block packages *))
+\usepackage[utf8]{inputenc}
+\usepackage[style=apa,sortcites=true,sorting=nyt,backend=biber]{biblatex}
+\usepackage{csquotes}
+
+% Paquetes propios para la exportación de jupyter
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{graphicx,float}
+\usepackage{adjustbox}
+\usepackage{longtable}
+\usepackage{ltablex}
+%\usepackage{caption}
+\usepackage{graphicx}
+((* endblock packages *))
+
+%===============================================================================
+% Title Page
+%===============================================================================
+
+((* block title -*))
+
+((*- endblock title *))
+((* block author -*))
+((* endblock author *))
+
+((* block maketitle *))
+((*- if nb.metadata.get("latex_metadata", {}).get("title", ""): -*))
+\title{((( nb.metadata["latex_metadata"]["title"] )))}
+((*- else -*))
+\title{((( resources.metadata.name | ascii_only | escape_latex )))}
+((*- endif *))
+
+((*- if nb.metadata.get("latex_metadata", {}).get("autoria", ""): -*))
+\autoria{((( nb.metadata["latex_metadata"]["tipo_autoria"] )))}{((( nb.metadata["latex_metadata"]["autoria"] )))}
+((*- else -*))
+\autoria{}{}
+((*- endif *))
+
+((*- if nb.metadata.get("latex_metadata", {}).get("tipodocumento", ""): -*))
+\tipodocumento{((( nb.metadata["latex_metadata"]["tipodocumento"] )))}
+((*- else -*))
+\tipodocumento{}
+((*- endif *))
+
+
+((*- if nb.metadata.get("latex_metadata", {}).get("antetitulo", ""): -*))
+\antetitulo{((( nb.metadata["latex_metadata"]["antetitulo"] )))}
+((*- else -*))
+\antetitulo{}
+((*- endif *))
+
+
+((*- if nb.metadata.get("latex_metadata", {}).get("date", ""): -*))
+\date{((( nb.metadata["latex_metadata"]["date"] )))}
+((*- else -*))
+\date{}
+((*- endif *))
+
+
+((*- if nb.metadata.get("latex_metadata", {}).get("address", ""): -*))
+\address{((( nb.metadata["latex_metadata"]["address"] )))}
+((*- else -*))
+\address{}
+((*- endif *))
+
+
+
+\maketitle
+((* endblock maketitle *))
+
+
+
+
+
+
+%===============================================================================
+% Output
+%===============================================================================
+
+((* block output_group -*))
+((*- if cell.metadata.hide_output: -*))
+((*- else -*))
+    ((( super() )))
+((*- endif -*))
+((* endblock output_group *))
