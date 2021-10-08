@@ -98,6 +98,7 @@ def nlp_corte(text, personas=True):
     patterns = [
         # Leyes, Reglamentos y Decretos
         {"label": "Reglamento", "pattern": [{"LOWER": "reglamento"}, {"IS_STOP": True, "OP":"+"},  {"IS_TITLE": True, "OP":"*"}, {"IS_STOP": True, "OP":"*"},  {"IS_TITLE": True, "OP":"*"}]},
+
         {"label": "Reglamento", "pattern": [{"LOWER": "reglamento"}, {"IS_STOP": True, "OP":"+"},  {"IS_UPPER": True, "OP":"*"}, {"IS_STOP": True, "OP":"*"},  {"IS_UPPER": True, "OP":"*"}]},
         {"label": "Ley", "pattern": [{"LOWER": "ley"}, {"IS_STOP": True, "OP":"+"},  {"IS_TITLE": True, "OP":"+"}, {"IS_STOP": True, "OP":"*"},  {"IS_TITLE": True, "OP":"*"}]  },
         {"label": "Ley", "pattern": [{"LOWER": "ley"}, {"IS_STOP": True, "OP":"+"},  {"IS_UPPER": True, "OP":"+"}, {"IS_STOP": True, "OP":"*"},  {"IS_UPPER": True, "OP":"*"}]   },
