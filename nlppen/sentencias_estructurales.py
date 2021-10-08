@@ -45,8 +45,22 @@ class SentenciasEstructurales():
         """
         
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
+        
         resultado = (self.seleccion.sdf.rdd
                     .map( lambda row : spark_extraer_extension(row, newColumns, solo_portanto))
+                    .toDF(schema=schema)
+                    .persist()
+                    )
+
+        if actualizar_sdf:
+            self.seleccion.sdf = resultado
+
+        return resultado
+
+    def extrarFechaRecibido(self, addColumns, actualizar_sdf = False):
+        (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
+        resultado = (self.seleccion.sdf.rdd
+                    .map( lambda row : spark_extraer_fecha_recibido(row, newColumns, solo_resultando))
                     .toDF(schema=schema)
                     .persist()
                     )
