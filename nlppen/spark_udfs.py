@@ -237,7 +237,7 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
 
     plazos = []
     #No procesar las que son sin lugar.
-    if res['termino_ext'] != "Sin lugar":
+    if res['termino_ext'] in ["Con lugar", "Con lugar parcial"]:
         doc = nlp(txt)
         matcher = Matcher(nlp.vocab)
         matcher.add("Patron 1 :", patterns, greedy="FIRST")
