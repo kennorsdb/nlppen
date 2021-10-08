@@ -15,12 +15,37 @@ from .extraccion.Natural import Natural
 from .extraccion.modelado import NNModel
 from .extraccion.utils.Txt2Numbers import Txt2Numbers
 from .extraccion.utils.Txt2Date import Txt2Date
+from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
 from .spacy_entities import nlp_test
+
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
             'NUM', 'PART', 'PRON', 'PROPN', 'PUNCT', 'SCONJ', 'SYM', 'VERB',
             'X', 'SPACE']
 
+MACRO_SOLO_RESULTANDO = "resultando"
+MACRO_SOLO_CONSIDERANDO = "considerando"
+MACRO_SOLO_POR_TANTO = "portanto"
+
+def filtrarSecciones(txt, seccion):
+    # RegExp para separar la resolución en sus partes
+    if(seccion == MACRO_SOLO_POR_TANTO):
+        partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
+                            (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
+                            (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
+                            (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*)))?""", re.X | re.M)
+    else:
+        partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))
+                            (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
+                            (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando)|(?i:(?:-|\n)\s*por\ tanto)))?
+                            (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*(?=(?i:(?:-|\n)\s*por\ tanto)))))?""", re.X | re.M)
+    
+    
+    res = partesExp.search(txt)
+    if res is not None and res.group(seccion) is not None:
+        return res.group(seccion)
+    else:
+        return ''
 
 def solo_considerando(txt):
     """
@@ -36,17 +61,22 @@ def solo_considerando(txt):
                 Representa el texto de la sentencia completa.
     """
 
-    
-    # RegExp para separar la resolución en sus partes
-    partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))
-                            (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
-                            (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando)|(?i:(?:-|\n)\s*por\ tanto)))?
-                            (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*(?=(?i:(?:-|\n)\s*por\ tanto)))))?""", re.X | re.M)
-    res = partesExp.search(txt)
-    if res is not None and res.group('considerando') is not None:
-        return res.group('considerando')
-    else:
-        return ''
+    return filtrarSecciones(txt, MACRO_SOLO_CONSIDERANDO)
+
+def solo_resultando(txt):
+    """
+        Aplica un filtro utilizando una expresión regular de una sentencia y obtiene solamente el texto que corresponde
+        a la sección del por lo tanto.
+
+        Retorna:
+             Texto correspondiente a la parte del por lo tanto.
+
+        Parametros:
+
+            txt: String
+                Representa el texto de la sentencia completa.
+    """
+    return filtrarSecciones(txt,MACRO_SOLO_RESULTANDO)
 
 
 def solo_portanto(txt):
@@ -62,17 +92,7 @@ def solo_portanto(txt):
             txt: String
                 Representa el texto de la sentencia completa.
     """
-
-    partesExp = re.compile(r"""(?:(?P<encabezado>(?s:.*?))(?=(?i:resultando)|(?i:considerando?\s*\n)|(?i:(?:-|\n)\s*por\ tanto)))   # Match al encabezado
-                            (?:(?i:resultando):?(?P<resultando>(?s:.*?))(?=(?i:(?:-|\n)\s*por\ tanto)|(?i:considerando:?\s*\n)))?
-                            (?:(?i:considerando):?\s*\n(?P<considerando>(?s:.*?))(?=(?i:resultando[:;,\n])|(?i:(?:-|\n)\s*por\ tanto[:;,\n])))?
-                            (?:(?i:(?:-|\n)\s*por\ tanto):?(?P<portanto>(?s:.*)))?""", re.X | re.M)
-
-    res = partesExp.search(txt)
-    if res is not None and res.group('portanto') is not None:
-        return res.group('portanto')
-    else:
-        return ''
+    return filtrarSecciones(txt, MACRO_SOLO_POR_TANTO)
 
 
 def filtro_oraciones(sent, filtro):
@@ -124,6 +144,40 @@ def spark_get_spacy(lang):
     else:
         nlp = spacy.load(lang)
         return nlp
+
+
+
+
+def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
+    
+    
+
+    res = row.asDict()
+    if resultandoFunction is not None:
+        txt = resultandoFunction(res[col])
+    else:
+        txt = res[col]
+    
+    date = res['fechahora_ext']
+    nlp = spark_get_spacy('es_core_news_lg')
+    doc = nlp(txt)
+    oraciones = [str(sent).strip() for sent in doc.sents if sent.text != "\n"]
+    index = 0
+    if len(oraciones) > 0:
+        sentenciaConFecha = oraciones[index]
+        if(len(sentenciaConFecha) < 5):
+            index += 1
+            sentenciaConFecha += oraciones[index]
+        if sentenciaConFecha.lower().rfind("hrs.") >= 0 and len(oraciones) > 2:
+            sentenciaConFecha += oraciones[index + 1]
+        
+        extraerFecha = ExtraerFecha(nlp)
+        fecha = extraerFecha.txt2Date(sentenciaConFecha, date)
+    else:
+        fecha = None
+    for column in newColumns:
+        res[column] = fecha
+    return Row(**res)
 
 def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
     """
@@ -354,7 +408,7 @@ def getEntitiesByStanza(text, entities, newColumns):
             entities[newColumns[4]].append(ent.text)
             continue
 
-def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
+def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None, keepRowEmpty=False):
     """
         Ejecuta la busqueda de terminos revisando la cantidad de ocurrencias de las expresiones regulares para un row en especifico
 
@@ -393,10 +447,13 @@ def spark_buscar_terminos_doc(row, terminos, col='txt', preprocess=None):
             tiene_terminos = len(resultado) != 0 or tiene_terminos
             res[key] += len(resultado)
 
-    if tiene_terminos: # Retorna un objeto Row
+    if keepRowEmpty:
         return Row(**res)
     else:
-        return None
+        if tiene_terminos: # Retorna un objeto Row
+            return Row(**res)
+        else:
+            return None
 
 
 def spark_extraer_tokens(batch, index_col='index', txt_col='txt', incluir=[], cambios={}, preprocess=None):

@@ -71,7 +71,7 @@ class Seleccion:
             self.sdf = self.spark.read.parquet(parquet_path)
 
     
-    def filtrar_sentencias(self, parquet_file='terminos.parquet', preprocess=None, save=True):
+    def filtrar_sentencias(self, parquet_file='terminos.parquet', preprocess=None, save=True, keepRowEmpty=False):
         """ Sobreescribe el Dataframe aplicando el filtro de las sentencias de acuerdo a los terminos de la clase.
 
         Parametros:
@@ -86,7 +86,7 @@ class Seleccion:
         if os.path.exists(parquet_path):
             self.sdf = self.spark.read.parquet(parquet_path)
         else:
-            self.__busqueda_terminos(preprocess)
+            self.__busqueda_terminos(preprocess, keepRowEmpty)
             if save:
                 self.guardarDatos(parquet_file)
 
@@ -128,7 +128,7 @@ class Seleccion:
         ldf.columns = self.terminos.keys()
         return ldf
 
-    def __busqueda_terminos(self, preprocess=None):
+    def __busqueda_terminos(self, preprocess=None, keepRowEmpty=False):
         """
         Aplica la busqueda de terminos distribuido con Spark, y sobreescribe el dataframe.
 
@@ -156,14 +156,14 @@ class Seleccion:
             schema.add(col_name, 'integer', True) # Agregar las nuevas columnas
 
         self.sdf = (self.sdf.rdd
-                    .map(lambda row: spark_buscar_terminos_doc(row, term_regex, preprocess=preprocess)) # Ejecuta la busqueda de terminos con spark
+                    .map(lambda row: spark_buscar_terminos_doc(row, term_regex, preprocess=preprocess, keepRowEmpty=keepRowEmpty)) # Ejecuta la busqueda de terminos con spark
                     .filter(lambda d: d is not None)
                     .toDF(schema=schema) 
                     .persist()
                     ) # Guarda el nuevo esquema
         return self.sdf
 
-    def sub_busqueda(self, terminos_sub, actualizar_sdf=False, preprocess=None):
+    def sub_busqueda(self, terminos_sub, actualizar_sdf=False, preprocess=None, keepRowEmpty=False):
         """
             Aplica búsqueda de los terminos sobre el dataset, a diferencia de filtrar sentencias, este metodo
             recibe por parametro si se desea actualzar el sdf.
@@ -196,7 +196,7 @@ class Seleccion:
         
         #Aplicar la busqueda de terminos
         self.subbusqueda = (self.sdf.rdd
-                            .map(lambda row: spark_buscar_terminos_doc(row, term_regex, preprocess=preprocess))
+                            .map(lambda row: spark_buscar_terminos_doc(row, term_regex, preprocess=preprocess, keepRowEmpty=keepRowEmpty))
                             .filter(lambda d: d is not None)
                             .toDF(schema=schema)
                             .persist()
