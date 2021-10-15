@@ -56,6 +56,31 @@ class SentenciasEstructurales():
             self.seleccion.sdf = resultado
 
         return resultado
+    
+    def extraerNumeroSentencia(self, addColumns, actualizar_sdf = False):
+        """
+            Extrae el numero de sentencia desde el encabezado.
+
+            Retorna:
+                Un nuevo SDF, no reemplaza el anterior. 
+
+            Parametros:
+
+                addColumns: Dictionary e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]}
+                    Es un diccionario de columnas a agregar al schema del sdf. Las llaves corresponde
+                    a los nombres de las columnas, el valor corresponde al tipo de dato DataType object de Spark.
+
+        """
+        (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
+        resultado = (self.seleccion.sdf.rdd
+                    .map( lambda row : spark_extraer_numero_sentencia(row, newColumns, solo_encabezado))
+                    .toDF(schema=schema)
+                    .persist()
+                    )
+        if actualizar_sdf:
+            self.seleccion.sdf = resultado
+
+        return resultado
 
     def extrarFechaRecibido(self, addColumns, actualizar_sdf = False):
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns)

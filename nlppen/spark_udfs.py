@@ -17,6 +17,7 @@ from .extraccion.utils.Txt2Numbers import Txt2Numbers
 from .extraccion.utils.Txt2Date import Txt2Date
 from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
 from .spacy_entities import nlp_test
+from .extraccion.utils.misc import limpiarResolucion
 
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
@@ -26,6 +27,7 @@ POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
 MACRO_SOLO_RESULTANDO = "resultando"
 MACRO_SOLO_CONSIDERANDO = "considerando"
 MACRO_SOLO_POR_TANTO = "portanto"
+MACRO_SOLO_ENCABEZADO = "encabezado"
 
 def filtrarSecciones(txt, seccion):
     # RegExp para separar la resolución en sus partes
@@ -46,6 +48,22 @@ def filtrarSecciones(txt, seccion):
         return res.group(seccion)
     else:
         return ''
+
+def solo_encabezado(txt):
+    """
+        Aplica un filtro utilizando una expresión regular de una sentencia y obtiene solamente el texto que corresponde
+        a la sección del considerando.
+
+        Retorna:
+             Texto correspondiente a la parte del considerando.
+
+        Parametros:
+
+            txt: String
+                Representa el texto de la sentencia completa.
+    """
+
+    return filtrarSecciones(txt, MACRO_SOLO_ENCABEZADO)
 
 def solo_considerando(txt):
     """
@@ -147,11 +165,61 @@ def spark_get_spacy(lang):
 
 
 
+def spark_extraer_numero_sentencia(row, newColumns, encabezadoFunction, col="txt"):
+    """
+        Extrae el numero de sentencia del encabezado del texto, y los agrega
+        al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
+
+            encabezadoFunction: Function
+                Funcion para filtrar el texto por el encabezado.
+    """
+    res = row.asDict()
+    if encabezadoFunction is not None:
+        #Filtrar encabezado
+        txt = encabezadoFunction(res[col])
+    else:
+        txt = res[col]
+    
+    #Expresion para remover el numero de expediente.
+    removeExp = re.compile(r"(exp|expediente(:)?(\s)?)(.)?(\s*)?(n|no)?(.)?(°|º)?\s?[0-9]+(-([a-z]*|[A-Z]*))?-[0-9]+", re.IGNORECASE)
+    txt = removeExp.sub("", txt)
+    #Expresione spara encontrar el numero de voto/resolucion
+    voto = re.compile(r"(voto)\s?((n|no)?(.)?(°|º)?)\s?[0-9]*-[0-9]*", re.IGNORECASE)
+    numero = re.compile(r"(n|no)(.)?(°|º)?\s?[0-9]*(-([a-z]*|[A-Z]*))?-[0-9]*", re.IGNORECASE)
+    resolucionRe = re.compile(r"(resoluci[oó]n|res)((.|:|\s))(\s)*(n|no)?(.)?(°|º)?(\s)*(([0-9]+(-([a-z]*|[A-Z]*))?-[0-9]*)|[0-9]+)", re.IGNORECASE)
+    extraccion = voto.search(txt)
+    resolucion = ""
+    #Verificar una a una las posibles expresiones regulares.
+    if extraccion is not None:
+        limpio = limpiarResolucion(extraccion.group(0))
+        resolucion = limpio
+    else:
+        extraccion = resolucionRe.search(txt)
+        if extraccion is not None:
+            limpio = limpiarResolucion(extraccion.group(0))
+            resolucion = limpio
+        else:
+            extraccion = numero.search(txt)
+            if extraccion is not None:
+                limpio = limpiarResolucion(extraccion.group(0))
+                resolucion = limpio
+                
+    for column in newColumns:
+        if (resolucion != ""):
+            res[column] = resolucion
+        else:
+            res[column] = None
+    return Row(**res)
+
 
 def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
-    
-    
-
     res = row.asDict()
     if resultandoFunction is not None:
         txt = resultandoFunction(res[col])
