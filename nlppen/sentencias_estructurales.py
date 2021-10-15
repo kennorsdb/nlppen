@@ -74,7 +74,7 @@ class SentenciasEstructurales():
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
         resultado = (self.seleccion.sdf.rdd
                     .map( lambda row : spark_extraer_numero_sentencia(row, newColumns, solo_encabezado))
-                    .toDF(schema=schema)
+                    .toDF(schema=schema) 
                     .persist()
                     )
         if actualizar_sdf:
