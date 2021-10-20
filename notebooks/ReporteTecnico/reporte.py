@@ -60,6 +60,7 @@ def cargar_datos(spark):
 def grafico_se_ordena_anno(estructurales):
     s = estructurales.seleccion.sdf
     df1 = (s
+           .where('termino_ext == "Con lugar" OR  termino_ext == "Con lugar parcial" ')
        .groupby('anno')
        .count()
        .sort('anno')
@@ -68,6 +69,7 @@ def grafico_se_ordena_anno(estructurales):
 
     df2 = (s
            .where('se_ordena != 0')
+           .where('termino_ext == "Con lugar" OR  termino_ext == "Con lugar parcial" ')
          .groupby('anno')
          .count()
          .sort('anno')

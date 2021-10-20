@@ -13,17 +13,17 @@ class ExtraerFecha():
                 Procesador de nlp de spacy, se utiliza para el proceso de extraccion
         """
         self.nlp = nlp
-    
+
     def asignarHora(self, hora, agregarHora, number):
         if hora == "" and agregarHora and number != None:
             hora = str(number)
         return hora
-    
+
     def asignarMinutos(self, minutos, number):
         if minutos == "" and number != None:
             minutos = str(number)
         return minutos
-    
+
     def asignarDia(self,dia, number):
         if dia == "" and  number != None:
             dia = str(number)
@@ -69,7 +69,7 @@ class ExtraerFecha():
         doc = self.nlp(txt)
         #Eliminar el 1. del inicio del resultando de la sentencia
         (doc, indexNextWord) = self.__cleanDoc(doc)
-        
+
         for token in doc:
             #print(token.text, token.pos_)
             if includeText:
@@ -156,26 +156,28 @@ class ExtraerFecha():
                             if(len(token.text) > 4):
                                 #Filtrar números como el de sentencia 2015712365
                                 continue
-
-                            if reHoras.search(doc[token.i + indexNextWord].text.strip()) != None:
-                                #Proxima palabra es horas
-                                hora = self.asignarHora(hora, agregarHora, accumTokenText)
-                                try:
-                                    nextWordHora = doc[token.i + 1  + indexNextWord].text.strip().lower()
-                                    if nextWordHora == "de" or nextWordHora == "del":
-                                        agregarMinutos = False
-                                except:
-                                    pass
-                            else:
-                                if reMin.search(doc[token.i + indexNextWord].text.strip()) != None and agregarMinutos:
-                                    minutos = self.asignarMinutos(minutos, accumTokenText)
+                            try:
+                                if reHoras.search(doc[token.i + indexNextWord].text.strip()) != None:
+                                    #Proxima palabra es horas
+                                    hora = self.asignarHora(hora, agregarHora, accumTokenText)
+                                    try:
+                                        nextWordHora = doc[token.i + 1  + indexNextWord].text.strip().lower()
+                                        if nextWordHora == "de" or nextWordHora == "del":
+                                            agregarMinutos = False
+                                    except:
+                                        pass
                                 else:
-                                    if dia == "":
-                                        dia = accumTokenText
+                                    if reMin.search(doc[token.i + indexNextWord].text.strip()) != None and agregarMinutos:
+                                        minutos = self.asignarMinutos(minutos, accumTokenText)
                                     else:
-                                        if anno == "":
-                                            anno = accumTokenText
-                                            break
+                                        if dia == "":
+                                            dia = accumTokenText
+                                        else:
+                                            if anno == "":
+                                                anno = accumTokenText
+                                                break
+                            except:
+                                pass
                 if token.text.lower() == "de" or token.text.lower() == "del" or token.text.lower() == "con":
                     #Palabra previa era hora, entonces no hay que agregar minutos
                     previousToken = doc[token.i + indexNextWord - 2].text
@@ -184,10 +186,17 @@ class ExtraerFecha():
 
                     validatorMes = False
                     #nextWord = doc[token.i+1].text.strip().lower()
-                    nextWord = doc[token.i + indexNextWord].text.strip().lower()
-                    nextWord2 = doc[token.i + 1 + indexNextWord].text.strip().lower()
-                    if nextWord2 == "y":
-                        continue
+
+                    try:
+                        nextWord = doc[token.i + indexNextWord].text.strip().lower()
+                        nextWord2 = doc[token.i + 1 + indexNextWord].text.strip().lower()
+                        
+                        if nextWord2 == "y":
+                            continue
+
+                    except:
+                        pass
+
                     #print("Token", token.text)
                     #print("NextWord", doc[token.i-1], doc[token.i], doc[token.i+1])
                     #print("")
@@ -204,23 +213,24 @@ class ExtraerFecha():
                     else:
                         #Validar si viene en formato texto
                         if nextWord != "mil":
-                            if doc[token.i + indexNextWord + 1].text.strip() != "mil":
-                                #Puede ser parte de la fecha y hora, o puede ser un anno.
-                                number = convertToNumber.number(nextWord)
-                                if number != None:
-                                    nextWordIncluded = True
-                                    if hora == "" and agregarHora:
-                                        hora = str(number)
-                                    else:
-                                        if minutos == "" and agregarMinutos and agregarHora:
-                                            minutos = str(number)
+                            try:
+                                if doc[token.i + indexNextWord + 1].text.strip() != "mil":
+                                    #Puede ser parte de la fecha y hora, o puede ser un anno.
+                                    number = convertToNumber.number(nextWord)
+                                    if number != None:
+                                        nextWordIncluded = True
+                                        if hora == "" and agregarHora:
+                                            hora = str(number)
                                         else:
-                                            if dia == "":
-                                                dia = str(number)
+                                            if minutos == "" and agregarMinutos and agregarHora:
+                                                minutos = str(number)
                                             else:
-                                                if anno == "":
-                                                    anno = str(number)
-                                                    break
+                                                if dia == "":
+                                                    dia = str(number)
+                                                else:
+                                                    if anno == "":
+                                                        anno = str(number)
+                                                        break
                                 else:
                                     try:
                                         #Verificar si es un numero, no letras
@@ -241,10 +251,18 @@ class ExtraerFecha():
                                                             break
                                     except:
                                         pass
+                            except:
+                                pass
                 else:
                     if token.text.lower() == "el":
-                        nextWord = doc[token.i + indexNextWord].text.strip().lower()
-                        if nextWord != "mil":
+
+                        nextWord = None
+                        try:
+                            nextWord = doc[token.i + indexNextWord].text.strip().lower()
+                        except:
+                            pass
+
+                        if nextWord is not None and nextWord != "mil":
                             nextWord2 = None
                             try:
                                 nextWord2 = doc[token.i +indexNextWord + 1].text.strip()
@@ -294,11 +312,11 @@ class ExtraerFecha():
                                 agregarHora = False
                         if nextWordIncluded:
                                 nextWordIncluded = False
-                            
+
             if anno == "" or len(anno) != 4 :
-                if reCurso.search(txt.lower()) !=None:
+                if reCurso.search(txt.lower()) != None and sentenceDate is not None:
                     anno = str(sentenceDate.year)
-            
+
 
         if dia != "" and mes != "" and anno != "":
             if hora != "":

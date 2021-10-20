@@ -139,6 +139,37 @@ cython_debug/
 /dataset/*
 /datasets/*
 nlppen.zip
+<<<<<<< HEAD
+<<<<<<< HEAD
 nlppen/extraccion/utils/__pycache__/__init__.cpython-39.pyc
 nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-39.pyc
 nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/__init__.cpython-37.pyc
+nlppen/extraccion/utils/__pycache__/__init__.cpython-38.pyc
+nlppen/extraccion/utils/__pycache__/__init__.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-37.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-38.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-37.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-38.pyc
+notebooks/ReporteTecnico/estructurales_crudo[18-10-21].xlsx
+nlppen/extraccion/utils/__pycache__/__init__.cpython-37.pyc
+nlppen/extraccion/utils/__pycache__/__init__.cpython-38.pyc
+nlppen/extraccion/utils/__pycache__/__init__.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-37.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-38.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-37.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-38.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-39.pyc
+=======
+=======
+>>>>>>> 6d861ad226441926046597194e3cc857d9ce0372
+*/__pycache__/*
+
+notebooks/ReporteTecnico/estructurales_crudo[18-10-21].xlsx
+
+<<<<<<< HEAD
+>>>>>>> 6d861ad226441926046597194e3cc857d9ce0372
+notebooks/ReporteTecnico/estructurales_crudo[18-10-21].xlsx
+=======
+>>>>>>> 6d861ad226441926046597194e3cc857d9ce0372

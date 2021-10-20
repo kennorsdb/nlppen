@@ -12,10 +12,12 @@ class Descripcion():
     self.export = Export(extraccion_path)
 
   def guardar_lista(self, columnas, sheet='Lista'):
-    self.export(sheet, self.df[columnas])
+    self.export(sheet, self.sdf.select(*columnas).toPandas().applymap(lambda x: x.encode(errors='backslashreplace').
+                 decode('utf-8') if isinstance(x, str) else x))
 
   def guardar_df(self, df, sheet='Lista'):
-    self.export(sheet, df)
+    self.export(sheet, df.applymap(lambda x: x.encode(errors='backslashreplace').
+                 decode('utf-8') if isinstance(x, str) else x))
 
 
   def cruce_variables(self, var1, var2, sheet=None):
@@ -66,12 +68,12 @@ class Descripcion():
           )
 
     ldf.columns = ldf.columns.get_level_values(1)
-    
+
     if sheet is not None:
       self.export(sheet, ldf.copy())
 
     return ldf
-      
+
 
   def cruce_entidades(self, cruce, entidades_col, ent_name='Entidad', sheet=None):
     ldf = (self.df[self.df[entidades_col].notna()][[entidades_col, cruce]]
@@ -87,7 +89,7 @@ class Descripcion():
             .unstack()
             .fillna(0).T
           )
-    
+
     if sheet is not None:
       self.export(sheet, ldf.copy())
 

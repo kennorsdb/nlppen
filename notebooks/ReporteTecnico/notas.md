@@ -1,0 +1,48 @@
+
+## Lista de Columnas
+
+```
+[ 
+  'archivo',
+ 'txt',
+ 'cleanText',
+ 'num',
+ 'fechahora_ext',
+ 'redactor_ext',
+ 'tipoResolucion_ext',
+ 'termino_ext',
+ 'voto_salvado',
+ 'tema',
+ 'Recurrente_ents',
+ 'Cantón_ents',
+ 'Fecha_ents',
+ 'Constitución_ents',
+ 'Redactor_ents',
+ 'Ley_ents',
+ 'EntidadPublica_ents',
+ 'tema_prob',
+ 'termino_lst',
+ 'expediente',
+ 'Fechahora_ents',
+ 'CitaSentencias_ents',
+ 'Recurrido_ents',
+ 'Reglamento_ents',
+ 'Magistrado_ents',
+ '_id',
+ 'seguimiento',
+ 'se_ordena',
+ 'plan',
+ 'plazo',
+ 'se_ordena_PER',
+ 'se_ordena_LOC',
+ 'se_ordena_ORG',
+ 'se_ordena_MISC',
+ 'se_ordena_GPE',
+ 'se_ordena_Ent_Pub',
+ 'extension_sentencia',
+ 'extension_por_lo_tanto',
+ 'plazosDefinidos',
+ 'FechaSolicitud',
+ 'anno'
+]
+```

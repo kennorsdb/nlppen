@@ -32,7 +32,7 @@ class Export:
             for key in self.exportar_excel:
                 self.exportar_excel[key].to_excel(writer, sheet_name=key, index=False)
                 worksheet = writer.sheets[key]
-                
+
                 for idx, col in enumerate(self.exportar_excel[key]):  # loop through all columns
                     series = self.exportar_excel[key][col]
                     max_len = max((
@@ -41,6 +41,6 @@ class Export:
                         )) + 1  # adding a little extra space
                     worksheet.column_dimensions[get_column_letter(idx+1)].width = min((max_len, 50))  # set column width
 
-                
 
-    
+
+
