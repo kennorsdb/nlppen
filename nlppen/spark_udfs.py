@@ -2,6 +2,7 @@
 import stanza
 import spacy
 from spacy.matcher import Matcher
+from spacy.tokens import Span
 import re
 import sys
 import numpy as np
@@ -17,7 +18,9 @@ from .extraccion.utils.Txt2Numbers import Txt2Numbers
 from .extraccion.utils.Txt2Date import Txt2Date
 from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
 from .spacy_entities import nlp_test
-from .extraccion.utils.misc import limpiarResolucion
+from .spacy_internationals import extractInternational
+from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos
+from .spacy_derechos import extractDerechos
 
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
@@ -191,9 +194,9 @@ def spark_extraer_numero_sentencia(row, newColumns, encabezadoFunction, col="txt
     removeExp = re.compile(r"(exp|expediente(:)?(\s)?)(.)?(\s*)?(n|no)?(.)?(°|º)?\s?[0-9]+(-([a-z]*|[A-Z]*))?-[0-9]+", re.IGNORECASE)
     txt = removeExp.sub("", txt)
     #Expresione spara encontrar el numero de voto/resolucion
-    voto = re.compile(r"(voto)\s?((n|no)?(.)?(°|º)?)\s?[0-9]*-[0-9]*", re.IGNORECASE)
-    numero = re.compile(r"(n|no)(.)?(°|º)?\s?[0-9]*(-([a-z]*|[A-Z]*))?-[0-9]*", re.IGNORECASE)
-    resolucionRe = re.compile(r"(resoluci[oó]n|res)((.|:|\s))(\s)*(n|no)?(.)?(°|º)?(\s)*(([0-9]+(-([a-z]*|[A-Z]*))?-[0-9]*)|[0-9]+)", re.IGNORECASE)
+    voto = re.compile(r"(voto)\s?((n|no)?(\.)?(°|º)?)\s?[0-9]*-[0-9]*", re.IGNORECASE)
+    numero = re.compile(r"(n|no)(\.)?(°|º)?\s?[0-9]*(-([a-z]*|[A-Z]*))?-[0-9]*", re.IGNORECASE)
+    resolucionRe = re.compile(r"(resoluci[oó]n|res)((\.|:|\s))(\s)*(n|no)?(\.)?(°|º)?(\s)*(([0-9]+(-([a-z]*|[A-Z]*))?-[0-9]*)|[0-9]+)", re.IGNORECASE)
     extraccion = voto.search(txt)
     resolucion = ""
     #Verificar una a una las posibles expresiones regulares.
@@ -274,10 +277,6 @@ def spark_extraer_extension(row, newColumns, porLoTantoFunction, col="txt"):
     res[newColumns[1]] = porLoTantoExtension
     return Row(**res)
 
-
-
-         
-
 def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
     """
         Extrae los plazos desde el texto, realiza la conversión a DeltaTime. Finalmente
@@ -352,6 +351,168 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
             res[column] = None
     return Row(**res)
 
+def spark_extraer_instrumentos_internacionales(row, newColumns, preprocess, col='txt'):
+    """
+    Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+    entidades, y los agrega al Row.
+
+    Retorna:
+            El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+    Parametros:
+            row: Row - Spark
+            El row al que va a ser aplicada la busqueda de entidades
+
+        doc: Document
+            El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
+        TODO:Completar comentarios
+    """
+    res = row.asDict()
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+    
+    
+    instrumentos = filtrarInstrumentosInternacionales(txt)
+    for column in newColumns:
+        if instrumentos:
+            res[column] = instrumentos
+        else:
+            res[column] = None
+
+    return Row(**res)
+
+def spark_extraer_derechos(row, newColumns, preprocess, col='txt'):
+    res = row.asDict()
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+     #Aplicar para cada tipo de entidad
+    doc = extractDerechos(txt)
+    derechosFundamentales = [ent.ent_id_ for ent in doc.ents if ent.label_ == "Derecho Fundamental" or ent.label_ == "Derecho General"]
+    derechosExtraidos = [ent.text for ent in doc.ents if ent.label_ == "Derecho Fundamental" or ent.label_ == "Derecho General"]
+    unionFundamentales = list(set().union(derechosFundamentales, derechosFundamentales))
+    if (unionFundamentales != []):
+            res[newColumns[0]] = derechosFundamentales
+    else:
+            res[newColumns[0]] = None
+
+    if (unionFundamentales != []):
+            res[newColumns[1]] = derechosExtraidos
+    else:
+            res[newColumns[1]] = None
+
+    return Row(**res)
+
+
+
+def spark_extraer_derechos_sin_normalizar(row, newColumns, preprocess, col='txt'):
+    """
+        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+        entidades, y los agrega al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+             row: Row - Spark
+                El row al que va a ser aplicada la busqueda de entidades
+        TODO:Completar comentarios
+    """
+    derechoPattern =           [
+                         {"LOWER": "derecho"}, {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "+"},
+                        ]
+
+    derechoGeneralPattern =    [
+                         {"LOWER": "derecho"}, {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "+"},
+                         {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "*"},
+                         {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "*"}
+                        ]
+    derechoFundamentalPattern = [
+                         {"LOWER": "derecho"}, {"LOWER": "fundamental"}, {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "+"},
+                         {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "*"},
+                         {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "*"}
+                        ]
+    derechoHumanoPattern = [
+                         {"LOWER": "derecho"}, {"LOWER": "humano"}, {"POS": {"IN":["PRON", "VERB", "DET"]}, "OP": "*"}, {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "+"},
+                         {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "*"},
+                         {"POS": {"IN":["ADP", "DET"]}, "OP": "*"},
+                         {"LOWER": {"IN": ["y", "o"]}, "OP": "?"},
+                         {"POS": {"IN": ["VERB", "ADJ", "NOUN"]}, "OP": "*"}
+                        ]
+
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
+
+    doc = nlp(txt)
+    matcher = Matcher(nlp.vocab)
+    
+    matcher.add("Derecho Acotado", [derechoPattern], greedy="FIRST")
+    matcher.add("Derecho General", [derechoGeneralPattern], greedy="FIRST")
+    matcher.add("Derecho Fundamental", [derechoFundamentalPattern], greedy="FIRST")
+    matcher.add("Derecho Humano", [derechoHumanoPattern], greedy="FIRST")
+
+    entities = {}
+
+    for column in newColumns:
+        entities[column] = []
+
+    derechos = []
+    derechosGeneral = []
+    derechosFundamental = []
+    derechosHumano = []
+
+    matches = matcher(doc)
+    for match_id, start, end in matches:
+        span = Span(doc, start, end, label=match_id)
+        if span.label_ == "Derecho Acotado":
+            derechos.append(span.text.lower())
+        elif span.label_ == "Derecho General":
+            derechosGeneral.append(span.text.lower())
+        elif span.label_ == "Derecho Fundamental":
+            derechosFundamental.append(span.text.lower())
+        elif span.label_ == "Derecho Humano":
+            derechosHumano.append(span.text.lower())
+
+    derechos = limpiarDerechos(derechos)
+    derechosGeneral = limpiarDerechos(derechosGeneral)
+    derechosFundamental = limpiarDerechos(derechosFundamental)
+    derechosHumano = limpiarDerechos(derechosHumano)
+
+    listaDerechos = [derechos, derechosGeneral, derechosFundamental, derechosHumano]
+    for i in range(0, len(newColumns)):
+        if (listaDerechos[i] != []):
+            res[newColumns[i]] = listaDerechos[i]
+        else:
+            res[newColumns[i]] = None
+
+    return Row(**res)
+
+    
 def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col='txt', useSpacy=True):
     """
         Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
@@ -363,13 +524,7 @@ def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col
         Parametros:
              row: Row - Spark
                 El row al que va a ser aplicada la busqueda de entidades
-        
-            doc: Document
-                El documento procesado por Spacy, de aquí se obtenedrá el span donde se obtienen las entidades.
-            start: int
-                Inicio del span donde se obtendran las entidades.
-            end: int
-                Fin del span donde se obtendran las entidades.
+        TODO:Completar comentarios
     """
     nlp = spark_get_spacy('es_core_news_lg')
     res = row.asDict()
@@ -405,11 +560,18 @@ def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col
     
     return Row(**res)
 
+
 def filtrarEntidadesPublicas(span, entities, newColumns):
     #Aplicar para cada tipo de entidad
     doc = nlp_test(span,personas=False)
     entidadesFiltradas = [ent.ent_id_ for ent in doc.ents if ent.label_ == "Entidad Pública" or ent.label_ == "Entidad Pública Acrónimo"]
     entities[newColumns[-1]] = entidadesFiltradas
+
+def filtrarInstrumentosInternacionales(span):
+    doc = extractInternational(span)
+    entidadesFiltradas = [ent.ent_id_ for ent in doc.ents if ent.label_ in ["Organismo", "Organismo Acronimo", "Tratado Internacional ONU", "Tratado Internacional ONU Acronimo", "Declaracion Internacional ONU", "Resolucion Internacional ONU", "Tratado Internacional OEA", "Tratado Internacional OEA Acronimo", "Resolucion Internacional OEA", "Instrumento Internacional sobre Derechos Humanos"] ]
+    return entidadesFiltradas
+    
             
     
 def getEntitiesBySpacy(doc, start, end, entities,newColumns):
