@@ -1,0 +1,207 @@
+{"label": "Organismo", "id": "Instituto Interamericano de Derechos Humanos", "pattern": [ {"LOWER": "instituto"}, {"LOWER": "interamericano"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Organismo Acronimo","id": "Instituto Interamericano de Derechos Humanos", "pattern": [ {"ORTH": "IIDH"}] }
+
+{"label": "Organismo", "id": "Federacion Iberomericana del Ombudsman", "pattern": [ {"LOWER": {"IN": ["federacion", "federación"]}}, {"LOWER": "iberoamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "Ombudsman"}]}
+{"label": "Organismo Acronimo","id": "Federación Iberomericana del Ombudsman", "pattern": [ {"ORTH": "FIO"}] }
+
+{"label": "Organismo", "id": "Organizacion de las Naciones Unidas", "pattern": [ {"LOWER": {"IN": ["organizacion", "organización"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}]}
+{"label": "Organismo Acronimo","id": "Organizacion de las Naciones Unidas", "pattern": [ {"ORTH": "ONU"}] }
+
+{"label": "Organismo", "id": "Organizacion de los Estados Americanos", "pattern": [ {"LOWER": {"IN": ["organizacion", "organización"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estados"}, {"LOWER": "americanos"}]}
+{"label": "Organismo Acronimo","id": "Organizacion de los Estados Americanos", "pattern": [ {"ORTH": "OEA"}] }
+
+{"label": "Organismo", "id": "Derechos Human Rights", "pattern": [ {"LOWER": "derechos"}, {"LOWER": "human"}, {"LOWER": "rights"}]}
+
+{"label": "Organismo", "id": "Amnistia Internacional", "pattern": [ {"LOWER": {"IN": ["amnistia", "amnistía"]}}, {"LOWER": "internacional"}]}
+{"label": "Organismo Acronimo","id": "Amnistia Internacional", "pattern": [ {"ORTH": "AI"}] }
+
+{"label": "Organismo", "id": "Human Rights Watch", "pattern": [ {"LOWER": "human"}, {"LOWER": "rigths"}, {"LOWER": "watch"}]}
+{"label": "Organismo Acronimo","id": "Human Rights Watch", "pattern": [ {"ORTH": "HRW"}] }
+
+{"label": "Organismo", "id": "Oficina del Alto Comisionado de las Naciones Unidas para los Derechos Humanos", "pattern": [ {"LOWER": "oficina"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "alto"}, {"LOWER": "comisionado"}, {"IS_STOP": true, "OP":"+"},  {"LOWER": "naciones"}, {"LOWER": "unidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Organismo Acronimo","id": "Oficina del Alto Comisionado de las Naciones Unidas", "pattern": [ {"ORTH": "OACNUDH"}] }
+
+{"label": "Organismo", "id": "Oficina del Alto Comisionado de las Naciones Unidas", "pattern": [ {"LOWER": "oficina"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "alto"}, {"LOWER": "comisionado"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}]}
+{"label": "Organismo Acronimo","id": "Oficina del Alto Comisionado de las Naciones Unidas", "pattern": [ {"ORTH": "OACNU"}] }
+
+{"label": "Organismo", "id": "Derechos Humanos en America Latina", "pattern": [{"LOWER": "derechos"}, {"LOWER": "humanos"}, {"IS_STOP": true, "OP":"+"} , {"LOWER": {"IN": ["america", "ameríca"]}}, {"LOWER": "latina"}]}
+{"label": "Organismo Acronimo","id": "Derechos Humanos en America Latina", "pattern": [ {"ORTH": "DHAL"}] }
+
+{"label": "Organismo", "id": "Centro de Derechos Humanos de Nuremberg", "pattern": [ {"LOWER": "centro"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nuremberg"}]}
+{"label": "Organismo Acronimo","id": "Centro de Derechos Humanos de Nuremberg", "pattern": [ {"ORTH": "NMRZ"}] }
+
+{"label": "Organismo", "id": "Corte Interamericana de Derechos Humanos", "pattern": [ {"LOWER": "corte"}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Organismo Acronimo","id": "Corte Interamericana de Derechos Humanos", "pattern": [ {"ORTH": "CorteIDH"}] }
+
+{"label": "Organismo", "id": "Comision Interamericana de Derechos Humanos", "pattern": [ {"LOWER": {"IN": ["comision", "comisi[on"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Organismo Acronimo","id": "Comision Interamericana de Derechos Humanos", "pattern": [ {"ORTH": "CIDH"}] }
+
+{"label": "Organismo", "id": "Corte Europea de Derechos Humanos", "pattern": [ {"LOWER": "corte"}, {"LOWER": "europea"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Organismo Acronimo","id": "Corte Europea de Derechos Humanos", "pattern": [ {"ORTH": "CEDH"}] }
+
+{"label": "Organismo", "id": "Corte Penal Internacional", "pattern": [ {"LOWER": "corte"}, {"LOWER": "penal"}, {"LOWER": "internacional"}]}
+{"label": "Organismo Acronimo","id": "Corte Penal Internacional", "pattern": [ {"ORTH": "CPI"}] }
+
+{"label": "Tratado Internacional ONU", "id": "Pacto Internacional de Derechos Civiles y Politicos", "pattern": [ {"LOWER": "pacto"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "civiles"}, {"LOWER": "y"}, {"LOWER": {"IN": ["politicos", "políticos"]}}]}
+{"label": "Tratado Internacional ONU Acronimo","id": "Pacto Internacional de Derechos Civiles y Politicos", "pattern": [ {"ORTH": "ICCPR"}] }
+
+{"label": "Tratado Internacional ONU", "id": "Segundo Protocolo Facultativo del Pacto Internacional de Derechos Civiles y Politicos, destinado a abolir la Pena de Muerte", "pattern": [ {"LOWER": "segundo"}, {"LOWER": "protocolo"}, {"LOWER": "facultativo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pacto"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"} , {"LOWER": "civiles"},{"LOWER": "y"}, {"LOWER": {"IN": ["politicos", "políticos"]}}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": "destinado"},{"LOWER": "a"}, {"LOWER": {"IN": ["abolir", "abolicion", "abolición"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pena"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "muerte"}]}
+
+{"label": "Tratado Internacional ONU", "id": "Protocolo Facultativo del Pacto Internacional de Derechos Civiles y Politicos", "pattern": [ {"LOWER": "protocolo"}, {"LOWER": "facultativo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pacto"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"} , {"LOWER": "civiles"}, {"LOWER": "y"}, {"LOWER": {"IN": ["politicos", "políticos"]}}]}
+
+{"label": "Tratado Internacional ONU", "id": "Convencion contra la Tortura y otros Tratos o Penas Crueles, Inhumanos o Degradantes", "pattern": [ {"LOWER": {"IN": ["convencion", "convención"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tortura"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tratos"}, {"LOWER": "o"}, {"LOWER": "penas"}, {"LOWER": "crueles"}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": "inhumanos"}, {"LOWER": "o"}, {"LOWER": "degradantes"}]}
+
+{"label": "Tratado Internacional ONU", "id": "Convencion sobre los Derechos del Niño", "pattern": [ {"LOWER": {"IN": ["convencion", "convención"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niño"}]}
+
+{"label": "Tratado Internacional ONU", "id": "Convencion para la Prevención y Castigo del Delito de Genocidio", "pattern": [ {"LOWER": {"IN": ["convencion", "convención"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["prevencion", "prevención"]}}, {"LOWER": "y"}, {"LOWER": "castigo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "delito"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "genocidio"}]}
+
+{"label": "Tratado Internacional ONU", "id": "Convencion sobre la Eliminación de Todas las Formas de Discriminacion contra la Mujer", "pattern": [ {"LOWER": {"IN": ["convencion", "convención"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["eliminacion", "eliminación"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "formas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminacion", "discriminación"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+
+{"label": "Declaracion Internacional ONU", "id": "Declaracion Universal de los Derechos Humanos", "pattern": [ {"LOWER": {"IN": ["declaracion", "declaración"]}}, {"LOWER": "universal"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+
+{"label": "Declaracion Internacional ONU", "id": "Declaracion sobre los Principios de Justicia para las Víctimas de Delitos y del Abuso de Poder", "pattern": [ {"LOWER": {"IN": ["declaracion", "declaración"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "principios"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "justicia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["víctimas", "victimas"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "delitos"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "abuso"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "poder"}]}
+
+{"label": "Declaracion Internacional ONU", "id": "Declaracion sobre la Proteccion de Todas las Personas contra las Desapariciones Forzadas", "pattern": [ {"LOWER": {"IN": ["declaracion", "declaración"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["protección", "proteccion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desapariciones"}, {"LOWER": "forzadas"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Principios Basicos relativos a la Independencia de la Judicatura", "pattern": [ {"LOWER": "principios"}, {"LOWER": {"IN": ["basicos", "básicos"]}}, {"LOWER": "relativos"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "independencia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "judicatura"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Directrices sobre la Funcion de los Fiscales", "pattern": [ {"LOWER": "directrices"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["función", "funcion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fiscales"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Codigo de Conducta para Funcionarios Encargados de Hacer Cumplir la Ley", "pattern": [ {"LOWER": {"IN": ["código", "codigo"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "conducta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "funcionarios"}, {"LOWER": "encargados"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cumplir"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ley"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Principios Básicos sobre el Empleo de la Fuerza y Armas de Fuego por los Funcionarios Encargados de Hacer Cumplir la Ley", "pattern": [ {"LOWER": "principios"}, {"LOWER": {"IN": ["basicos", "básicos"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "empleo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fuerza"}, {"LOWER": "y"}, {"LOWER": "armas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "fuego"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "funcionarios"}, {"LOWER": "encargados"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "cumplir"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ley"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Principios Basicos para el Tratamiento de los Reclusos", "pattern": [ {"LOWER": "principios"}, {"LOWER": {"IN": ["basicos", "básicos"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tratamiento"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "reclusos"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Reglas Mínimas para el Tratamiento de los Reclusos", "pattern": [ {"LOWER": "reglas"}, {"LOWER": {"IN": ["mínimas", "minimas"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tratamiento"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "reclusos"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Conjunto de Principios para la Protección de Todas las Personas Sometidas a cualquier forma de detención o prisión", "pattern": [ {"LOWER": "conjunto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "principios"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["protección", "proteccion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"LOWER": "sometidas"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "forma"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["detención", "detencion"]}}, {"LOWER": "o"}, {"LOWER": {"IN":["prisión", "prision"]}}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Reglas de las Naciones Unidas para la Protección de los Menores Privados de Libertad", "pattern": [ {"LOWER": "reglas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["protección", "proteccion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "menores"}, {"LOWER": "privados"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "libertad"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Reglas Minimas de las Naciones Unidas para la Administración de la Justicia de Menores", "pattern": [ {"LOWER": "reglas"}, {"LOWER": {"IN": ["mínimas", "minimas"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["administracion", "administración"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "justicia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "menores"}]}
+{"label": "Resolucion Internacional ONU", "id": "Reglas Minimas de las Naciones Unidas para la Administración de la Justicia de Menores", "pattern": [ {"LOWER": "reglas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "beijing"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Reglas Minimas de las Naciones Unidas sobre las Medidas no Privativas de la Libertad", "pattern": [ {"LOWER": "reglas"}, {"LOWER": {"IN": ["mínimas", "minimas"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "medidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "privativas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "libertad"}]}
+{"label": "Resolucion Internacional ONU", "id": "Reglas Minimas de las Naciones Unidas sobre las Medidas no Privativas de la Libertad", "pattern": [ {"LOWER": "reglas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tokio"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Principios de Cooperación Internacional en la Identificación, Detención, Extradición y Castigo de los Culpables de Crímenes de Guerra y de Lesa Humanidad", "pattern": [ {"LOWER": "principios"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["cooperación", "cooperacion"]}}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["identificación", "identificacion"]}}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": {"IN": ["detención", "detencion"]}}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": {"IN": ["extradición", "extradicion"]}}, {"LOWER": "y"}, {"LOWER": "castigo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "culpables"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["crímenes", "crimenes"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "guerra"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "lesa"}, {"LOWER": "humanidad"}]}
+
+{"label": "Resolucion Internacional ONU", "id": "Principios relativos a una Eficaz Prevención e Investigación de las Ejecuciones Extralegales, Arbitrarias o Sumarias", "pattern": [ {"LOWER": "principios"}, {"LOWER": "relativos"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "eficaz"}, {"LOWER": {"IN": ["prevención", "prevencion"]}}, {"LOWER": "e"}, {"LOWER": {"IN": ["investigación", "investigacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ejecuciones"}, {"LOWER": "extralegales"}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": "arbitrarias"}, {"LOWER": "o"}, {"LOWER": "sumarias"}]}
+
+
+{"label": "Tratado Internacional OEA", "id": "Convención Americana sobre Derechos Humanos", "pattern": [ {"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "americana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Tratado Internacional OEA Acronimo","id": "Convención Americana sobre Derechos Humanos", "pattern": [ {"ORTH": "CADH"}] }
+
+{"label": "Tratado Internacional OEA", "id": "Protocolo a la Convención Americana sobre Derechos Humanos relativo a la Abolición de la Pena de Muerte", "pattern": [{"LOWER": "protocolo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "americana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}, {"LOWER": "relativo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["abolición", "abolicion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pena"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "muerte"}]}
+
+{"label": "Tratado Internacional OEA", "id": "Convención Interamericana sobre Desaparición Forzada de Personas", "pattern": [{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["desaparicion", "desaparición"]}}, {"LOWER": "forzada"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}]}
+
+{"label": "Tratado Internacional OEA", "id": "Convención Interamericana para Prevenir y Sancionar la Tortura", "pattern": [{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "prevenir"}, {"LOWER": "y"}, {"LOWER": "sancionar"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tortura"}]}
+
+{"label": "Tratado Internacional OEA", "id": "Convención Interamericana para Prevenir, Sancionar y Erradicar la Violencia contra la Mujer", "pattern": [{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "prevenir"}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": "sancionar"}, {"LOWER": "y"}, {"LOWER": "erradicar"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "violencia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Tratado Internacional OEA", "id": "Convención Interamericana para Prevenir, Sancionar y Erradicar la Violencia contra la Mujer", "pattern": [{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["belem", "belém"]}}, {"LOWER": "do"}, {"LOWER": {"IN": ["para", "pará"]}}]}
+
+{"label": "Tratado Internacional OEA", "id": "Declaración Americana de los Derechos y Deberes del Hombre", "pattern": [{"LOWER": {"IN": ["declaracion", "declaración"]}}, {"LOWER": "americana" }, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos" }, {"LOWER": "y" }, {"LOWER": "deberes" }, {"IS_STOP": true, "OP":"+"}, {"LOWER": "hombre" }]}
+
+{"label": "Resolucion Internacional OEA", "id": "Principios y Buenas Prácticas sobre la Protección de las Personas Privadas de Libertad en las Américas", "pattern": [{"LOWER": "principios"}, {"LOWER": "y"}, {"LOWER": "buenas"}, {"LOWER": {"IN": ["practicas", "prácticas"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["proteccion", "protección"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"LOWER": "privadas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "libertad"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["americas", "américas"]}}]}
+
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Pacto Internacional de Derechos Civiles y Políticos", "pattern" :[{"LOWER": "pacto"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "civiles"}, {"LOWER": "y"}, {"LOWER": {"IN": ["políticos", "politicos"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Pacto Internacional de Derechos Económicos, Sociales y Culturales", "pattern" :[{"LOWER": "pacto"}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": {"IN": ["económicos", "economicos"]}}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": "sociales"}, {"LOWER": "y"}, {"LOWER": "culturales"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Americana sobre Derechos Humanos", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "americana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo a la Convención Americana sobre Derechos Humanos para Abolir la Pena de Muerte", "pattern" :[{"LOWER": "protocolo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "americana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "abolir"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "pena"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "muerte"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convenciones Interamericanas de Derechos Civiles y Políticos de la Mujer", "pattern" :[{"LOWER": "convenciones"}, {"LOWER": "interamericanas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "civiles"}, {"LOWER": "y"}, {"LOWER": {"IN": ["políticos", "politicos"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre Derechos Políticos de la Mujer", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": {"IN": ["políticos", "politicos"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre Nacionalidad de la Mujer", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "nacionalidad"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre los Derechos del Niño", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niño"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre eliminación de todas las formas de discriminación racial", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["eliminación", "eliminacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "formas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminación", "discriminacion"]}}, {"LOWER": "racial"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre eliminación de la discriminación de la mujer", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["eliminación", "eliminacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminación", "discriminacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención contra discriminación en la enseñanza", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminación", "discriminacion"]}}, {"LOWER": "en"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "enseñanza"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo a la Convención sobre discriminación en la enseñanza", "pattern" :[{"LOWER": "protocolo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminación", "discriminacion"]}}, {"LOWER": "en"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "enseñanza"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre prevención y sanción del delito de genocidio", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["prevención", "prevencion"]}}, {"LOWER": "y"}, {"LOWER": {"IN": ["sanción", "sancion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "delito"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "genocidio"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención contra la tortura y tratos o penas crueles o degradantes", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tortura"}, {"LOWER": "y"}, {"LOWER": "tratos"}, {"LOWER": "o"}, {"LOWER": "penas"}, {"LOWER": "crueles"}, {"LOWER": "o"}, {"LOWER": "degradantes"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre asilo", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asilo"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre asilo político", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asilo"}, {"LOWER": "político"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre asilo diplomático", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asilo"}, {"LOWER": {"IN": ["diplomatico", "diplomático"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre asilo territorial", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "asilo"}, {"LOWER": "territorial"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre estatuto de refugiados y Protocolo", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estatuto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "refugiados"}, {"LOWER": "y"}, {"LOWER": "protocolo"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre estatuto de los apátridas", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "estatuto"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["apátridas", "apatridas"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre reducción casos de apatridia", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "reducción"}, {"LOWER": "casos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "apatridia"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convenio para la Protección de la Propiedad Industrial", "pattern" :[{"LOWER": "convenio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["protección", "proteccion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "propiedad"}, {"LOWER": "industrial"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención para erradicar la violencia contra la mujer", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "erradicar"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "violencia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convenio para la protección al niño y Cooperación en adopción internacional", "pattern" :[{"LOWER": "convenio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["protección", "proteccion"]}}, {"LOWER": "al"}, {"LOWER": "niño"}, {"LOWER": "y"}, {"LOWER": {"IN": ["cooperación", "cooperacion"]}}, {"LOWER": "en"}, {"LOWER": {"IN": ["adopción", "adopcion"]}}, {"LOWER": "internacional"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana sobre Condenas Penales en el Extranjero", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "condenas"}, {"LOWER": "penales"}, {"LOWER": "en"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "extranjero"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana sobre Desaparición Forzada de Personas", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["desaparición", "desaparicion"]}}, {"LOWER": "forzada"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convenio sobre la Transferencia de Personas Sentenciadas", "pattern" :[{"LOWER": "convenio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "transferencia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"LOWER": "sentenciadas"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convenio sobre los Aspectos Civiles de la Sustracción Internacional de Menores", "pattern" :[{"LOWER": "convenio"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "aspectos"}, {"LOWER": "civiles"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["sustraccion", "sustracción"]}}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "menores"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana para Prevenir y Sancionar la Tortura", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "prevenir"}, {"LOWER": "y"}, {"LOWER": "sancionar"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "tortura"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana contra la Discriminación de Discapacitados", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminación", "discriminacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "discapacitados"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana sobre Extradición", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["extradición", "extradicion"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Tratado de OMPI sobre Interpretación o Ejecución y Fonogramas", "pattern" :[{"LOWER": "tratado"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ompi"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["interpretación", "interpretacion"]}}, {"LOWER": "o"}, {"LOWER": {"IN": ["ejecución", "ejecucion"]}}, {"LOWER": "y"}, {"LOWER": "fonogramas"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Tratado de la OMPI sobre Derechos de Autor", "pattern" :[{"LOWER": "tratado"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "ompi"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "autor"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana sobre Restitución Internacional de Menores", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["restitución", "restitucion"]}}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "menores"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana sobre Obligaciones Alimentarias", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "obligaciones"}, {"LOWER": "alimentarias"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Interamericana sobre Tráfico Internacional de Menores", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "interamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["tráfico", "trafico"]}}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "menores"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo Facultativo de la Convención para Eliminación de todas las formas de Discriminación contra la Mujer", "pattern" :[{"LOWER": "protocolo"}, {"LOWER": "facultativo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["eliminación", "eliminacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "formas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["discriminación", "discriminacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "mujer"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo Facultativo de la Convención sobre los Derechos del Niño relativo a la venta de niños, la prostitución infantil y utilización de niños en la pornografía", "pattern" :[{"LOWER": "protocolo"}, {"LOWER": "facultativo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niño"}, {"LOWER": "relativo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "venta"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niños"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["prostitución", "prostitucion"]}}, {"LOWER": "infantil"}, {"LOWER": "y"}, {"LOWER": {"IN": ["utilización", "utilizacion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niños"}, {"LOWER": "en"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["pornografía", "pornografia"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo Facultativo de la Convención sobre los Derechos del Niño Relativo a la Participación de Niños en los Conflictos Armados", "pattern" :[{"LOWER": "protocolo"}, {"LOWER": "facultativo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niño"}, {"LOWER": "relativo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "participación"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "niños"}, {"LOWER": "en"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "conflictos"}, {"LOWER": "armados"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Internacional contra la Toma de Rehenes", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "toma"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "rehenes"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Internacional para la Protección de todas las personas contra las Desapariciones Forzadas", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "internacional"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["protección", "proteccion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "desapariciones"}, {"LOWER": "forzadas"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre Municiones en Racimo", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "municiones"}, {"LOWER": "en"}, {"LOWER": "racimo"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo sobre la prohibición del uso en la guerra de gases asfixiantes, tóxicos o similares y de medios bactereológicos", "pattern" :[{"LOWER": "protocolo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["prohibición", "prohibicion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "guerra"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "gases"}, {"LOWER": "asfixiantes"}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": {"IN": ["tóxicos", "toxicos"]}}, {"LOWER": "o"}, {"LOWER": "similares"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "medios"}, {"LOWER": {"IN": ["bactereológicos", "bactereologicos"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre la imprescriptibilidad de los crímenes de guerra y de los crímenes de lesa humanidad", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "imprescriptibilidad"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["crímenes", "críienes"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "guerra"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["crímenes", "críienes"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "lesa"}, {"LOWER": "humanidad"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre los Derechos de las Personas con Discapacidad y su Protocolo Facultativo", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"LOWER": "con"}, {"LOWER": "discapacidad"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "protocolo"}, {"LOWER": "facultativo"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención sobre los Derechos de las Personas con Discapacidad y su Protocolo", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"LOWER": "con"}, {"LOWER": "discapacidad"}, {"LOWER": "y"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "protocolo"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención Iberoamericana de Derechos de los Jóvenes", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "iberoamericana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["jóvenes", "jovenes"]}}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo para prevenir, reprimir, y sancionar la trata de personas, especialmente mujeres y niños, que complementa la Convención de las Naciones Unidas contra la Delincuencia Organizada Transnacional", "pattern" :[{"LOWER": "protocolo"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "prevenir"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "reprimir"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "y"}, {"LOWER": "sancionar"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "trata"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "personas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "especialmente"}, {"LOWER": "mujeres"}, {"LOWER": "y"}, {"LOWER": "niños"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "que"}, {"LOWER": "complementa"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "delincuencia"}, {"LOWER": "organizada"}, {"LOWER": "transnacional"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Convención de las Naciones Unidas Contra la Delincuencia Organizada Transnacional", "pattern" :[{"LOWER": {"IN": ["convención", "convencion"]}}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "naciones"}, {"LOWER": "unidas"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "delincuencia"}, {"LOWER": "organizada"}, {"LOWER": "transnacional"}]}
+{"label": "Instrumento Internacional sobre Derechos Humanos", "id": "Protocolo a la Convención Americana sobre Derechos Humanos en materia de Derechos Económicos, Sociales y Culturales", "pattern" :[{"LOWER": "protocolo"}, {"LOWER": "a"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": {"IN": ["convención", "convencion"]}}, {"LOWER": "americana"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": "humanos"}, {"LOWER": "en"}, {"LOWER": "materia"}, {"IS_STOP": true, "OP":"+"}, {"LOWER": "derechos"}, {"LOWER": {"IN": ["económicos", "economicos"]}}, {"IS_PUNCT": true, "OP":"+"}, {"LOWER": "sociales"}, {"LOWER": "y"}, {"LOWER": "culturales"}]}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

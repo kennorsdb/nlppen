@@ -1,6 +1,7 @@
 
 import sys
 sys.path.insert(0, "/home/jovyan/Work/ej/paquetes/nlppen/")
+from datetime import date
 
 from nlppen.extraccion.utils.Txt2Numbers import Txt2Numbers
 from nlppen.analisis import Analisis
@@ -10,6 +11,7 @@ from nlppen.sentencias_estructurales import SentenciasEstructurales
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import length
+from pyspark.sql import functions as F
 
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -18,8 +20,6 @@ import pandas as pd
 pd.options.display.latex.repr=True
 
 # Configuración permanente de los gráficos
-
-
 
 
 def init_spark():
@@ -54,7 +54,20 @@ def cargar_datos(spark):
     seleccion.cargarPreprocesados()
 
     estructurales = SentenciasEstructurales(seleccion)
+    
+    
     return estructurales
+
+
+def preprocesar_plazos(estructurales):
+    estructurales.seleccion.sdf = (estructurales.seleccion.sdf
+        .where('anno < 2019')
+        .withColumn('dias_tramite', F.datediff('fechahora_ext', 'FechaSolicitud'))
+        .withColumn('plazosDefinidos', F.explode_outer('plazosDefinidos'))
+        .withColumn('plazosDefinidos', F.datediff('plazosDefinidos', F.lit(date(1970, 1, 1))))
+        .withColumn('num_resolucion', F.regexp_replace('num_resolucion', "[^\d]", ""))
+        ).persist()
+
 
 
 def grafico_se_ordena_anno(estructurales):
