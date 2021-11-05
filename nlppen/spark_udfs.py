@@ -17,7 +17,7 @@ from .extraccion.modelado import NNModel
 from .extraccion.utils.Txt2Numbers import Txt2Numbers
 from .extraccion.utils.Txt2Date import Txt2Date
 from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
-from .spacy_entities import nlp_test
+from .spacy_entities import extractEntities
 from .spacy_internationals import extractInternational
 from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos
 from .spacy_derechos import extractDerechos
@@ -563,7 +563,7 @@ def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col
 
 def filtrarEntidadesPublicas(span, entities, newColumns):
     #Aplicar para cada tipo de entidad
-    doc = nlp_test(span,personas=False)
+    doc = extractEntities(span)
     entidadesFiltradas = [ent.ent_id_ for ent in doc.ents if ent.label_ == "Entidad Pública" or ent.label_ == "Entidad Pública Acrónimo"]
     entities[newColumns[-1]] = entidadesFiltradas
 

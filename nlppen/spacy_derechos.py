@@ -3,7 +3,6 @@ from spacy.pipeline import EntityRuler
 from spacy.language import Language
 from nltk.parse import CoreNLPParser
 import spacy
-import re
 
 def extractDerechos(text):  
 
@@ -16,7 +15,7 @@ def extractDerechos(text):
         nlp.remove_pipe("ner")
         nlp.add_pipe("ner", source=spacy.load('es_core_news_lg'))
         (nlp.add_pipe("entity_ruler", before="ner" , name='inst_publicas', validate=True)
-            .from_disk("/home/jovyan/work/nlppen/nlppen/derechos.jsonl"))
+            .from_disk("./nlppen/derechos.jsonl"))
     
     doc = nlp(text)
     return doc
