@@ -11,6 +11,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {1.1.3}Dimensión Calidad}{4}{subsection.1.1.3}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.2}Criterio 1. Se ordena}{5}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Dimensión Contenido}{6}{chapter.2}%
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {1.3}Gráficos}{8}{section.1.3}%
+\contentsline {section}{\numberline {2.1}Criterio CO5. Seguimiento}{6}{section.2.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {3}Dimensión Forma}{7}{chapter.3}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.1}FO01. Se ordena}{7}{section.3.1}%
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {3.2}FO02. Se señala qué debe hacerse y a quién}{8}{section.3.2}%
