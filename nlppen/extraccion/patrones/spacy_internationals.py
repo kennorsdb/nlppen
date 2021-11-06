@@ -11,7 +11,7 @@ def extractInternational(text):
     except:
         nlp = spacy.load('es_core_news_lg')
         (nlp.add_pipe("entity_ruler", name='inst_publicas', first=True, validate=True)
-            .from_disk("./nlppen/instrumentos_internacionales.jsonl"))
+            .from_disk("./nlppen/extraccion/patrones/jsonl/instrumentos_internacionales.jsonl"))
 
     doc = nlp(text, disable=["ner"])
     return doc

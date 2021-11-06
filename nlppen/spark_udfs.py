@@ -17,10 +17,10 @@ from .extraccion.modelado import NNModel
 from .extraccion.utils.Txt2Numbers import Txt2Numbers
 from .extraccion.utils.Txt2Date import Txt2Date
 from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
-from .spacy_entities import extractEntities
-from .spacy_internationals import extractInternational
+from .extraccion.patrones.spacy_entities import extractEntities
+from .extraccion.patrones.spacy_internationals import extractInternational
+from .extraccion.patrones.spacy_derechos import extractDerechos
 from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos
-from .spacy_derechos import extractDerechos
 
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',

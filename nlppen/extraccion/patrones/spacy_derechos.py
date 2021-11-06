@@ -15,7 +15,7 @@ def extractDerechos(text):
         nlp.remove_pipe("ner")
         nlp.add_pipe("ner", source=spacy.load('es_core_news_lg'))
         (nlp.add_pipe("entity_ruler", before="ner" , name='inst_publicas', validate=True)
-            .from_disk("./nlppen/derechos.jsonl"))
+            .from_disk("./nlppen/extraccion/patrones/jsonl/derechos.jsonl"))
     
     doc = nlp(text)
     return doc

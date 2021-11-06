@@ -14,7 +14,7 @@ def extractEntities(text):
         nlp = spacy.load('es_core_news_lg')
 
         (nlp.add_pipe("entity_ruler", name='inst_publicas', first=True, validate=True)
-            .from_disk("./nlppen/instituciones_publicas_v2.jsonl"))
+            .from_disk("./nlppen/extraccion/patrones/jsonl/instituciones_publicas_v2.jsonl"))
 
     doc = nlp(text, disable=["ner"])
 
