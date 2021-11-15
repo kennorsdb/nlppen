@@ -20,6 +20,7 @@ from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
 from .extraccion.patrones.spacy_entities import extractEntities
 from .extraccion.patrones.spacy_internationals import extractInternational
 from .extraccion.patrones.spacy_derechos import extractDerechos
+from .extraccion.utils.extraerFechaCitaSentencia import ExtraerFechaSentencia
 from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos
 
 
@@ -221,7 +222,37 @@ def spark_extraer_numero_sentencia(row, newColumns, encabezadoFunction, col="txt
             res[column] = None
     return Row(**res)
 
+def spark_extraer_fecha_cita_sentencia(row, newColumns, resumeFunction, col="txt"):
+    """
+        Extrae las citas citadas dentro de una sentencia incluyendo las fechas de creación, en 
+        casos de que esté disponible.
 
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
+
+            resumeFunction: Function
+                Funcion para filtrar el texto.
+    """
+    res = row.asDict()
+    if resumeFunction is not None:
+        txt = resumeFunction(res[col])
+    else:
+        txt = res[col]
+
+    extraerCitaSentencia = ExtraerFechaSentencia(spark_get_spacy('es_core_news_lg'))
+    sentenciasConFecha = extraerCitaSentencia.extraerCitas(txt)
+
+    for column in newColumns:
+        if not sentenciasConFecha:
+             res[column] = None
+        else:
+            res[column] = sentenciasConFecha
+    return Row(**res)
+    
 def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
     res = row.asDict()
     if resultandoFunction is not None:

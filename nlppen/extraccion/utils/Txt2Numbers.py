@@ -7,11 +7,13 @@ class Txt2Numbers:
         self.limpiar = re.compile (r'[ \s]+', re.M)
         self.numberList = {
             r"cero":    0,
+            r"1º":      1,
             r"una":     1,
             r"un":      1,
             r"uno":     1,
             r"primero": 1,
             r"dos":     2,
+            r"2º":      1,
             r"tres":    3,
             r"cuatro":  4,
             r"cinco":   5,
