@@ -6,7 +6,7 @@ class ExtraerFecha():
     ''' 
     Extraer fecha de recibido de la sentencia.  
     '''
-    def __init__(self, nlp):
+    def __init__(self, nlp=None):
         """
         Parametros:
             nlp: nlp - Spacy 
@@ -76,7 +76,7 @@ class ExtraerFecha():
                 #Se esta procesando un numero en letras.
                 if token.text == ",":
                     #Generalmente los annos aparecen antes de una, 
-                    number = self.__textoAAnno(accumTokenText)
+                    number = self.textoAAnno(accumTokenText)
                     if anno == "":
                         anno = str(number)
                         break
@@ -108,7 +108,7 @@ class ExtraerFecha():
                                 if number != None:
                                     dia = self.asignarDia(dia, number)
                                 else:
-                                    number = self.__textoAAnno(accumTokenText)
+                                    number = self.textoAAnno(accumTokenText)
                                     if anno == "" and number != None:
                                         anno = str(number)
                                         break
@@ -335,7 +335,7 @@ class ExtraerFecha():
             return None
 
     
-    def __textoAAnno(self, txt):
+    def textoAAnno(self, txt):
         txt = re.sub(',', '', txt.lower())
         convertToNumber = Txt2Numbers()
         expre = re.compile (r'dos mil', re.M)

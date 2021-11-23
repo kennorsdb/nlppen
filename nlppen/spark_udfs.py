@@ -1,4 +1,7 @@
 
+from pickle import NONE
+
+from scipy.fft import ifftn
 import stanza
 import spacy
 from spacy.matcher import Matcher
@@ -20,6 +23,7 @@ from .extraccion.utils.extraerFechaRecibido import ExtraerFecha
 from .extraccion.patrones.spacy_entities import extractEntities
 from .extraccion.patrones.spacy_internationals import extractInternational
 from .extraccion.patrones.spacy_derechos import extractDerechos
+from .extraccion.utils.extraerFechaCitaSentencia import ExtraerFechaSentencia
 from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos
 
 
@@ -220,8 +224,158 @@ def spark_extraer_numero_sentencia(row, newColumns, encabezadoFunction, col="txt
         else:
             res[column] = None
     return Row(**res)
+def spark_agregar_ID(row, newColumns, sentenciasCSV, col="num_resolucion"):
+    """
+        Extrae las citas citadas dentro de una sentencia incluyendo las fechas de creación, en 
+        casos de que esté disponible.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
+
+            resumeFunction: Function
+                Funcion para filtrar el texto.
+    """
+    res = row.asDict()
+    numRes = res[col]
+    expediente = res['expediente']
+    idSentencia = None
+    numDoc      = None
+    expedienteNuevo      = None
+    if numRes is not None:
+        
+        year = None
+        numResolucionSplitted = None
+        if numRes.isdigit():
+            #Es numero unicamente, debo buscar donde está el año
+            regExp = "((?:19[0-9][0-9])|(?:20[0-9][0-9]))"
+            exp = re.compile(regExp,  re.X | re.M | re.I)
+            splitNumRes = exp.split(numRes, 1)
+            if(len(splitNumRes) > 2):
+                if exp.match(splitNumRes[1]):
+                    year = splitNumRes[1]
+                    numResolucionSplitted = splitNumRes[2]
+                else:
+                    numResolucionSplitted = splitNumRes[1]
+                    year = splitNumRes[2]
+                
+        else:
+            regExp = "-"
+            exp = re.compile(regExp,  re.X | re.M | re.I)
+            splitNumRes = exp.split(numRes)
+
+            #Año a la izquierda 97
+            regExp = "[0-9][0-9]$"
+            exp = re.compile(regExp,  re.X | re.M | re.I)
+            if exp.match(splitNumRes[0]):
+                year = splitNumRes[0]
+                if year[0] == '0' or year[0] == '1' or year[0] == '2':
+                    year = str(2000+int(year))
+                else:
+                    year = str(1900+int(year))
+                
+                numResolucionSplitted = splitNumRes[1]
+            else:
+                #Año a la derecha 97
+                regExp = "[0-9][0-9]$"
+                exp = re.compile(regExp,  re.X | re.M | re.I)
+                if exp.match(splitNumRes[1]):
+                    year = splitNumRes[1]
+                    if year[0] == '0' or year[0] == '1' or year[0] == '2':
+                        year = str(2000+int(year))
+                    else:
+                        year = str(1900+int(year))
+                    
+                    numResolucionSplitted = splitNumRes[0]
+                else:
+                    regExp = "((?:19[0-9][0-9])|(?:20[0-9][0-9]))"
+                    exp = re.compile(regExp,  re.X | re.M | re.I)
+                    if(len(splitNumRes) > 1):
+                        if exp.match(splitNumRes[0]):
+                            #Año a la izquierda 1998
+                            year = splitNumRes[0]
+                            numResolucionSplitted = splitNumRes[1]
+                        else:
+                            #Año a la derecha 1998
+                            year = splitNumRes[1]
+                            numResolucionSplitted = splitNumRes[0]
+
+        try:
+            numResolucionSplitted = int(numResolucionSplitted)
+            year = int(year)
+        except:
+            pass
+        #print("Num resolucion", numRes)
+        #print("Resolucion", numResolucionSplitted, "Año", year) 
+        #print("Anno", year)
+        #print("Número de resolucion spliteado", numResolucionSplitted)
+        sentenciaFiltered = sentenciasCSV[sentenciasCSV.numeroDocumento == numResolucionSplitted]
+        sentenciaFiltered = sentenciaFiltered[sentenciaFiltered.anno == year]
+        lenFilter = len(sentenciaFiltered)
+        if lenFilter == 1:
+            
+            expedienteNuevo = str(sentenciaFiltered.iloc[0, 2])
+            idSentencia = str(sentenciaFiltered.iloc[0, 3])
+            numDoc = str(sentenciaFiltered.iloc[0, 4])
+            #print(idSentencia, numDoc)
+            #print("Find it")
+        else:
+            if lenFilter > 1:
+                cantidadAnterior = lenFilter
+                sentenciaFiltered = sentenciaFiltered[sentenciaFiltered.expediente == expediente]
+                lenFilter = len(sentenciaFiltered)
+                if lenFilter == 1:
+                    expedienteNuevo = str(sentenciaFiltered.iloc[0, 2])
+                    idSentencia = str(sentenciaFiltered.iloc[0, 3])
+                    numDoc = str(sentenciaFiltered.iloc[0, 4])
+                else:
+                    #Está repetido no importa cual agarre
+                    if cantidadAnterior == lenFilter:
+                        expedienteNuevo = str(sentenciaFiltered.iloc[0, 2])
+                        idSentencia = str(sentenciaFiltered.iloc[0, 3])
+                        numDoc = str(sentenciaFiltered.iloc[0, 4])
 
 
+    res[newColumns[0]] = idSentencia
+    res[newColumns[1]] = numDoc
+    res[newColumns[2]] = expedienteNuevo
+    
+    return Row(**res)
+
+def spark_extraer_fecha_cita_sentencia(row, newColumns, resumeFunction, col="txt"):
+    """
+        Extrae las citas citadas dentro de una sentencia incluyendo las fechas de creación, en 
+        casos de que esté disponible.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+            row: Row - Spark
+                El row al que va a ser aplicado el calculo de extension 
+
+            resumeFunction: Function
+                Funcion para filtrar el texto.
+    """
+    res = row.asDict()
+    if resumeFunction is not None:
+        txt = resumeFunction(res[col])
+    else:
+        txt = res[col]
+
+    extraerCitaSentencia = ExtraerFechaSentencia(spark_get_spacy('es_core_news_lg'))
+    sentenciasConFecha = extraerCitaSentencia.extraerCitas(txt)
+
+    for column in newColumns:
+        if not sentenciasConFecha:
+             res[column] = None
+        else:
+            res[column] = sentenciasConFecha
+    return Row(**res)
+    
 def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
     res = row.asDict()
     if resultandoFunction is not None:
