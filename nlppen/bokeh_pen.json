@@ -1,0 +1,42 @@
+{
+  "attrs": {
+    "Figure": {
+      "background_fill_color": "white",
+      "border_fill_color": "white",
+      "outline_line_color": null
+    },
+    "Axis": {
+      "axis_line_color": "#c0c0c0",
+      "major_tick_line_color": "#c0c0c0",
+      "minor_tick_line_color": null,
+      "axis_label_text_font": "IBM Plex Sans Light , sans",
+      "axis_label_text_font_style": "normal",
+      "axis_label_text_font_size": "12px",
+      "major_label_text_font": "IBM Plex Sans Regular , sans",
+      "major_label_text_font_style": "normal",
+      "major_label_text_font_size": "10px"
+    },
+    "Grid": {
+      
+      "grid_line_dash": [6, 4],
+      "grid_line_alpha": 0.3
+    },
+    "Title": {
+      "align": "left",
+      "text_color": "black",
+      "text_font": "IBM Plex Sans Medium , serif",
+      "text_font_style": "normal",
+      "text_font_size": "14px"
+    },
+    "Legend": {
+      "label_text_font": "IBM Plex Sans Regular",
+      "label_text_font_size": "10px",
+      "label_text_font_style": "normal",
+      "label_text_line_height": 1.2,
+      "padding": 2,
+      "spacing": 1,
+      "margin": 5,
+      "border_line_color": null
+    }
+  }
+}
