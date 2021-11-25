@@ -18,7 +18,7 @@ from bokeh.models import (Text, GraphRenderer, MultiLine, BoxZoomTool, HoverTool
 
 from pyspark.sql.functions import desc
 
-curdoc().theme = Theme('/home/jovyan/Work/erca/bokeh_pen.json')
+curdoc().theme = Theme('/home/jovyan/Work/ej/paquetes/nlppen/nlppen/bokeh_pen.json')
 output_notebook()
 pd.set_option('plotting.backend', 'pandas_bokeh')
 

@@ -54,8 +54,7 @@ def cargar_datos(spark):
     seleccion.cargarPreprocesados()
 
     estructurales = SentenciasEstructurales(seleccion)
-    
-    
+
     return estructurales
 
 
