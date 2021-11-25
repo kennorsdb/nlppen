@@ -2,7 +2,7 @@ import re
 import pandas as pd
 from .Txt2Numbers import Txt2Numbers
 from .extraerFechaRecibido import ExtraerFecha
-
+from .misc import splitResolucion
 class ExtraerFechaSentencia():
     def __init__(self, nlp=None):
         self.nlp = nlp
@@ -83,7 +83,15 @@ class ExtraerFechaSentencia():
         
         return (horaNum, minNum, diaNum, annoNum, mesNum)
 
-    def extraerCitas(self, txt):
+    def __extraerID(self, citas , sentenciasCSV):
+        citasSentenciasID  = {}
+        for cita in citas:
+            sentenciaId, numVoto, _ = splitResolucion(cita, None, sentenciasCSV, citas[cita])
+            if sentenciaId is not None:
+                citasSentenciasID[sentenciaId] = numVoto
+        return citasSentenciasID
+
+    def extraerCitas(self, txt, sentenciasCSV):
         """
         Extrae las citas a sentencias, incluyendo las fechas de creación de las citas citadas. 
 
@@ -98,9 +106,9 @@ class ExtraerFechaSentencia():
         doc = self.nlp(txt)
         #Expresiones regulares para capturar cada grupo.
         meses = "(?:enero|febrero|marzo|abril|mayo|junio|julio|agosto|septiembre|septiembre|setiembre|octubre|noviembre|diciembre)"
-        sentenciaRe = "[Ss]entencia\s*(?:estructural)?\s*"
+        sentenciaRe = "(?:(?:[Ss]entencia\s*))(?:estructural)?\s*"
         numeroRe    = "(?:(?:n[uú]mero)|(?:[nN][ºo°][\.|,]?))"
-        sentenciaCitadaRe ="\s*(?P<sentencia_citada>[\d]+\s?\-?[a-z]?\s?\-?[\d]+)[\.|,]?"
+        sentenciaCitadaRe ="\s*(?P<sentencia_citada>[\d]+\s?[\-\—]?[a-z]?\s?[\-\—]?[\d]+)[\.|,]?"
         horasRe = "(?:(?:\s?del?\s?las?\s?(?P<hora>[\w|\d]+)?\s?(?:(?:\:|horas?|hrs.?))?\s?)?"
         minutosRe = "(?:(?P<minutos>[\w|\s|\d]+)\s+(?:(?:horas?|hrs.?|minutos?)?))?"
         diaRe = "\s?del?\s?(?:d[íi]a)?(?P<dia>[\w|\s|\d]+)\s+de"
@@ -161,4 +169,5 @@ class ExtraerFechaSentencia():
             else:
                 #No existe la sentencia aún
                 sentenciasCitadas[sentencia] = fechaSentencia
-        return sentenciasCitadas
+        sentenciasCitadasID = self.__extraerID(sentenciasCitadas, sentenciasCSV)
+        return sentenciasCitadas, sentenciasCitadasID

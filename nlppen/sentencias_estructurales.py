@@ -145,7 +145,7 @@ class SentenciasEstructurales():
 
         return resultado
     
-    def extrarCitaSentenciasFecha(self, addColumns, actualizar_sdf = False):
+    def extrarCitaSentenciasFecha(self, addColumns, datasetSentencias, actualizar_sdf = False):
         """
             Extrae la fecha en la que fue recibida la sentencia.
 
@@ -164,7 +164,7 @@ class SentenciasEstructurales():
         """
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns)
         resultado = (self.seleccion.sdf.rdd
-                    .map( lambda row : spark_extraer_fecha_cita_sentencia(row, newColumns, None))
+                    .map( lambda row : spark_extraer_fecha_cita_sentencia(row, newColumns, datasetSentencias, None))
                     .toDF(schema=schema)
                     .persist()
                     )
