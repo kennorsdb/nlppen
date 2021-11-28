@@ -3,6 +3,7 @@ import pandas as pd
 from .Txt2Numbers import Txt2Numbers
 from .extraerFechaRecibido import ExtraerFecha
 from .misc import splitResolucion
+
 class ExtraerFechaSentencia():
     def __init__(self, nlp=None):
         self.nlp = nlp

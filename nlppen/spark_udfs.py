@@ -363,12 +363,14 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
     nlp = spark_get_spacy('es_core_news_lg')
     res = row.asDict()
 
-    regularExpresion = re.compile(r"\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?")
+    regularExpresion = re.compile(r",|\.|h[óo]r[aá]s?|d[íi][áa]s|m[ée]s([ée]s)?|[áa]ñ[óo]s?")
 
     if preprocess is not None:
         txt = preprocess(res[col])
     else:
         txt = res[col]
+    
+    txt = txt.lower()
 
     plazos = []
     #No procesar las que son sin lugar.
@@ -387,6 +389,7 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
             includeText = False
             plazo = ""
             stringNumber = ""
+            stringNumberFormat = None
             for token in doc[start:end]:
                 # Recolectar todos los token a partir del primer NUM hasta considir con
                 # algunas de las palabras de: [horas, dias, meses, año]
@@ -395,8 +398,10 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                     if token.pos_ == "PUNCT":
                         break
                     if regularExpresion.search(token.text) != None:
-                        
-                        number = convertToNumber.number(textToken)
+                        if stringNumberFormat is None:
+                            number = convertToNumber.number(textToken)
+                        else:
+                            number = stringNumberFormat
                         if number != None: 
                             deltaTime = convertToDate.txt2Date(token.text, number)
                             # Convierte los delta time a un datatime y se obtiene el timestamp
@@ -410,6 +415,18 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                         if textToken.isdigit() == False:
                             stringNumber += textToken
                             includeText = True
+                        else:
+                            stringNumberFormat = int(textToken)
+                            includeText = True
+                    else:
+                        if token.text == "un":
+                            try:
+                                nextWord = doc[token.i + 1].text
+                                if regularExpresion.search(nextWord) != None:
+                                    stringNumberFormat = 1
+                                    includeText = True
+                            except:
+                                pass
             if plazo != "":
                 plazos.append(plazo)
     for column in newColumns:
@@ -580,7 +597,46 @@ def spark_extraer_derechos_sin_normalizar(row, newColumns, preprocess, col='txt'
 
     return Row(**res)
 
+
+def spark_extraer_seguimiento(row, newColumns, patterns, preprocess, col='txt'):
+    """
+        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+        entidades, y los agrega al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+             row: Row - Spark
+                El row al que va a ser aplicada la busqueda de entidades
+        TODO:Completar comentarios
+    """
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
     
+    doc = nlp(txt)
+    matcher = Matcher(nlp.vocab)
+    matcher.add("Patron 1 :", patterns, greedy="FIRST")
+
+    matches = matcher(doc)
+    seguimientos = []
+    for _, start, end in matches:
+        #print("*************************")
+        #print(res['id_sentencia'])
+        textSpan =  doc[start:end]
+        seguimientos.append(textSpan.text)
+        #print(textSpan)
+    if len(seguimientos) > 0:
+        res[newColumns[0]] = seguimientos
+    else:
+        res[newColumns[0]] = None
+    res[newColumns[1]] = len(seguimientos)
+    return Row(**res)
+
 def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col='txt', useSpacy=True):
     """
         Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
@@ -639,8 +695,6 @@ def filtrarInstrumentosInternacionales(span):
     doc = extractInternational(span)
     entidadesFiltradas = [ent.ent_id_ for ent in doc.ents if ent.label_ in ["Organismo", "Organismo Acronimo", "Tratado Internacional ONU", "Tratado Internacional ONU Acronimo", "Declaracion Internacional ONU", "Resolucion Internacional ONU", "Tratado Internacional OEA", "Tratado Internacional OEA Acronimo", "Resolucion Internacional OEA", "Instrumento Internacional sobre Derechos Humanos"] ]
     return entidadesFiltradas
-    
-            
     
 def getEntitiesBySpacy(doc, start, end, entities,newColumns):
     """
