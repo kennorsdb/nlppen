@@ -62,7 +62,8 @@ def splitResolucion(numRes, expediente, sentenciasCSV, anno=None):
                 #Año a la derecha 97
                 regExp = "[0-9][0-9]$"
                 exp = re.compile(regExp,  re.X | re.M | re.I)
-                if exp.match(splitNumRes[1]):
+                    
+                if len(splitNumRes) > 1 and exp.match(splitNumRes[1]):
                     year = splitNumRes[1]
                     if year[0] == '0' or year[0] == '1' or year[0] == '2':
                         year = str(2000+int(year))
