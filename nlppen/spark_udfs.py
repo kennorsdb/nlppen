@@ -403,10 +403,12 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                         else:
                             number = stringNumberFormat
                         if number != None: 
-                            deltaTime = convertToDate.txt2Date(token.text, number)
-                            # Convierte los delta time a un datatime y se obtiene el timestamp
-                            plazo = pd.Timestamp(pd.to_datetime('1970-01-01') + deltaTime).to_pydatetime()
-                        
+                            try: 
+                                deltaTime = convertToDate.txt2Date(token.text, number)
+                                # Convierte los delta time a un datatime y se obtiene el timestamp
+                                plazo = pd.Timestamp(pd.to_datetime('1970-01-01') + deltaTime).to_pydatetime()
+                            except Exception as err:
+                                pass
                         break
                     stringNumber += " " + token.text
                 else:
@@ -416,8 +418,11 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                             stringNumber += textToken
                             includeText = True
                         else:
-                            stringNumberFormat = int(textToken)
-                            includeText = True
+                            try:
+                                stringNumberFormat = int(textToken)
+                                includeText = True
+                            except Exception as err:
+                                pass
                     else:
                         if token.text == "un":
                             try:
