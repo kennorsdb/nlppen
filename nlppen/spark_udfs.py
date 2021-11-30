@@ -852,7 +852,7 @@ def spark_extraer_tokens(batch, index_col='index', txt_col='txt', incluir=[], ca
         for indx, row in df.iterrows():
             if row[txt_col] is not None:
                 if preprocess is not None:
-                    txt = process(row[txt_col])
+                    txt = preprocess(row[txt_col])
                 else:
                     txt = row[txt_col]
                 txt, terms = spark_cambios(txt.lower(), cambios)
