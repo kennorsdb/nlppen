@@ -87,7 +87,7 @@ class Seleccion:
             else:
                 self.sdf = self.spark.read.parquet(parquet_path).where(filtro)
 
-    def filtrar_sentencias(self, parquet_file='terminos.parquet', precargar=True, preprocess=None, save=True, keepRowEmpty=False, partition_cols=None):
+    def filtrar_sentencias(self, parquet_file='terminos.parquet', precargar=True, preprocess=None, save=True, keepRowEmpty=False, partition_cols=None, overwriteColumns=False):
         """ Sobreescribe el Dataframe aplicando el filtro de las sentencias de acuerdo a los terminos de la clase.
 
         Parametros:
@@ -102,7 +102,7 @@ class Seleccion:
         if precargar and os.path.exists(parquet_path):
             self.sdf = self.spark.read.parquet(parquet_path)
         else:
-            self.__busqueda_terminos(preprocess, keepRowEmpty)
+            self.__busqueda_terminos(preprocess, keepRowEmpty, overwriteColumns)
             if save:
                 self.guardarDatos(parquet_file, partition_cols=partition_cols)
 
@@ -143,7 +143,7 @@ class Seleccion:
         ldf.columns = self.terminos.keys()
         return ldf
 
-    def __busqueda_terminos(self, preprocess=None, keepRowEmpty=False):
+    def __busqueda_terminos(self, preprocess=None, keepRowEmpty=False, overwriteColumns = False):
         """
         Aplica la busqueda de terminos distribuido con Spark, y sobreescribe el dataframe.
 
@@ -170,7 +170,8 @@ class Seleccion:
             term_regex[col_name] = [re.compile(r'\s+' + t.replace(' ', r'[\s\.\,\-\)\;\:\]]+'),  re.X | re.M | re.I)
                                     for t in lst]  # Compila las experesiones regulares
             # Agregar las nuevas columnas
-            schema.add(col_name, 'integer', True)
+            if overwriteColumns == False:
+                schema.add(col_name, 'integer', True)
 
         self.sdf = (self.sdf.rdd
                     # Ejecuta la busqueda de terminos con spark

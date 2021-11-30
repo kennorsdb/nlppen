@@ -14,6 +14,7 @@ import tensorflow as tf
 from pyspark.sql import Row
 from pyspark.sql.types import IntegerType
 
+
 from .extraccion.ProcessException import ProcessException
 from .extraccion.Natural import Natural
 from .extraccion.modelado import NNModel
@@ -24,7 +25,7 @@ from .extraccion.patrones.spacy_entities import extractEntities
 from .extraccion.patrones.spacy_internationals import extractInternational
 from .extraccion.patrones.spacy_derechos import extractDerechos
 from .extraccion.utils.extraerFechaCitaSentencia import ExtraerFechaSentencia
-from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos
+from .extraccion.utils.misc import limpiarResolucion, limpiarDerechos, splitResolucion
 
 
 POS_TAGS = ['ADJ', 'ADP', 'ADV', 'AUX', 'CONJ', 'CCONJ', 'DET', 'INTJ', 'NOUN',
@@ -245,99 +246,8 @@ def spark_agregar_ID(row, newColumns, sentenciasCSV, col="num_resolucion"):
     idSentencia = None
     numDoc      = None
     expedienteNuevo      = None
-    if numRes is not None:
-        
-        year = None
-        numResolucionSplitted = None
-        if numRes.isdigit():
-            #Es numero unicamente, debo buscar donde está el año
-            regExp = "((?:19[0-9][0-9])|(?:20[0-9][0-9]))"
-            exp = re.compile(regExp,  re.X | re.M | re.I)
-            splitNumRes = exp.split(numRes, 1)
-            if(len(splitNumRes) > 2):
-                if exp.match(splitNumRes[1]):
-                    year = splitNumRes[1]
-                    numResolucionSplitted = splitNumRes[2]
-                else:
-                    numResolucionSplitted = splitNumRes[1]
-                    year = splitNumRes[2]
-                
-        else:
-            regExp = "-"
-            exp = re.compile(regExp,  re.X | re.M | re.I)
-            splitNumRes = exp.split(numRes)
-
-            #Año a la izquierda 97
-            regExp = "[0-9][0-9]$"
-            exp = re.compile(regExp,  re.X | re.M | re.I)
-            if exp.match(splitNumRes[0]):
-                year = splitNumRes[0]
-                if year[0] == '0' or year[0] == '1' or year[0] == '2':
-                    year = str(2000+int(year))
-                else:
-                    year = str(1900+int(year))
-                
-                numResolucionSplitted = splitNumRes[1]
-            else:
-                #Año a la derecha 97
-                regExp = "[0-9][0-9]$"
-                exp = re.compile(regExp,  re.X | re.M | re.I)
-                if exp.match(splitNumRes[1]):
-                    year = splitNumRes[1]
-                    if year[0] == '0' or year[0] == '1' or year[0] == '2':
-                        year = str(2000+int(year))
-                    else:
-                        year = str(1900+int(year))
-                    
-                    numResolucionSplitted = splitNumRes[0]
-                else:
-                    regExp = "((?:19[0-9][0-9])|(?:20[0-9][0-9]))"
-                    exp = re.compile(regExp,  re.X | re.M | re.I)
-                    if(len(splitNumRes) > 1):
-                        if exp.match(splitNumRes[0]):
-                            #Año a la izquierda 1998
-                            year = splitNumRes[0]
-                            numResolucionSplitted = splitNumRes[1]
-                        else:
-                            #Año a la derecha 1998
-                            year = splitNumRes[1]
-                            numResolucionSplitted = splitNumRes[0]
-
-        try:
-            numResolucionSplitted = int(numResolucionSplitted)
-            year = int(year)
-        except:
-            pass
-        #print("Num resolucion", numRes)
-        #print("Resolucion", numResolucionSplitted, "Año", year) 
-        #print("Anno", year)
-        #print("Número de resolucion spliteado", numResolucionSplitted)
-        sentenciaFiltered = sentenciasCSV[sentenciasCSV.numeroDocumento == numResolucionSplitted]
-        sentenciaFiltered = sentenciaFiltered[sentenciaFiltered.anno == year]
-        lenFilter = len(sentenciaFiltered)
-        if lenFilter == 1:
-            
-            expedienteNuevo = str(sentenciaFiltered.iloc[0, 2])
-            idSentencia = str(sentenciaFiltered.iloc[0, 3])
-            numDoc = str(sentenciaFiltered.iloc[0, 4])
-            #print(idSentencia, numDoc)
-            #print("Find it")
-        else:
-            if lenFilter > 1:
-                cantidadAnterior = lenFilter
-                sentenciaFiltered = sentenciaFiltered[sentenciaFiltered.expediente == expediente]
-                lenFilter = len(sentenciaFiltered)
-                if lenFilter == 1:
-                    expedienteNuevo = str(sentenciaFiltered.iloc[0, 2])
-                    idSentencia = str(sentenciaFiltered.iloc[0, 3])
-                    numDoc = str(sentenciaFiltered.iloc[0, 4])
-                else:
-                    #Está repetido no importa cual agarre
-                    if cantidadAnterior == lenFilter:
-                        expedienteNuevo = str(sentenciaFiltered.iloc[0, 2])
-                        idSentencia = str(sentenciaFiltered.iloc[0, 3])
-                        numDoc = str(sentenciaFiltered.iloc[0, 4])
-
+    
+    idSentencia, numDoc, expedienteNuevo = splitResolucion(numRes, expediente, sentenciasCSV)
 
     res[newColumns[0]] = idSentencia
     res[newColumns[1]] = numDoc
@@ -345,7 +255,7 @@ def spark_agregar_ID(row, newColumns, sentenciasCSV, col="num_resolucion"):
     
     return Row(**res)
 
-def spark_extraer_fecha_cita_sentencia(row, newColumns, resumeFunction, col="txt"):
+def spark_extraer_fecha_cita_sentencia(row, newColumns, datasetSentencias,  resumeFunction, col="txt"):
     """
         Extrae las citas citadas dentro de una sentencia incluyendo las fechas de creación, en 
         casos de que esté disponible.
@@ -367,13 +277,17 @@ def spark_extraer_fecha_cita_sentencia(row, newColumns, resumeFunction, col="txt
         txt = res[col]
 
     extraerCitaSentencia = ExtraerFechaSentencia(spark_get_spacy('es_core_news_lg'))
-    sentenciasConFecha = extraerCitaSentencia.extraerCitas(txt)
-
-    for column in newColumns:
-        if not sentenciasConFecha:
-             res[column] = None
-        else:
-            res[column] = sentenciasConFecha
+    sentenciasConFecha , sentenciasCitadas  = extraerCitaSentencia.extraerCitas(txt, datasetSentencias)
+    
+    if not sentenciasConFecha:
+        res[newColumns[0]] = None
+    else:
+        res[newColumns[0]] = sentenciasConFecha
+    
+    if not sentenciasCitadas:
+        res[newColumns[1]] = None
+    else:
+        res[newColumns[1]] = sentenciasCitadas
     return Row(**res)
     
 def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
@@ -449,12 +363,14 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
     nlp = spark_get_spacy('es_core_news_lg')
     res = row.asDict()
 
-    regularExpresion = re.compile(r"\.|[Hh][OoÓó][Rr][Aa]([Ss])?|[dD][iíIÍ][ÁAaa]([Ss])?|[Mm][EeÉé][Ss]([EeÉé][Ss])?|[ÁáAa][Ññ][OoÓó]([Ss])?")
+    regularExpresion = re.compile(r",|\.|h[óo]r[aá]s?|d[íi][áa]s|m[ée]s([ée]s)?|[áa]ñ[óo]s?")
 
     if preprocess is not None:
         txt = preprocess(res[col])
     else:
         txt = res[col]
+    
+    txt = txt.lower()
 
     plazos = []
     #No procesar las que son sin lugar.
@@ -473,6 +389,7 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
             includeText = False
             plazo = ""
             stringNumber = ""
+            stringNumberFormat = None
             for token in doc[start:end]:
                 # Recolectar todos los token a partir del primer NUM hasta considir con
                 # algunas de las palabras de: [horas, dias, meses, año]
@@ -481,8 +398,10 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                     if token.pos_ == "PUNCT":
                         break
                     if regularExpresion.search(token.text) != None:
-                        
-                        number = convertToNumber.number(textToken)
+                        if stringNumberFormat is None:
+                            number = convertToNumber.number(textToken)
+                        else:
+                            number = stringNumberFormat
                         if number != None: 
                             deltaTime = convertToDate.txt2Date(token.text, number)
                             # Convierte los delta time a un datatime y se obtiene el timestamp
@@ -496,6 +415,18 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                         if textToken.isdigit() == False:
                             stringNumber += textToken
                             includeText = True
+                        else:
+                            stringNumberFormat = int(textToken)
+                            includeText = True
+                    else:
+                        if token.text == "un":
+                            try:
+                                nextWord = doc[token.i + 1].text
+                                if regularExpresion.search(nextWord) != None:
+                                    stringNumberFormat = 1
+                                    includeText = True
+                            except:
+                                pass
             if plazo != "":
                 plazos.append(plazo)
     for column in newColumns:
@@ -666,7 +597,46 @@ def spark_extraer_derechos_sin_normalizar(row, newColumns, preprocess, col='txt'
 
     return Row(**res)
 
+
+def spark_extraer_seguimiento(row, newColumns, patterns, preprocess, col='txt'):
+    """
+        Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
+        entidades, y los agrega al Row.
+
+        Retorna:
+             El mismo objeto Row de entrada, pero con los valores de las nuevas columnas.
+
+        Parametros:
+             row: Row - Spark
+                El row al que va a ser aplicada la busqueda de entidades
+        TODO:Completar comentarios
+    """
+    nlp = spark_get_spacy('es_core_news_lg')
+    res = row.asDict()
+    if preprocess is not None:
+        txt = preprocess(res[col])
+    else:
+        txt = res[col]
     
+    doc = nlp(txt)
+    matcher = Matcher(nlp.vocab)
+    matcher.add("Patron 1 :", patterns, greedy="FIRST")
+
+    matches = matcher(doc)
+    seguimientos = []
+    for _, start, end in matches:
+        #print("*************************")
+        #print(res['id_sentencia'])
+        textSpan =  doc[start:end]
+        seguimientos.append(textSpan.text)
+        #print(textSpan)
+    if len(seguimientos) > 0:
+        res[newColumns[0]] = seguimientos
+    else:
+        res[newColumns[0]] = None
+    res[newColumns[1]] = len(seguimientos)
+    return Row(**res)
+
 def spark_extraer_entidades_se_ordena(row, newColumns, patterns, preprocess, col='txt', useSpacy=True):
     """
         Extrae las sentencias de se ordena de un texto y para cada una de ellas obtiene sus 
@@ -725,8 +695,6 @@ def filtrarInstrumentosInternacionales(span):
     doc = extractInternational(span)
     entidadesFiltradas = [ent.ent_id_ for ent in doc.ents if ent.label_ in ["Organismo", "Organismo Acronimo", "Tratado Internacional ONU", "Tratado Internacional ONU Acronimo", "Declaracion Internacional ONU", "Resolucion Internacional ONU", "Tratado Internacional OEA", "Tratado Internacional OEA Acronimo", "Resolucion Internacional OEA", "Instrumento Internacional sobre Derechos Humanos"] ]
     return entidadesFiltradas
-    
-            
     
 def getEntitiesBySpacy(doc, start, end, entities,newColumns):
     """
