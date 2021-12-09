@@ -136,7 +136,7 @@ class SentenciasEstructurales():
         """
         (schema, newColumns) = self.__agregarColumnasSchema(addColumns, overwriteColumns)
         resultado = (self.seleccion.sdf.rdd
-                    .map( lambda row : spark_extraer_subtema_considerando(row, newColumns, solo_resultando))
+                    .map( lambda row : spark_extraer_subtema_considerando(row, newColumns, solo_considerando))
                     .toDF(schema=schema)
                     .persist()
                     )
