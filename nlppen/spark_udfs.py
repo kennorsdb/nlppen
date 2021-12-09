@@ -289,7 +289,19 @@ def spark_extraer_fecha_cita_sentencia(row, newColumns, datasetSentencias,  resu
     else:
         res[newColumns[1]] = sentenciasCitadas
     return Row(**res)
-    
+
+def spark_extraer_subtema_considerando(row, newColumns, resultandoFunction, col="txt"):
+    res = row.asDict()
+    if resultandoFunction is not None:
+        txt = resultandoFunction(res[col])
+    else:
+        txt = res[col]
+    regex = re.compile(r'[^A-Za-záéíóúüïÁÉÍÓÚÜÏñÑ]')
+
+    for column in newColumns:
+        res[column] = fecha
+    return Row(**res)
+
 def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
     res = row.asDict()
     if resultandoFunction is not None:
@@ -842,7 +854,7 @@ def spark_skipgrams(batch, n=3, k=1, txt_col='txt',filtro=[], cruce='index', inc
     from nltk import skipgrams
     import re
 
-    limpiar_regex = re.compile(r'[^A-Za-záéíóúüïÁÉÍÓÚÜÏ]')
+    limpiar_regex = (r'[^A-Za-záéíóúüïÁÉÍÓÚÜÏ]')
 
     def limpiar(t):
         return limpiar_regex.sub('', t).lower()

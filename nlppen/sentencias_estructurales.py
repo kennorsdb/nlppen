@@ -117,6 +117,35 @@ class SentenciasEstructurales():
 
         return resultado
 
+    def extraerSubtemaConsiderando(self, addColumns, actualizar_sdf = False, overwriteColumns = False):
+        """
+            Extrae la fecha en la que fue recibida la sentencia.
+
+            Retorna:
+                Un nuevo SDF, no reemplaza el anterior. 
+
+            Parametros:
+
+                addColumns: Dictionary e.g {llave_1, [valor_1_1, valor_1_n], ... , llave_n, [valor_n_1, valor_n_n]}
+                    Es un diccionario de columnas a agregar al schema del sdf. Las llaves corresponde
+                    a los nombres de las columnas, el valor corresponde al tipo de dato DataType object de Spark.
+
+                actualizar_sdf: Booleano.
+                    True para reescribir el sdf.
+                    False para no sobreescribir el sdf.
+        """
+        (schema, newColumns) = self.__agregarColumnasSchema(addColumns, overwriteColumns)
+        resultado = (self.seleccion.sdf.rdd
+                    .map( lambda row : spark_extraer_subtema_considerando(row, newColumns, solo_resultando))
+                    .toDF(schema=schema)
+                    .persist()
+                    )
+
+        if actualizar_sdf:
+            self.seleccion.sdf = resultado
+
+        return resultado
+
     def extrarFechaRecibido(self, addColumns, actualizar_sdf = False, overwriteColumns = False):
         """
             Extrae la fecha en la que fue recibida la sentencia.
