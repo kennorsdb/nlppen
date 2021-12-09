@@ -46,7 +46,7 @@ class Analisis:
             cambios = {**deepcopy(self.terminos), **
                        deepcopy(self.cambios_config)}
 
-        self.wdf = (self.sdf.mapInPandas(lambda df: spark_extraer_tokens(df,
+        self.wdf = (self.sdf.mapInPandas(lambda df: b(df,
                                                                          index_col=index_col,
                                                                          txt_col=txt_col,
                                                                          incluir=incluir,

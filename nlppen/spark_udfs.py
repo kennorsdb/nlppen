@@ -415,10 +415,12 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                         else:
                             number = stringNumberFormat
                         if number != None: 
-                            deltaTime = convertToDate.txt2Date(token.text, number)
-                            # Convierte los delta time a un datatime y se obtiene el timestamp
-                            plazo = pd.Timestamp(pd.to_datetime('1970-01-01') + deltaTime).to_pydatetime()
-                        
+                            try: 
+                                deltaTime = convertToDate.txt2Date(token.text, number)
+                                # Convierte los delta time a un datatime y se obtiene el timestamp
+                                plazo = pd.Timestamp(pd.to_datetime('1970-01-01') + deltaTime).to_pydatetime()
+                            except Exception as err:
+                                pass
                         break
                     stringNumber += " " + token.text
                 else:
@@ -428,8 +430,11 @@ def spark_extraer_plazos(row, newColumns, patterns, preprocess, col='txt'):
                             stringNumber += textToken
                             includeText = True
                         else:
-                            stringNumberFormat = int(textToken)
-                            includeText = True
+                            try:
+                                stringNumberFormat = int(textToken)
+                                includeText = True
+                            except Exception as err:
+                                pass
                     else:
                         if token.text == "un":
                             try:
@@ -832,7 +837,7 @@ def spark_extraer_tokens(batch, index_col='index', txt_col='txt', incluir=[], ca
         for indx, row in df.iterrows():
             if row[txt_col] is not None:
                 if preprocess is not None:
-                    txt = process(row[txt_col])
+                    txt = preprocess(row[txt_col])
                 else:
                     txt = row[txt_col]
                 txt, terms = spark_cambios(txt.lower(), cambios)
