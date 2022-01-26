@@ -289,7 +289,35 @@ def spark_extraer_fecha_cita_sentencia(row, newColumns, datasetSentencias,  resu
     else:
         res[newColumns[1]] = sentenciasCitadas
     return Row(**res)
-    
+
+def spark_extraer_subtema_considerando(row, newColumns, functionConsiderando, col="txt"):
+    res = row.asDict()
+    if functionConsiderando is not None:
+        txt = functionConsiderando(res[col])
+    else:
+        txt = res[col]
+
+    regularExpresion = re.compile(r"(?<=[LXVI])[\.|-]+[A-Z|\s|ÁÉÍÓÚ]+(?=[:\.])")
+    extraccion = regularExpresion.findall(txt.upper())
+    subtemas = []
+    for match in extraccion:
+        
+        match = re.sub("-\s?", "", match)
+        match = re.sub("\.|\n", "", match)
+        match = re.sub("Á", "A", match)
+        match = re.sub("É", "E", match)
+        match = re.sub("Í", "I", match)
+        match = re.sub("Ó", "O", match)
+        match = re.sub("ú", "U", match)
+        if len(match) > 3:
+            subtemas.append(match)
+
+    if len(subtemas) > 0:
+        res[newColumns[0]] = subtemas
+    else:
+        res[newColumns[0]] = None
+    return Row(**res)
+
 def spark_extraer_fecha_recibido(row, newColumns, resultandoFunction, col="txt"):
     res = row.asDict()
     if resultandoFunction is not None:
@@ -847,7 +875,7 @@ def spark_skipgrams(batch, n=3, k=1, txt_col='txt',filtro=[], cruce='index', inc
     from nltk import skipgrams
     import re
 
-    limpiar_regex = re.compile(r'[^A-Za-záéíóúüïÁÉÍÓÚÜÏ]')
+    limpiar_regex = (r'[^A-Za-záéíóúüïÁÉÍÓÚÜÏ]')
 
     def limpiar(t):
         return limpiar_regex.sub('', t).lower()
