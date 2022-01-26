@@ -49,8 +49,8 @@ def cargar_datos(spark):
         'plazo': [r'\bplazo\b']
     }
     seleccion = Seleccion(
-        terminos, spark, parquet_path='../../../../src/datasets/complete/', 
-        datasets_path='../../datasets/estructurales/')
+        terminos, spark, parquet_path='../../datasets/estructurales3/extracciones3', 
+        datasets_path='../../datasets/estructurales3/')
     seleccion.cargarPreprocesados()
 
     estructurales = SentenciasEstructurales(seleccion)

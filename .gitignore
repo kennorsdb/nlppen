@@ -191,3 +191,26 @@ nlppen/extraccion/utils/__pycache__/__init__.cpython-39.pyc
 notebooks/ReporteTecnico/estructurales_crudo[28-10-21]-corret.xlsx
 notebooks/ReporteTecnico/estructurales_crudo[18-10-21]prev.xlsx.xlsx
 notebooks/ReporteTecnico/estructurales_crudo[18-10-21].xlsx.xlsx
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-39.pyc
+notebooks/ReporteTecnico/prueba2.csv/_SUCCESS
+notebooks/ReporteTecnico/prueba2.csv/._SUCCESS.crc
+notebooks/ReporteTecnico/prueba2.csv/.part-00000-efe3b58d-2d0f-41d9-97e4-67e4c53a3a9b-c000.csv.crc
+notebooks/ReporteTecnico/prueba2.csv/prueba_derechos.csv
+notebooks/ReporteTecnico/SentEstruct_individuales.csv/_SUCCESS
+notebooks/ReporteTecnico/SentEstruct_individuales.csv/._SUCCESS.crc
+notebooks/ReporteTecnico/SentEstruct_individuales.csv/.part-00000-b7bd6bd6-a9e8-4234-9ef4-d24b597b9bc4-c000.csv.crc
+notebooks/ReporteTecnico/SentEstruct_individuales.csv/SentEstruct_individuales.csv
+*.xlsx#
+*.cpython-39.pyc
+*.gexf
+*.xlsx
+notebooks/ReporteTecnico/RED_COMPLETA.csv
+muestra de sentencias estructurales.csv
+listaSentencias.zip
+muestra de sentencias estructurales.parquet
+notebooks/ReporteTecnico/Base_Sentencias.zip
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/spacy_entities.cpython-39.pyc
+nlppen/extraccion/utils/__pycache__/Txt2Numbers.cpython-39.pyc
